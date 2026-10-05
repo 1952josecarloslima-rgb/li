@@ -33,7 +33,7 @@ with sync_playwright() as p:
         pg.close()
     # série de suspense (stories)
     pg = b.new_page(viewport={"width": 1080, "height": 1920}, device_scale_factor=2)
-    for n in (1, 2, 3):
+    for n in (1, 2, 3, 4, 5, 6):
         pg.goto(base.replace("arte.html", "teaser.html") + f"?n={n}")
         pg.evaluate("document.fonts.ready")
         pg.wait_for_timeout(500)
