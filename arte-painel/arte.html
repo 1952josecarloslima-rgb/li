@@ -77,10 +77,10 @@
   .crescer .ext{color:var(--ext1);transform:translate(4px,4px)}
   .crescer .face{color:var(--title)}
 
-  .sem{position:absolute;left:120px;top:572px;z-index:4;transform:rotate(-6deg)}
-  .sem .txt{font-family:'Knewave';font-size:124px;color:var(--script);white-space:nowrap;line-height:1;
+  .sem{position:absolute;left:215px;top:566px;z-index:4;transform:rotate(-6deg)}
+  .sem .txt{font-family:'Knewave';font-size:112px;color:var(--script);white-space:nowrap;line-height:1;
     text-shadow:6px 6px 0 var(--script-outline)}
-  .sem svg{position:absolute;left:30px;top:118px;width:760px;height:40px;overflow:visible}
+  .sem svg{position:absolute;left:30px;top:106px;width:690px;height:40px;overflow:visible}
 
   .ruler{position:absolute;right:14px;top:-60px;width:92px;height:2040px;background:var(--ruler-bg);
     transform:rotate(1.2deg);opacity:var(--ruler-op)}
@@ -88,8 +88,8 @@
 
   .route{display:none;position:absolute;left:740px;top:770px;width:240px;height:260px;z-index:3;overflow:visible}
 
-  .verse{position:absolute;left:120px;top:762px;width:840px;font-family:'Montserrat';font-weight:700;
-    color:var(--body);font-size:24px;line-height:1.45;z-index:3;text-align:center}
+  .verse{position:absolute;left:78px;top:774px;width:610px;font-family:'Montserrat';font-weight:700;
+    color:var(--body);font-size:24px;line-height:1.45;z-index:3;text-align:left}
   .verse b{color:var(--accent);font-weight:900;font-style:italic}
   .verse .ref{display:inline-block;margin-left:10px;font-weight:900;font-size:20px;letter-spacing:.05em;
     background:var(--ref-bg);color:var(--ref-ink);padding:4px 12px}
@@ -124,6 +124,8 @@
   .addr{margin-top:16px;display:flex;align-items:center;gap:12px;font-family:'Montserrat';text-align:left}
   .addr strong{display:block;font-weight:900;font-size:27px;letter-spacing:.02em}
   .addr small{display:block;font-weight:600;font-size:21px;margin-top:2px}
+
+  body:not(.h) .verse .ref{margin-left:0;margin-top:8px}
 
   /* ===== PROJEÇÃO (1920×1080) ===== */
   body.h .art{width:1920px;height:1080px;

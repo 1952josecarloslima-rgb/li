@@ -31,5 +31,13 @@ with sync_playwright() as p:
             pg.wait_for_timeout(500)
             pg.locator("#art").screenshot(path=str(out / f"crescer-sem-se-perder-{nome}-{fmt}.png"))
         pg.close()
+    # série de suspense (stories)
+    pg = b.new_page(viewport={"width": 1080, "height": 1920}, device_scale_factor=2)
+    for n in (1, 2, 3):
+        pg.goto(base.replace("arte.html", "teaser.html") + f"?n={n}")
+        pg.evaluate("document.fonts.ready")
+        pg.wait_for_timeout(500)
+        pg.locator("#art").screenshot(path=str(out / f"suspense-{n}-story.png"))
+    pg.close()
     b.close()
 srv.shutdown()
