@@ -8,58 +8,72 @@
   :root{
     --bg1:#1d2370; --bg2:#141850; --bg3:#0b0d33;
     --cream:#efeadc; --aqua:#7ff0b4; --aqua2:#1f9a63; --ink:#0f1240; --red:#e2342b;
+    --col:72px;                 /* margem da coluna de texto */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:1080px;height:1920px;background:var(--bg2);overflow:hidden}
   .art{position:relative;width:1080px;height:1920px;overflow:hidden;
-    background:radial-gradient(120% 70% at 60% 45%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%)}
+    background:radial-gradient(120% 70% at 70% 50%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%)}
   svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
   .grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
   .scan{position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 3px, transparent 3px 9px)}
   .ruler{position:absolute;right:14px;top:-60px;width:92px;height:2040px;background:var(--cream);
-    transform:rotate(1.2deg);opacity:.22}
+    transform:rotate(1.2deg);opacity:.20}
   .ruler svg{width:100%;height:100%}
 
-  .logo{position:absolute;top:62px;left:78px;width:96px;z-index:6}
-  .tag{position:absolute;left:210px;top:78px;font-family:'Montserrat';font-weight:900;font-size:36px;color:var(--ink);
-    background:var(--cream);padding:10px 26px 8px;box-shadow:6px 7px 0 rgba(0,0,0,.35);transform:rotate(-2deg);z-index:6}
-  .tag::before,.tag::after{content:"";position:absolute;width:64px;height:26px;background:rgba(255,255,255,.45)}
-  .tag::before{left:-26px;top:-10px;transform:rotate(-32deg)}
-  .tag::after{right:-26px;bottom:-8px;transform:rotate(-32deg)}
+  /* cabeçalho */
+  .logo{position:absolute;top:66px;left:var(--col);width:92px;z-index:6}
+  .tag{position:absolute;left:198px;top:82px;font-family:'Montserrat';font-weight:900;font-size:34px;color:var(--ink);
+    background:var(--cream);padding:10px 24px 8px;box-shadow:6px 7px 0 rgba(0,0,0,.35);transform:rotate(-2deg);z-index:6}
+  .tag::before,.tag::after{content:"";position:absolute;width:60px;height:24px;background:rgba(255,255,255,.45)}
+  .tag::before{left:-24px;top:-10px;transform:rotate(-32deg)}
+  .tag::after{right:-24px;bottom:-8px;transform:rotate(-32deg)}
+  .count{position:absolute;right:130px;top:70px;z-index:6;font-family:'Anton';font-size:84px;line-height:1;color:var(--aqua)}
+  .count small{font-size:40px;color:var(--cream);opacity:.7}
 
-  .kicker{position:absolute;left:80px;top:250px;font-family:'Montserrat';font-weight:800;font-size:28px;
-    letter-spacing:.22em;color:var(--cream);opacity:.85;z-index:6}
-  .kicker b{color:var(--aqua);opacity:1}
-
-  .g{position:absolute;left:66px;top:296px;width:1000px;height:240px;z-index:6;
-    -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);-webkit-mask-size:1000px 350px;mask-size:1000px 350px;
-    transform:rotate(-1.5deg)}
+  /* bloco do nome — tudo alinhado na mesma margem */
+  .head{position:absolute;left:var(--col);top:250px;z-index:7}
+  .kicker{font-family:'Montserrat';font-weight:800;font-size:26px;letter-spacing:.26em;color:var(--cream);opacity:.85}
+  .g{position:relative;margin-top:10px;height:var(--h);width:900px;
+    -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);-webkit-mask-size:1000px 350px;mask-size:1000px 350px}
   .g span{position:absolute;left:0;top:0;font-family:'Anton';line-height:1;white-space:nowrap}
   .g .ext{color:var(--aqua);transform:translate(4px,4px)}
   .g .face{color:var(--cream)}
-  .sur{position:absolute;left:150px;top:500px;font-family:'Knewave';font-size:120px;color:var(--aqua);
-    text-shadow:6px 6px 0 var(--ink);transform:rotate(-6deg);white-space:nowrap;z-index:7}
+  .sur{font-family:'Knewave';font-size:112px;line-height:1;color:var(--aqua);text-shadow:6px 6px 0 var(--ink);
+    margin-top:-14px;margin-left:6px;white-space:nowrap}
+  .rolebar{display:inline-flex;align-items:stretch;margin-top:26px;box-shadow:6px 7px 0 rgba(0,0,0,.35)}
+  .rolebar span{font-family:'Montserrat';font-weight:900;font-size:27px;letter-spacing:.08em;padding:10px 18px 9px;white-space:nowrap}
+  .rolebar .a{background:var(--cream);color:var(--ink)}
+  .rolebar .b{background:var(--aqua);color:var(--ink)}
 
+  /* foto */
   .person{position:absolute;bottom:150px;z-index:3;
     filter:drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff)
            drop-shadow(16px 18px 0 rgba(0,0,0,.30))}
+  /* sombra suave atrás da coluna de texto, para leitura */
+  .shade{position:absolute;left:0;top:0;bottom:0;width:640px;z-index:4;
+    background:linear-gradient(90deg, rgba(11,13,51,.82) 0%, rgba(11,13,51,.6) 55%, rgba(11,13,51,0) 100%)}
 
-  .role{position:absolute;z-index:8;font-family:'Permanent Marker';font-size:44px;color:var(--ink);
-    background:var(--cream);padding:6px 24px;box-shadow:6px 7px 0 rgba(0,0,0,.35);white-space:nowrap}
-  .role i{font-style:normal;color:var(--red)}
+  /* bio em linha do tempo / régua */
+  .bio{position:absolute;left:var(--col);width:450px;z-index:7;padding-left:44px}
+  .bio::before{content:"";position:absolute;left:9px;top:12px;bottom:12px;width:4px;background:var(--aqua);opacity:.6}
+  .item{position:relative}
+  .item + .item{margin-top:46px}
+  .item::before{content:"";position:absolute;left:-44px;top:6px;width:22px;height:22px;background:var(--aqua);
+    border:5px solid var(--bg2);box-shadow:0 0 0 3px var(--aqua);border-radius:50%}
+  .item .lb{font-family:'Montserrat';font-weight:900;font-size:23px;letter-spacing:.2em;color:var(--aqua)}
+  .item p{margin-top:10px;font-family:'Montserrat';font-weight:600;font-size:31px;line-height:1.32;color:var(--cream)}
+  .item p b{font-weight:900;color:#fff}
 
-  /* cartão da bio */
-  .card{position:absolute;left:46px;bottom:200px;width:560px;background:var(--cream);color:var(--ink);z-index:8;
-    padding:34px 34px 30px;box-shadow:10px 12px 0 rgba(0,0,0,.38);transform:rotate(-1.2deg);font-family:'Montserrat'}
-  .card::before{content:"";position:absolute;left:50%;top:-18px;width:150px;height:38px;transform:translateX(-50%) rotate(-3deg);
-    background:rgba(255,255,255,.5)}
-  .row + .row{margin-top:22px;padding-top:20px;border-top:3px dashed rgba(15,18,64,.2)}
-  .row .lb{display:inline-block;font-weight:900;font-size:19px;letter-spacing:.14em;background:var(--ink);color:var(--aqua);
-    padding:4px 12px;margin-bottom:10px}
-  .row p{font-weight:600;font-size:27px;line-height:1.32}
-  .row p b{font-weight:900}
+  /* selo (Gean) */
+  .seal{position:absolute;z-index:8;width:230px;height:230px;border-radius:50%;background:var(--aqua);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:8px 10px 0 rgba(0,0,0,.35);
+    border:6px dashed var(--ink);outline:8px solid var(--aqua);font-family:'Montserrat';font-weight:900;line-height:1.05}
+  .seal div{font-size:21px;letter-spacing:.06em}
+  .seal strong{display:block;font-family:'Anton';font-weight:400;font-size:46px;letter-spacing:.02em;margin:4px 0}
 
+  /* faixa de baixo */
   .band{position:absolute;left:0;right:0;bottom:0;height:170px;z-index:9}
   .band .torn{position:absolute;left:0;right:0;top:-24px;width:100%;height:194px}
   .band .c{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:24px;padding-top:14px;
@@ -84,15 +98,20 @@
 
   <img class="logo" src="logo_white.png" alt="">
   <div class="tag">PAINEL JOVEM</div>
-
-  <div class="kicker" id="kicker"></div>
-  <div class="g"><span class="ext" id="n1"></span><span class="face" id="n2"></span></div>
-  <div class="sur" id="sur"></div>
+  <div class="count" id="count"></div>
 
   <img class="person" id="photo" alt="">
-  <div class="role" id="role"></div>
+  <div class="shade"></div>
 
-  <div class="card" id="card"></div>
+  <div class="head">
+    <div class="kicker" id="kicker"></div>
+    <div class="g" id="g"><span class="ext" id="n1"></span><span class="face" id="n2"></span></div>
+    <div class="sur" id="sur"></div>
+    <div class="rolebar" id="rolebar"></div>
+  </div>
+
+  <div class="bio" id="bio"></div>
+  <div class="seal" id="seal" style="display:none"></div>
 
   <div class="band">
     <svg class="torn" preserveAspectRatio="none" viewBox="0 0 1080 194"><path id="torn" fill="#efeadc"/></svg>
@@ -106,9 +125,9 @@
 <script>
   const P = {
     1: {
-      n: '01', conv: 'CONVIDADA', first: 'NATHALLIE', sur: 'Braz', size: 200,
-      img: 'p_farma.png', h: 1160, left: 300,
-      role: 'na <i>farmácia</i>', roleXY: [70, 1000, -4],
+      n: '01', kicker: 'CONHEÇA A CONVIDADA', first: 'NATHALLIE', sur: 'Braz',
+      role: ['EMPRESÁRIA', 'FARMÁCIA'],
+      img: 'p_farma.png', h: 1130, left: 330,
       rows: [
         ['NO TRABALHO', 'Empresária há <b>mais de 20 anos</b> no ramo farmacêutico.'],
         ['NA IGREJA', 'Líder do Ministério de Casais <b>Casa na Rocha</b>, na Igreja Cristã Casa da Paternidade.'],
@@ -116,9 +135,9 @@
       ],
     },
     2: {
-      n: '02', conv: 'CONVIDADO', first: 'ADRIANO', sur: 'Ramos', size: 230,
-      img: 'p_samarco.png', h: 1140, left: 220,
-      role: 'na <i>mineração</i>', roleXY: [70, 1000, -4],
+      n: '02', kicker: 'CONHEÇA O CONVIDADO', first: 'ADRIANO', sur: 'Ramos',
+      role: ['ANALISTA', 'MINERAÇÃO'],
+      img: 'p_samarco.png', h: 1060, left: 330,
       rows: [
         ['NO TRABALHO', 'Analista no setor de mineração há <b>mais de 10 anos</b>.'],
         ['NA IGREJA', 'Pastor na Igreja <b>Assembleia de Deus Boas Novas</b>.'],
@@ -126,11 +145,12 @@
       ],
     },
     3: {
-      n: '03', conv: 'CONVIDADO', first: 'GEAN', sur: 'Pietro', size: 240,
-      img: 'p_goleiro.png', h: 1130, left: 220,
-      role: 'no <i>esporte</i>', roleXY: [70, 1000, -4],
+      n: '03', kicker: 'CONHEÇA O CONVIDADO', first: 'GEAN', sur: 'Pietro',
+      role: ['GOLEIRO', 'BEACH SOCCER'],
+      img: 'p_goleiro.png', h: 1090, left: 380,
+      seal: ['JÁ DEFENDEU A', 'SELEÇÃO', 'BRASILEIRA'], sealXY: [96, 1380, -8],
       rows: [
-        ['NO ESPORTE', 'Goleiro de <b>beach soccer</b>, já defendeu times na <b>Itália</b> e em ligas internacionais.'],
+        ['NO ESPORTE', 'Já defendeu a <b>Seleção Brasileira</b> e times da <b>Itália</b> e de ligas internacionais.'],
         ['NA IGREJA', 'Serve na <b>Igreja Missão</b>, em Anchieta.'],
         ['NA FAMÍLIA', 'Casado com a <b>Alícia Laís</b> e pai da <b>Laís</b>.'],
       ],
@@ -138,26 +158,42 @@
   };
   const d = P[new URLSearchParams(location.search).get('p') || '1'];
 
-  document.getElementById('kicker').innerHTML = `${d.conv} <b>${d.n}</b>/03 · CONHEÇA`;
-  ['n1','n2'].forEach(id => { const el = document.getElementById(id); el.textContent = d.first; el.style.fontSize = d.size + 'px'; });
+  document.getElementById('count').innerHTML = `${d.n}<small>/03</small>`;
+  document.getElementById('kicker').textContent = d.kicker;
+
+  // nome: maior tamanho que caiba em 880px
+  const n1 = document.getElementById('n1'), n2 = document.getElementById('n2');
+  n1.textContent = n2.textContent = d.first;
+  let fs = 230; n2.style.fontSize = fs + 'px';
+  while (n2.offsetWidth > 860 && fs > 120) { fs -= 4; n2.style.fontSize = fs + 'px'; }
+  n1.style.fontSize = fs + 'px';
+  document.getElementById('g').style.setProperty('--h', (fs * 1.02) + 'px');
   const sh = []; for (let i = 1; i <= 12; i++) sh.push(`${i}px ${i}px 0 ${i < 4 ? '#7ff0b4' : '#1f9a63'}`);
-  document.getElementById('n1').style.textShadow = sh.join(',');
+  n1.style.textShadow = sh.join(',');
   document.getElementById('sur').textContent = d.sur;
-  // sobrenome logo após o nome
-  const nameW = document.getElementById('n2').offsetWidth;
-  document.getElementById('sur').style.left = Math.min(66 + nameW - 120, 1080 - 520) + 'px';
-  document.getElementById('sur').style.top = (296 + d.size * 0.86) + 'px';
+  document.getElementById('rolebar').innerHTML = `<span class="a">${d.role[0]}</span><span class="b">${d.role[1]}</span>`;
 
   const ph = document.getElementById('photo');
   ph.src = d.img; ph.style.height = d.h + 'px'; ph.style.left = d.left + 'px';
 
-  const role = document.getElementById('role');
-  role.innerHTML = d.role;
-  role.style.left = d.roleXY[0] + 'px'; role.style.top = d.roleXY[1] + 'px';
-  role.style.transform = `rotate(${d.roleXY[2]}deg)`;
+  // bio logo abaixo do bloco do nome
+  const head = document.querySelector('.head');
+  const bio = document.getElementById('bio');
+  bio.innerHTML = d.rows.map(([lb, tx]) => `<div class="item"><div class="lb">${lb}</div><p>${tx}</p></div>`).join('');
+  // centraliza a coluna (bio + selo) no espaço entre o nome e a faixa
+  const top0 = head.offsetTop + head.offsetHeight + 60, bottom0 = 1700;
+  const groupH = bio.offsetHeight + (d.seal ? 290 : 0);
+  const bioTop = top0 + Math.max(0, (bottom0 - top0 - groupH) / 2);
+  bio.style.top = bioTop + 'px';
+  if (d.seal) d.sealXY[1] = bioTop + bio.offsetHeight + 60;
 
-  document.getElementById('card').innerHTML = d.rows.map(([lb, tx]) =>
-    `<div class="row"><span class="lb">${lb}</span><p>${tx}</p></div>`).join('');
+  if (d.seal) {
+    const se = document.getElementById('seal');
+    se.style.display = 'flex';
+    se.innerHTML = `<div>${d.seal[0]}<strong>${d.seal[1]}</strong>${d.seal[2]}</div>`;
+    se.style.left = d.sealXY[0] + 'px'; se.style.top = d.sealXY[1] + 'px';
+    se.style.transform = `rotate(${d.sealXY[2]}deg)`;
+  }
 
   let s = 13; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
   let svg = '';
