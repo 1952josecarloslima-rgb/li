@@ -5,33 +5,33 @@
 <title>Crescer sem se perder</title>
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-  /* Tema A — azul-marinho + verde (versão aprovada) */
+  /* Tema A — azul-marinho + verde neon (versão principal) */
   :root{
     --bg1:#1d2370; --bg2:#141850; --bg3:#0b0d33;
-    --title:#ecebe4; --title-shadow:#22c47a;
-    --script:#7ff0b4; --script-outline:#141850;
-    --topo:#22c47a; --route:#7ff0b4; --star:#ecebe4;
-    --body:#ecebe4; --accent:#7ff0b4; --ref-bg:#22c47a; --ref-ink:#0d0d12;
-    --kicker-bg:#ecebe4; --kicker-ink:#0d0d12; --kicker-shadow:#22c47a;
-    --label-bg:#ecebe4; --label-ink:#0d0d12; --label-hi:#e2342b;
-    --band-bg:#ecebe4; --band-ink:#0d0d12; --band-hi:#22c47a; --band-hi-ink:#0d0d12;
-    --ruler-bg:#ecebe4; --ruler-ink:#0d0d12; --ruler-op:.32;
+    --title:#efeadc; --ext1:#5ef25a; --ext2:#1f8a3a;
+    --script:#5ef25a; --script-outline:#0f1240;
+    --topo:#3ddc6a; --route:#5ef25a; --star:#efeadc;
+    --body:#efeadc; --accent:#5ef25a;
+    --ref-bg:#5ef25a; --ref-ink:#0d0d12;
+    --kicker-bg:#efeadc; --kicker-ink:#141850;
+    --label-bg:#efeadc; --label-ink:#0d0d12; --label-hi:#e2342b;
+    --band-bg:#efeadc; --band-ink:#0f1240; --band-hi:#5ef25a; --band-hi-ink:#0f1240;
+    --ruler-bg:#efeadc; --ruler-ink:#0d0d12; --ruler-op:.30;
     --x:#e2342b; --pin:#e2342b; --scan:rgba(255,255,255,.035);
-    --grain-op:.55; --grain-blend:overlay;
   }
-  /* Tema B — papel + preto + laranja + azul da igreja */
-  body.b{
-    --bg1:#f3efe4; --bg2:#ebe5d6; --bg3:#ddd5c2;
-    --title:#111111; --title-shadow:#ff5a1f;
-    --script:#1b74d1; --script-outline:#f3efe4;
-    --topo:#1b74d1; --route:#ff5a1f; --star:#111111;
-    --body:#111111; --accent:#1b74d1; --ref-bg:#111111; --ref-ink:#f3efe4;
-    --kicker-bg:#111111; --kicker-ink:#f3efe4; --kicker-shadow:#ff5a1f;
-    --label-bg:#ffffff; --label-ink:#111111; --label-hi:#1b74d1;
-    --band-bg:#111111; --band-ink:#f3efe4; --band-hi:#ff5a1f; --band-hi-ink:#111111;
-    --ruler-bg:#111111; --ruler-ink:#f3efe4; --ruler-op:.16;
-    --x:#ff5a1f; --pin:#ff5a1f; --scan:rgba(0,0,0,.025);
-    --grain-op:.35; --grain-blend:multiply;
+  /* Tema C — vinho + mostarda */
+  body.c{
+    --bg1:#7a1834; --bg2:#520f24; --bg3:#2c0613;
+    --title:#f6eedd; --ext1:#ffc23a; --ext2:#b06e08;
+    --script:#ffc23a; --script-outline:#3a0918;
+    --topo:#ffc23a; --route:#ffc23a; --star:#f6eedd;
+    --body:#f6eedd; --accent:#ffc23a;
+    --ref-bg:#ffc23a; --ref-ink:#2c0613;
+    --kicker-bg:#f6eedd; --kicker-ink:#520f24;
+    --label-bg:#f6eedd; --label-ink:#2c0613; --label-hi:#a3163f;
+    --band-bg:#f6eedd; --band-ink:#3a0918; --band-hi:#ffc23a; --band-hi-ink:#3a0918;
+    --ruler-bg:#f6eedd; --ruler-ink:#2c0613; --ruler-op:.26;
+    --x:#ffc23a; --pin:#a3163f; --scan:rgba(255,255,255,.03);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -39,61 +39,72 @@
   .art{position:relative;width:1080px;height:1920px;overflow:hidden;
     background:radial-gradient(120% 70% at 50% 35%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%);}
   svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .grain{position:absolute;inset:0;mix-blend-mode:var(--grain-blend);opacity:var(--grain-op);pointer-events:none}
+  .grain{position:absolute;inset:0;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
   .scan{position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(0deg, var(--scan) 0 3px, transparent 3px 9px);}
 
-  .logo{position:absolute;top:66px;left:50%;transform:translateX(-50%);width:112px}
-  .logo.color{display:none}
-  body.b .logo.white{display:none}
-  body.b .logo.color{display:block;transform:translateX(-50%) rotate(-3deg);
-    filter:drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(8px 10px 0 rgba(0,0,0,.18))}
+  .logo{position:absolute;top:62px;left:50%;transform:translateX(-50%);width:112px}
 
-  .kicker{position:absolute;top:196px;left:74px;font-family:'Space Mono';font-weight:700;
-    font-size:38px;letter-spacing:.06em;color:var(--kicker-ink);background:var(--kicker-bg);
-    padding:8px 20px;transform:rotate(-2deg);box-shadow:5px 5px 0 var(--kicker-shadow);z-index:4}
+  /* etiqueta PAINEL JOVEM com fita adesiva */
+  .kicker{position:absolute;top:196px;left:70px;font-family:'Montserrat';font-weight:900;
+    font-size:46px;letter-spacing:.03em;color:var(--kicker-ink);background:var(--kicker-bg);
+    padding:12px 30px 10px;transform:rotate(-2.5deg);box-shadow:6px 7px 0 rgba(0,0,0,.35);z-index:4}
+  .kicker::before,.kicker::after{content:"";position:absolute;width:74px;height:30px;
+    background:rgba(255,255,255,.45);box-shadow:0 0 0 1px rgba(0,0,0,.04)}
+  .kicker::before{left:-30px;top:-12px;transform:rotate(-32deg)}
+  .kicker::after{right:-30px;bottom:-10px;transform:rotate(-32deg)}
 
-  .title{position:absolute;left:62px;top:292px;width:960px;z-index:3}
-  .crescer{font-family:'Anton';font-size:268px;line-height:.9;color:var(--title);
-    position:relative;text-shadow:7px 7px 0 var(--title-shadow)}
-  .sem{position:absolute;font-family:'Permanent Marker';color:var(--script);
-    font-size:104px;left:236px;top:232px;transform:rotate(-5deg);white-space:nowrap;
-    text-shadow:4px 4px 0 var(--script-outline), -2px -2px 0 var(--script-outline)}
+  /* CRESCER — desgastado com extrusão 3D */
+  .crescer{position:absolute;left:52px;top:288px;width:1000px;height:300px;z-index:3;
+    -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);
+    -webkit-mask-size:1000px 350px;mask-size:1000px 350px;transform:rotate(-1.5deg)}
+  .crescer span{position:absolute;left:0;top:0;font-family:'Anton';font-size:292px;line-height:1;
+    letter-spacing:.01em;white-space:nowrap}
+  .crescer .ext{color:var(--ext1);transform:translate(4px,4px)}
+  .crescer .face{color:var(--title)}
 
-  /* régua de crescimento — altura total, mais apagada */
+  /* SEM SE PERDER — pincel */
+  .sem{position:absolute;left:120px;top:598px;z-index:4;transform:rotate(-6deg)}
+  .sem .txt{font-family:'Knewave';font-size:124px;color:var(--script);white-space:nowrap;line-height:1;
+    text-shadow:6px 6px 0 var(--script-outline)}
+  .sem svg{position:absolute;left:30px;top:118px;width:760px;height:40px;overflow:visible}
+
   .ruler{position:absolute;right:14px;top:-60px;width:92px;height:2040px;background:var(--ruler-bg);
     transform:rotate(1.2deg);opacity:var(--ruler-op)}
   .ruler svg{width:100%;height:100%}
 
-  .verse{position:absolute;left:78px;top:676px;width:560px;font-family:'Space Mono';
-    color:var(--body);font-size:25px;line-height:1.45;z-index:3}
-  .verse b{color:var(--accent);font-weight:700}
-  .verse .ref{display:inline-block;margin-top:10px;font-weight:700;font-size:21px;
-    background:var(--ref-bg);color:var(--ref-ink);padding:3px 10px}
+  .verse{position:absolute;left:78px;top:812px;width:560px;font-family:'Montserrat';font-weight:700;
+    color:var(--body);font-size:27px;line-height:1.38;z-index:3}
+  .verse b{color:var(--accent);font-weight:900;font-style:italic}
+  .verse .ref{display:inline-block;margin-top:12px;font-weight:900;font-size:22px;letter-spacing:.05em;
+    background:var(--ref-bg);color:var(--ref-ink);padding:4px 12px}
 
-  .people{position:absolute;left:0;right:0;top:905px;height:820px}
+  .people{position:absolute;left:0;right:0;top:880px;height:820px}
   .p{position:absolute;bottom:0;
     filter:drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff)
            drop-shadow(14px 16px 0 rgba(0,0,0,.30));}
-  .p1{left:-30px;height:660px}
-  .p3{right:-36px;height:680px}
-  .p2{left:50%;transform:translateX(-50%);height:760px;z-index:2}
+  .p1{left:-30px;height:640px}
+  .p3{right:-36px;height:660px}
+  .p2{left:50%;transform:translateX(-50%);height:740px;z-index:2}
 
-  .label{position:absolute;z-index:5;background:var(--label-bg);color:var(--label-ink);
-    padding:8px 18px 6px;box-shadow:4px 4px 0 rgba(0,0,0,.35);white-space:nowrap;line-height:1}
-  .label b{display:block;font-family:'Archivo Black';font-size:25px;letter-spacing:.02em}
-  .label span{display:block;font-family:'Permanent Marker';font-size:32px;margin-top:4px}
+  /* etiquetas com nome — embaixo de cada pessoa */
+  .label{position:absolute;z-index:8;background:var(--label-bg);color:var(--label-ink);
+    padding:10px 20px 8px;box-shadow:5px 6px 0 rgba(0,0,0,.35);white-space:nowrap;line-height:1}
+  .label b{display:block;font-family:'Montserrat';font-weight:900;font-size:27px;letter-spacing:.01em}
+  .label span{display:block;font-family:'Permanent Marker';font-size:33px;margin-top:5px}
   .label i{font-style:normal;color:var(--label-hi)}
 
-  .info{position:absolute;left:0;right:0;bottom:0;height:310px;z-index:6}
-  .info .content{position:absolute;inset:0;padding:66px 70px 0;color:var(--band-ink)}
-  .bp{display:inline-block;font-family:'Space Mono';font-weight:700;font-size:28px;border:3px solid var(--band-ink);
-    padding:6px 16px;letter-spacing:.04em}
-  .when{display:flex;align-items:stretch;margin-top:22px;border:4px solid var(--band-ink);width:max-content}
-  .when div{font-family:'Archivo Black';font-size:58px;padding:2px 26px;line-height:1.15}
+  .info{position:absolute;left:0;right:0;bottom:0;height:372px;z-index:6}
+  .info .content{position:absolute;inset:0;padding:80px 64px 0;color:var(--band-ink)}
+  .bp{display:inline-block;font-family:'Montserrat';font-weight:800;font-size:25px;border:3px solid var(--band-ink);
+    padding:7px 14px;letter-spacing:.01em}
+  .when{display:flex;align-items:stretch;margin-top:16px;border:4px solid var(--band-ink);width:max-content}
+  .when div{font-family:'Archivo Black';font-size:54px;padding:2px 24px;line-height:1.15}
   .when div + div{border-left:4px solid var(--band-ink)}
   .when .hi{background:var(--band-hi);color:var(--band-hi-ink)}
-  .addr{margin-top:22px;font-family:'Space Mono';font-weight:700;font-size:23px;display:flex;align-items:center;gap:10px}
+  .addr{margin-top:16px;display:flex;align-items:center;gap:12px;font-family:'Montserrat'}
+  .addr strong{display:block;font-weight:900;font-size:27px;letter-spacing:.02em}
+  .addr small{display:block;font-weight:600;font-size:21px;margin-top:2px}
 </style>
 </head>
 <body>
@@ -108,24 +119,27 @@
 
   <div class="ruler"><svg id="ruler" viewBox="0 0 92 2040"></svg></div>
 
-  <img class="logo white" src="logo_white.png" alt="">
-  <img class="logo color" src="logo.png" alt="">
+  <img class="logo" src="logo_white.png" alt="">
   <div class="kicker">PAINEL JOVEM</div>
 
-  <div class="title">
-    <div class="crescer">CRESCER</div>
-    <div class="sem">sem se perder</div>
+  <div class="crescer"><span class="ext" id="ext">CRESCER</span><span class="face">CRESCER</span></div>
+
+  <div class="sem">
+    <div class="txt">SEM SE PERDER</div>
+    <svg viewBox="0 0 760 40" preserveAspectRatio="none">
+      <path d="M8 26 C 180 14, 420 8, 752 4 C 600 16, 380 26, 120 36 Z" fill="var(--script)"/>
+    </svg>
   </div>
 
   <svg class="layer" viewBox="0 0 1080 1920" style="z-index:3">
-    <path d="M 865 700 C 960 760, 905 860, 820 860 S 690 790, 760 740 S 900 820, 880 905"
+    <path d="M 865 820 C 960 880, 905 980, 820 980 S 690 910, 760 860 S 900 940, 880 1010"
           fill="none" stroke="var(--route)" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
-    <g transform="translate(860 690) rotate(8)" stroke="var(--x)" stroke-width="9" stroke-linecap="round">
+    <g transform="translate(860 810) rotate(8)" stroke="var(--x)" stroke-width="9" stroke-linecap="round">
       <line x1="-20" y1="-20" x2="20" y2="20"/><line x1="20" y1="-20" x2="-20" y2="20"/>
     </g>
     <g fill="var(--star)">
-      <path transform="translate(640 250) scale(1.3)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
-      <path transform="translate(330 1010) scale(1.1)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
+      <path transform="translate(870 200) scale(1.3)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
+      <path transform="translate(80 1180) scale(1.1)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
     </g>
   </svg>
 
@@ -139,27 +153,33 @@
     <img class="p p3" src="p_goleiro.png" alt="">
     <img class="p p2" src="p_samarco.png" alt="">
   </div>
-  <div class="label" style="left:30px;top:1000px;transform:rotate(-5deg)"><b>NATHALLIE BRAZ</b><span>na <i>farmácia</i></span></div>
-  <div class="label" style="left:372px;top:862px;transform:rotate(3deg)"><b>ADRIANO RAMOS</b><span>na <i>mineração</i></span></div>
-  <div class="label" style="right:30px;top:945px;transform:rotate(-3deg)"><b>GEAN PIETRO</b><span>no <i>beach soccer</i></span></div>
+  <div class="label" style="left:22px;top:1462px;transform:rotate(-4deg)"><b>NATHALLIE BRAZ</b><span>na <i>farmácia</i></span></div>
+  <div class="label" style="left:372px;top:1478px;transform:rotate(2deg)"><b>ADRIANO RAMOS</b><span>na <i>mineração</i></span></div>
+  <div class="label" style="right:20px;top:1458px;transform:rotate(-3deg)"><b>GEAN PIETRO</b><span>no <i>beach soccer</i></span></div>
 
   <div class="info">
-    <svg class="layer" viewBox="0 0 1080 310" preserveAspectRatio="none" style="top:-26px;height:340px">
+    <svg class="layer" viewBox="0 0 1080 372" preserveAspectRatio="none" style="top:-26px;height:400px">
       <path id="torn" fill="var(--band-bg)"/>
     </svg>
     <div class="content">
-      <div class="bp">BATE-PAPO + COMUNHÃO</div>
+      <div class="bp">BATE-PAPO + DIRECIONAMENTO BÍBLICO + COMUNHÃO</div>
       <div class="when"><div class="hi">SEXTA</div><div>17/10</div><div>19H30</div></div>
       <div class="addr">
-        <svg width="26" height="34" viewBox="0 0 26 34"><path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="var(--pin)"/><circle cx="13" cy="13" r="5" fill="var(--band-bg)"/></svg>
-        AV. ZULMIRA ROSA ANTUNES, 1424 · CENTRO, ANCHIETA - ES
+        <svg width="30" height="40" viewBox="0 0 26 34"><path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="var(--pin)"/><circle cx="13" cy="13" r="5" fill="var(--band-bg)"/></svg>
+        <div><strong>IGREJA CASA DA PATERNIDADE</strong><small>Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</small></div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  if (new URLSearchParams(location.search).get('tema') === 'b') document.body.classList.add('b');
+  if (new URLSearchParams(location.search).get('tema') === 'c') document.body.classList.add('c');
+
+  // extrusão 3D do CRESCER
+  const cs = getComputedStyle(document.body);
+  const e1 = cs.getPropertyValue('--ext1').trim(), e2 = cs.getPropertyValue('--ext2').trim();
+  let sh = []; for (let i = 1; i <= 12; i++) sh.push(`${i}px ${i}px 0 ${i < 4 ? e1 : e2}`);
+  document.getElementById('ext').style.textShadow = sh.join(',');
 
   let s = 7; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
 
@@ -176,7 +196,7 @@
         const rr = R*(1+0.16*Math.sin(3*t+ph+k*.3)+0.08*Math.cos(5*t-ph));
         d += (a?'L':'M')+(cx+rr*Math.cos(t)).toFixed(1)+','+(cy+rr*0.82*Math.sin(t)).toFixed(1);
       }
-      svg += `<path d="${d}Z" fill="none" stroke="var(--topo)" stroke-opacity="${0.10+0.22*(k/n)}" stroke-width="${k%4?1.6:3}"/>`;
+      svg += `<path d="${d}Z" fill="none" stroke="var(--topo)" stroke-opacity="${0.08+0.18*(k/n)}" stroke-width="${k%4?1.6:3}"/>`;
     }
   });
   topo.innerHTML = svg;
@@ -186,12 +206,12 @@
   for(let i=0;i<=203;i++){
     const y=2030-i*10, L = i%10===0?52:(i%5===0?34:18);
     rs += `<line x1="${92-L}" y1="${y}" x2="92" y2="${y}" stroke="var(--ruler-ink)" stroke-width="${i%10===0?3:1.6}"/>`;
-    if(i%10===0 && i>0) rs += `<text x="4" y="${y+8}" font-family="Space Mono" font-weight="700" font-size="20" fill="var(--ruler-ink)">${i}</text>`;
+    if(i%10===0 && i>0) rs += `<text x="4" y="${y+8}" font-family="Montserrat" font-weight="800" font-size="20" fill="var(--ruler-ink)">${i}</text>`;
   }
   ru.innerHTML = rs;
 
   // papel rasgado
-  let p='M0,40'; for(let x=0;x<=1080;x+=18){ p+=` L${x},${18+r()*26}`; } p+=' L1080,340 L0,340 Z';
+  let p='M0,40'; for(let x=0;x<=1080;x+=18){ p+=` L${x},${18+r()*26}`; } p+=' L1080,400 L0,400 Z';
   document.getElementById('torn').setAttribute('d',p);
 </script>
 </body>
