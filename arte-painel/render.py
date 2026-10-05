@@ -38,6 +38,12 @@ with sync_playwright() as p:
         pg.evaluate("document.fonts.ready")
         pg.wait_for_timeout(500)
         pg.locator("#art").screenshot(path=str(out / f"suspense-{n}-story.png"))
+    # apresentação dos convidados (stories)
+    for n, nome in ((1, "nathallie"), (2, "adriano"), (3, "gean")):
+        pg.goto(base.replace("arte.html", "convidados.html") + f"?p={n}")
+        pg.evaluate("document.fonts.ready")
+        pg.wait_for_timeout(500)
+        pg.locator("#art").screenshot(path=str(out / f"convidado-{n}-{nome}-story.png"))
     pg.close()
     b.close()
 srv.shutdown()

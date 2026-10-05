@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel Jovem — convidados</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{
+    --bg1:#1d2370; --bg2:#141850; --bg3:#0b0d33;
+    --cream:#efeadc; --aqua:#7ff0b4; --aqua2:#1f9a63; --ink:#0f1240; --red:#e2342b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;background:var(--bg2);overflow:hidden}
+  .art{position:relative;width:1080px;height:1920px;overflow:hidden;
+    background:radial-gradient(120% 70% at 60% 45%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%)}
+  svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+  .scan{position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 3px, transparent 3px 9px)}
+  .ruler{position:absolute;right:14px;top:-60px;width:92px;height:2040px;background:var(--cream);
+    transform:rotate(1.2deg);opacity:.22}
+  .ruler svg{width:100%;height:100%}
+
+  .logo{position:absolute;top:62px;left:78px;width:96px;z-index:6}
+  .tag{position:absolute;left:210px;top:78px;font-family:'Montserrat';font-weight:900;font-size:36px;color:var(--ink);
+    background:var(--cream);padding:10px 26px 8px;box-shadow:6px 7px 0 rgba(0,0,0,.35);transform:rotate(-2deg);z-index:6}
+  .tag::before,.tag::after{content:"";position:absolute;width:64px;height:26px;background:rgba(255,255,255,.45)}
+  .tag::before{left:-26px;top:-10px;transform:rotate(-32deg)}
+  .tag::after{right:-26px;bottom:-8px;transform:rotate(-32deg)}
+
+  .kicker{position:absolute;left:80px;top:250px;font-family:'Montserrat';font-weight:800;font-size:28px;
+    letter-spacing:.22em;color:var(--cream);opacity:.85;z-index:6}
+  .kicker b{color:var(--aqua);opacity:1}
+
+  .g{position:absolute;left:66px;top:296px;width:1000px;height:240px;z-index:6;
+    -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);-webkit-mask-size:1000px 350px;mask-size:1000px 350px;
+    transform:rotate(-1.5deg)}
+  .g span{position:absolute;left:0;top:0;font-family:'Anton';line-height:1;white-space:nowrap}
+  .g .ext{color:var(--aqua);transform:translate(4px,4px)}
+  .g .face{color:var(--cream)}
+  .sur{position:absolute;left:150px;top:500px;font-family:'Knewave';font-size:120px;color:var(--aqua);
+    text-shadow:6px 6px 0 var(--ink);transform:rotate(-6deg);white-space:nowrap;z-index:7}
+
+  .person{position:absolute;bottom:150px;z-index:3;
+    filter:drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff)
+           drop-shadow(16px 18px 0 rgba(0,0,0,.30))}
+
+  .role{position:absolute;z-index:8;font-family:'Permanent Marker';font-size:44px;color:var(--ink);
+    background:var(--cream);padding:6px 24px;box-shadow:6px 7px 0 rgba(0,0,0,.35);white-space:nowrap}
+  .role i{font-style:normal;color:var(--red)}
+
+  /* cartão da bio */
+  .card{position:absolute;left:46px;bottom:200px;width:560px;background:var(--cream);color:var(--ink);z-index:8;
+    padding:34px 34px 30px;box-shadow:10px 12px 0 rgba(0,0,0,.38);transform:rotate(-1.2deg);font-family:'Montserrat'}
+  .card::before{content:"";position:absolute;left:50%;top:-18px;width:150px;height:38px;transform:translateX(-50%) rotate(-3deg);
+    background:rgba(255,255,255,.5)}
+  .row + .row{margin-top:22px;padding-top:20px;border-top:3px dashed rgba(15,18,64,.2)}
+  .row .lb{display:inline-block;font-weight:900;font-size:19px;letter-spacing:.14em;background:var(--ink);color:var(--aqua);
+    padding:4px 12px;margin-bottom:10px}
+  .row p{font-weight:600;font-size:27px;line-height:1.32}
+  .row p b{font-weight:900}
+
+  .band{position:absolute;left:0;right:0;bottom:0;height:170px;z-index:9}
+  .band .torn{position:absolute;left:0;right:0;top:-24px;width:100%;height:194px}
+  .band .c{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:24px;padding-top:14px;
+    font-family:'Montserrat';color:var(--ink)}
+  .when{display:flex;border:4px solid var(--ink)}
+  .when div{font-family:'Archivo Black';font-size:40px;padding:0 18px;line-height:1.2}
+  .when div + div{border-left:4px solid var(--ink)}
+  .when .hi{background:var(--aqua)}
+  .where strong{display:block;font-weight:900;font-size:23px;white-space:nowrap}
+  .where small{display:block;font-weight:600;font-size:16px;margin-top:3px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="art" id="art">
+  <svg class="layer" id="topo" viewBox="0 0 1080 1920"></svg>
+  <div class="scan"></div>
+  <svg class="grain" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#n)"/>
+  </svg>
+  <div class="ruler"><svg id="ruler" viewBox="0 0 92 2040"></svg></div>
+
+  <img class="logo" src="logo_white.png" alt="">
+  <div class="tag">PAINEL JOVEM</div>
+
+  <div class="kicker" id="kicker"></div>
+  <div class="g"><span class="ext" id="n1"></span><span class="face" id="n2"></span></div>
+  <div class="sur" id="sur"></div>
+
+  <img class="person" id="photo" alt="">
+  <div class="role" id="role"></div>
+
+  <div class="card" id="card"></div>
+
+  <div class="band">
+    <svg class="torn" preserveAspectRatio="none" viewBox="0 0 1080 194"><path id="torn" fill="#efeadc"/></svg>
+    <div class="c">
+      <div class="when"><div class="hi">SÁBADO</div><div>17/10</div><div>19H30</div></div>
+      <div class="where"><strong>IGREJA CASA DA PATERNIDADE</strong><small>Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</small></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const P = {
+    1: {
+      n: '01', conv: 'CONVIDADA', first: 'NATHALLIE', sur: 'Braz', size: 200,
+      img: 'p_farma.png', h: 1160, left: 300,
+      role: 'na <i>farmácia</i>', roleXY: [70, 1000, -4],
+      rows: [
+        ['NO TRABALHO', 'Empresária há <b>mais de 20 anos</b> no ramo farmacêutico.'],
+        ['NA IGREJA', 'Líder do Ministério de Casais <b>Casa na Rocha</b>, na Igreja Cristã Casa da Paternidade.'],
+        ['NA FAMÍLIA', 'Esposa do <b>Erisson</b> e mãe do <b>Davi</b>.'],
+      ],
+    },
+    2: {
+      n: '02', conv: 'CONVIDADO', first: 'ADRIANO', sur: 'Ramos', size: 230,
+      img: 'p_samarco.png', h: 1140, left: 220,
+      role: 'na <i>mineração</i>', roleXY: [70, 1000, -4],
+      rows: [
+        ['NO TRABALHO', 'Analista no setor de mineração há <b>mais de 10 anos</b>.'],
+        ['NA IGREJA', 'Pastor na Igreja <b>Assembleia de Deus Boas Novas</b>.'],
+        ['NA FAMÍLIA', 'Casado com a <b>Rubiene</b>, pai da <b>Sofia</b> e do <b>Emanuel</b>.'],
+      ],
+    },
+    3: {
+      n: '03', conv: 'CONVIDADO', first: 'GEAN', sur: 'Pietro', size: 240,
+      img: 'p_goleiro.png', h: 1130, left: 220,
+      role: 'no <i>esporte</i>', roleXY: [70, 1000, -4],
+      rows: [
+        ['NO ESPORTE', 'Goleiro de <b>beach soccer</b>, já defendeu times na <b>Itália</b> e em ligas internacionais.'],
+        ['NA IGREJA', 'Serve na <b>Igreja Missão</b>, em Anchieta.'],
+        ['NA FAMÍLIA', 'Casado com a <b>Alícia Laís</b> e pai da <b>Laís</b>.'],
+      ],
+    },
+  };
+  const d = P[new URLSearchParams(location.search).get('p') || '1'];
+
+  document.getElementById('kicker').innerHTML = `${d.conv} <b>${d.n}</b>/03 · CONHEÇA`;
+  ['n1','n2'].forEach(id => { const el = document.getElementById(id); el.textContent = d.first; el.style.fontSize = d.size + 'px'; });
+  const sh = []; for (let i = 1; i <= 12; i++) sh.push(`${i}px ${i}px 0 ${i < 4 ? '#7ff0b4' : '#1f9a63'}`);
+  document.getElementById('n1').style.textShadow = sh.join(',');
+  document.getElementById('sur').textContent = d.sur;
+  // sobrenome logo após o nome
+  const nameW = document.getElementById('n2').offsetWidth;
+  document.getElementById('sur').style.left = Math.min(66 + nameW - 120, 1080 - 520) + 'px';
+  document.getElementById('sur').style.top = (296 + d.size * 0.86) + 'px';
+
+  const ph = document.getElementById('photo');
+  ph.src = d.img; ph.style.height = d.h + 'px'; ph.style.left = d.left + 'px';
+
+  const role = document.getElementById('role');
+  role.innerHTML = d.role;
+  role.style.left = d.roleXY[0] + 'px'; role.style.top = d.roleXY[1] + 'px';
+  role.style.transform = `rotate(${d.roleXY[2]}deg)`;
+
+  document.getElementById('card').innerHTML = d.rows.map(([lb, tx]) =>
+    `<div class="row"><span class="lb">${lb}</span><p>${tx}</p></div>`).join('');
+
+  let s = 13; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  let svg = '';
+  [[860,700,11],[180,1500,9],[600,1250,6]].forEach(([cx,cy,k0])=>{
+    const p0 = r()*6;
+    for(let k=1;k<=k0;k++){ const R=k*62; let dd='';
+      for(let a=0;a<=64;a++){ const t=a/64*Math.PI*2;
+        const rr=R*(1+0.16*Math.sin(3*t+p0+k*.3)+0.08*Math.cos(5*t-p0));
+        dd+=(a?'L':'M')+(cx+rr*Math.cos(t)).toFixed(1)+','+(cy+rr*0.82*Math.sin(t)).toFixed(1); }
+      svg+=`<path d="${dd}Z" fill="none" stroke="#22c47a" stroke-opacity="${0.08+0.18*(k/k0)}" stroke-width="${k%4?1.6:3}"/>`; }
+  });
+  document.getElementById('topo').innerHTML = svg;
+
+  let rs='';
+  for(let i=0;i<=203;i++){ const y=2030-i*10, L=i%10===0?52:(i%5===0?34:18);
+    rs+=`<line x1="${92-L}" y1="${y}" x2="92" y2="${y}" stroke="#0d0d12" stroke-width="${i%10===0?3:1.6}"/>`;
+    if(i%10===0&&i>0) rs+=`<text x="4" y="${y+8}" font-family="Montserrat" font-weight="800" font-size="20" fill="#0d0d12">${i}</text>`; }
+  document.getElementById('ruler').innerHTML = rs;
+
+  let p='M0,40'; for(let x=0;x<=1080;x+=18){ p+=` L${x},${18+r()*26}`; } p+=' L1080,194 L0,194 Z';
+  document.getElementById('torn').setAttribute('d',p);
+</script>
+</body>
+</html>
