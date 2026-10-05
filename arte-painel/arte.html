@@ -5,21 +5,22 @@
 <title>Crescer sem se perder</title>
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-  /* Tema A — azul-marinho + verde neon (versão principal) */
+  /* ===== PALETAS ===== */
+  /* A — azul-marinho + verde-água (principal) */
   :root{
     --bg1:#1d2370; --bg2:#141850; --bg3:#0b0d33;
-    --title:#efeadc; --ext1:#5ef25a; --ext2:#1f8a3a;
-    --script:#5ef25a; --script-outline:#0f1240;
-    --topo:#3ddc6a; --route:#5ef25a; --star:#efeadc;
-    --body:#efeadc; --accent:#5ef25a;
-    --ref-bg:#5ef25a; --ref-ink:#0d0d12;
+    --title:#efeadc; --ext1:#7ff0b4; --ext2:#1f9a63;
+    --script:#7ff0b4; --script-outline:#0f1240;
+    --topo:#22c47a; --route:#7ff0b4; --star:#efeadc;
+    --body:#efeadc; --accent:#7ff0b4;
+    --ref-bg:#7ff0b4; --ref-ink:#0f1240;
     --kicker-bg:#efeadc; --kicker-ink:#141850;
     --label-bg:#efeadc; --label-ink:#0d0d12; --label-hi:#e2342b;
-    --band-bg:#efeadc; --band-ink:#0f1240; --band-hi:#5ef25a; --band-hi-ink:#0f1240;
+    --band-bg:#efeadc; --band-ink:#0f1240; --band-hi:#7ff0b4; --band-hi-ink:#0f1240;
     --ruler-bg:#efeadc; --ruler-ink:#0d0d12; --ruler-op:.30;
     --x:#e2342b; --pin:#e2342b; --scan:rgba(255,255,255,.035);
   }
-  /* Tema C — vinho + mostarda */
+  /* C — vinho + mostarda */
   body.c{
     --bg1:#7a1834; --bg2:#520f24; --bg3:#2c0613;
     --title:#f6eedd; --ext1:#ffc23a; --ext2:#b06e08;
@@ -33,19 +34,33 @@
     --ruler-bg:#f6eedd; --ruler-ink:#2c0613; --ruler-op:.26;
     --x:#ffc23a; --pin:#a3163f; --scan:rgba(255,255,255,.03);
   }
+  /* D — verde-petróleo + coral */
+  body.d{
+    --bg1:#0f4a4f; --bg2:#0a3539; --bg3:#041b1e;
+    --title:#fbf1e4; --ext1:#ff8a6b; --ext2:#c24a2c;
+    --script:#ff8a6b; --script-outline:#062528;
+    --topo:#5fd3c4; --route:#ff8a6b; --star:#fbf1e4;
+    --body:#fbf1e4; --accent:#ff8a6b;
+    --ref-bg:#ff8a6b; --ref-ink:#062528;
+    --kicker-bg:#fbf1e4; --kicker-ink:#0a3539;
+    --label-bg:#fbf1e4; --label-ink:#062528; --label-hi:#d9462a;
+    --band-bg:#fbf1e4; --band-ink:#062528; --band-hi:#ff8a6b; --band-hi-ink:#062528;
+    --ruler-bg:#fbf1e4; --ruler-ink:#062528; --ruler-op:.24;
+    --x:#ff8a6b; --pin:#d9462a; --scan:rgba(255,255,255,.03);
+  }
 
+  /* ===== BASE (STORY 1080×1920) ===== */
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:1080px;height:1920px;background:var(--bg2);overflow:hidden}
+  html,body{background:var(--bg2);overflow:hidden}
   .art{position:relative;width:1080px;height:1920px;overflow:hidden;
     background:radial-gradient(120% 70% at 50% 35%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%);}
   svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .grain{position:absolute;inset:0;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+  .grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
   .scan{position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(0deg, var(--scan) 0 3px, transparent 3px 9px);}
 
   .logo{position:absolute;top:62px;left:50%;transform:translateX(-50%);width:112px}
 
-  /* etiqueta PAINEL JOVEM com fita adesiva */
   .kicker{position:absolute;top:196px;left:70px;font-family:'Montserrat';font-weight:900;
     font-size:46px;letter-spacing:.03em;color:var(--kicker-ink);background:var(--kicker-bg);
     padding:12px 30px 10px;transform:rotate(-2.5deg);box-shadow:6px 7px 0 rgba(0,0,0,.35);z-index:4}
@@ -54,7 +69,6 @@
   .kicker::before{left:-30px;top:-12px;transform:rotate(-32deg)}
   .kicker::after{right:-30px;bottom:-10px;transform:rotate(-32deg)}
 
-  /* CRESCER — desgastado com extrusão 3D */
   .crescer{position:absolute;left:52px;top:288px;width:1000px;height:300px;z-index:3;
     -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);
     -webkit-mask-size:1000px 350px;mask-size:1000px 350px;transform:rotate(-1.5deg)}
@@ -63,7 +77,6 @@
   .crescer .ext{color:var(--ext1);transform:translate(4px,4px)}
   .crescer .face{color:var(--title)}
 
-  /* SEM SE PERDER — pincel */
   .sem{position:absolute;left:120px;top:598px;z-index:4;transform:rotate(-6deg)}
   .sem .txt{font-family:'Knewave';font-size:124px;color:var(--script);white-space:nowrap;line-height:1;
     text-shadow:6px 6px 0 var(--script-outline)}
@@ -73,51 +86,84 @@
     transform:rotate(1.2deg);opacity:var(--ruler-op)}
   .ruler svg{width:100%;height:100%}
 
-  .verse{position:absolute;left:78px;top:812px;width:560px;font-family:'Montserrat';font-weight:700;
-    color:var(--body);font-size:27px;line-height:1.38;z-index:3}
+  .route{position:absolute;left:740px;top:770px;width:240px;height:260px;z-index:3;overflow:visible}
+
+  .verse{position:absolute;left:78px;top:786px;width:540px;font-family:'Montserrat';font-weight:700;
+    color:var(--body);font-size:26px;line-height:1.36;z-index:3}
   .verse b{color:var(--accent);font-weight:900;font-style:italic}
   .verse .ref{display:inline-block;margin-top:12px;font-weight:900;font-size:22px;letter-spacing:.05em;
     background:var(--ref-bg);color:var(--ref-ink);padding:4px 12px}
 
-  .people{position:absolute;left:0;right:0;top:880px;height:820px}
+  .people{position:absolute;left:0;right:0;bottom:150px;height:900px}
   .p{position:absolute;bottom:0;
     filter:drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff)
            drop-shadow(14px 16px 0 rgba(0,0,0,.30));}
-  .p1{left:-30px;height:640px}
-  .p3{right:-36px;height:660px}
-  .p2{left:50%;transform:translateX(-50%);height:740px;z-index:2}
+  .p1{left:-50px;height:740px}
+  .p3{right:-60px;height:760px}
+  .p2{left:50%;transform:translateX(-50%);height:840px;z-index:2}
 
-  /* etiquetas com nome — embaixo de cada pessoa */
   .label{position:absolute;z-index:8;background:var(--label-bg);color:var(--label-ink);
     padding:10px 20px 8px;box-shadow:5px 6px 0 rgba(0,0,0,.35);white-space:nowrap;line-height:1}
   .label b{display:block;font-family:'Montserrat';font-weight:900;font-size:27px;letter-spacing:.01em}
   .label span{display:block;font-family:'Permanent Marker';font-size:33px;margin-top:5px}
   .label i{font-style:normal;color:var(--label-hi)}
+  .l1{left:22px;top:1462px;transform:rotate(-4deg)}
+  .l2{left:50%;top:1478px;transform:translateX(-50%) rotate(2deg)}
+  .l3{right:20px;top:1458px;transform:rotate(-3deg)}
 
   .info{position:absolute;left:0;right:0;bottom:0;height:372px;z-index:6}
-  .info .content{position:absolute;inset:0;padding:80px 64px 0;color:var(--band-ink)}
-  .bp{display:inline-block;font-family:'Montserrat';font-weight:800;font-size:25px;border:3px solid var(--band-ink);
-    padding:7px 14px;letter-spacing:.01em}
-  .when{display:flex;align-items:stretch;margin-top:16px;border:4px solid var(--band-ink);width:max-content}
-  .when div{font-family:'Archivo Black';font-size:54px;padding:2px 24px;line-height:1.15}
+  .info .torn{position:absolute;left:0;right:0;top:-26px;height:400px;width:100%}
+  .info .content{position:absolute;inset:0;padding:78px 40px 0;color:var(--band-ink);
+    display:flex;flex-direction:column;align-items:center;text-align:center}
+  .bp{font-family:'Montserrat';font-weight:800;font-size:25px;border:3px solid var(--band-ink);
+    padding:7px 16px;letter-spacing:.01em}
+  .when{display:flex;align-items:stretch;margin-top:16px;border:4px solid var(--band-ink)}
+  .when div{font-family:'Archivo Black';font-size:56px;padding:2px 26px;line-height:1.15}
   .when div + div{border-left:4px solid var(--band-ink)}
   .when .hi{background:var(--band-hi);color:var(--band-hi-ink)}
-  .addr{margin-top:16px;display:flex;align-items:center;gap:12px;font-family:'Montserrat'}
+  .addr{margin-top:16px;display:flex;align-items:center;gap:12px;font-family:'Montserrat';text-align:left}
   .addr strong{display:block;font-weight:900;font-size:27px;letter-spacing:.02em}
   .addr small{display:block;font-weight:600;font-size:21px;margin-top:2px}
+
+  /* ===== PROJEÇÃO (1920×1080) ===== */
+  body.h .art{width:1920px;height:1080px;
+    background:radial-gradient(90% 110% at 30% 30%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%)}
+  body.h .ruler{right:10px;top:-40px;height:1160px}
+  body.h .logo{left:100px;top:52px;transform:none;width:92px}
+  body.h .kicker{left:226px;top:66px;font-size:40px}
+  body.h .crescer{left:74px;top:170px;width:960px}
+  body.h .crescer span{font-size:272px}
+  body.h .sem{left:120px;top:462px}
+  body.h .sem .txt{font-size:112px}
+  body.h .sem svg{width:700px;top:106px}
+  body.h .verse{left:100px;top:648px;width:720px;font-size:25px}
+  body.h .route{display:none}
+  body.h .people{left:auto;right:30px;width:1000px;bottom:150px;height:900px}
+  body.h .p1{left:-20px;height:640px}
+  body.h .p3{right:-10px;height:660px}
+  body.h .p2{height:740px}
+  body.h .l1{left:900px;top:735px}
+  body.h .l2{left:1390px;top:752px}
+  body.h .l3{left:auto;right:40px;top:732px}
+  body.h .info{height:250px}
+  body.h .info .torn{top:-24px;height:280px}
+  body.h .info .content{padding:52px 40px 0}
+  body.h .row{display:flex;align-items:center;gap:44px;margin-top:14px}
+  body.h .when{margin-top:0}
+  body.h .addr{margin-top:0}
 </style>
 </head>
 <body>
 <div class="art" id="art">
 
-  <svg class="layer" id="topo" viewBox="0 0 1080 1920"></svg>
+  <svg class="layer" id="topo"></svg>
   <div class="scan"></div>
-  <svg class="grain" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+  <svg class="grain" preserveAspectRatio="none">
     <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
     <rect width="100%" height="100%" filter="url(#n)"/>
   </svg>
 
-  <div class="ruler"><svg id="ruler" viewBox="0 0 92 2040"></svg></div>
+  <div class="ruler"><svg id="ruler" preserveAspectRatio="none"></svg></div>
 
   <img class="logo" src="logo_white.png" alt="">
   <div class="kicker">PAINEL JOVEM</div>
@@ -131,15 +177,12 @@
     </svg>
   </div>
 
-  <svg class="layer" viewBox="0 0 1080 1920" style="z-index:3">
-    <path d="M 865 820 C 960 880, 905 980, 820 980 S 690 910, 760 860 S 900 940, 880 1010"
+  <!-- rota + "você está aqui" -->
+  <svg class="route" viewBox="0 0 240 260">
+    <path d="M 125 50 C 220 110, 165 210, 80 210 S -50 140, 20 90 S 160 170, 140 240"
           fill="none" stroke="var(--route)" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
-    <g transform="translate(860 810) rotate(8)" stroke="var(--x)" stroke-width="9" stroke-linecap="round">
+    <g transform="translate(120 40) rotate(8)" stroke="var(--x)" stroke-width="9" stroke-linecap="round">
       <line x1="-20" y1="-20" x2="20" y2="20"/><line x1="20" y1="-20" x2="-20" y2="20"/>
-    </g>
-    <g fill="var(--star)">
-      <path transform="translate(870 200) scale(1.3)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
-      <path transform="translate(80 1180) scale(1.1)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
     </g>
   </svg>
 
@@ -153,27 +196,35 @@
     <img class="p p3" src="p_goleiro.png" alt="">
     <img class="p p2" src="p_samarco.png" alt="">
   </div>
-  <div class="label" style="left:22px;top:1462px;transform:rotate(-4deg)"><b>NATHALLIE BRAZ</b><span>na <i>farmácia</i></span></div>
-  <div class="label" style="left:372px;top:1478px;transform:rotate(2deg)"><b>ADRIANO RAMOS</b><span>na <i>mineração</i></span></div>
-  <div class="label" style="right:20px;top:1458px;transform:rotate(-3deg)"><b>GEAN PIETRO</b><span>no <i>beach soccer</i></span></div>
+  <div class="label l1"><b>NATHALLIE BRAZ</b><span>na <i>farmácia</i></span></div>
+  <div class="label l2"><b>ADRIANO RAMOS</b><span>na <i>mineração</i></span></div>
+  <div class="label l3"><b>GEAN PIETRO</b><span>no <i>beach soccer</i></span></div>
 
   <div class="info">
-    <svg class="layer" viewBox="0 0 1080 372" preserveAspectRatio="none" style="top:-26px;height:400px">
-      <path id="torn" fill="var(--band-bg)"/>
-    </svg>
+    <svg class="torn" preserveAspectRatio="none"><path id="torn" fill="var(--band-bg)"/></svg>
     <div class="content">
       <div class="bp">BATE-PAPO + DIRECIONAMENTO BÍBLICO + COMUNHÃO</div>
-      <div class="when"><div class="hi">SEXTA</div><div>17/10</div><div>19H30</div></div>
-      <div class="addr">
-        <svg width="30" height="40" viewBox="0 0 26 34"><path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="var(--pin)"/><circle cx="13" cy="13" r="5" fill="var(--band-bg)"/></svg>
-        <div><strong>IGREJA CASA DA PATERNIDADE</strong><small>Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</small></div>
+      <div class="row">
+        <div class="when"><div class="hi">SEXTA</div><div>17/10</div><div>19H30</div></div>
+        <div class="addr">
+          <svg width="30" height="40" viewBox="0 0 26 34"><path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="var(--pin)"/><circle cx="13" cy="13" r="5" fill="var(--band-bg)"/></svg>
+          <div><strong>IGREJA CASA DA PATERNIDADE</strong><small>Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</small></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <svg class="layer" id="stars" style="z-index:3"></svg>
 </div>
 
 <script>
-  if (new URLSearchParams(location.search).get('tema') === 'c') document.body.classList.add('c');
+  const q = new URLSearchParams(location.search);
+  const tema = q.get('tema'); if (tema && tema !== 'a') document.body.classList.add(tema);
+  const H = q.get('formato') === 'h'; if (H) document.body.classList.add('h');
+  const W = H ? 1920 : 1080, HT = H ? 1080 : 1920;
+
+  // no story a data e o endereço ficam empilhados; na projeção, lado a lado
+  if (!H) document.querySelector('.row').style.display = 'contents';
 
   // extrusão 3D do CRESCER
   const cs = getComputedStyle(document.body);
@@ -185,7 +236,8 @@
 
   // curvas de nível
   const topo = document.getElementById('topo');
-  const centers = [[880,560,11],[160,1500,9],[620,1250,6]];
+  topo.setAttribute('viewBox', `0 0 ${W} ${HT}`);
+  const centers = H ? [[1500,260,11],[260,900,9],[1000,700,6]] : [[880,560,11],[160,1500,9],[620,1250,6]];
   let svg = '';
   centers.forEach(([cx,cy,n])=>{
     const ph = r()*6;
@@ -201,17 +253,27 @@
   });
   topo.innerHTML = svg;
 
+  // estrelinhas
+  const star = 'M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z';
+  const st = H ? [[1080,110,1.3],[60,620,1.0],[880,860,1.0]] : [[870,200,1.3],[60,1040,1.1]];
+  const ss = document.getElementById('stars'); ss.setAttribute('viewBox', `0 0 ${W} ${HT}`);
+  ss.innerHTML = st.map(([x,y,k]) => `<path fill="var(--star)" transform="translate(${x} ${y}) scale(${k})" d="${star}"/>`).join('');
+
   // régua (cm) — altura toda da arte
-  const ru = document.getElementById('ruler'); let rs='';
-  for(let i=0;i<=203;i++){
-    const y=2030-i*10, L = i%10===0?52:(i%5===0?34:18);
+  const ruler = document.querySelector('.ruler'), rh = ruler.offsetHeight;
+  const ru = document.getElementById('ruler'); ru.setAttribute('viewBox', `0 0 92 ${rh}`);
+  let rs='';
+  for(let i=0; i*10 <= rh-10; i++){
+    const y=rh-10-i*10, L = i%10===0?52:(i%5===0?34:18);
     rs += `<line x1="${92-L}" y1="${y}" x2="92" y2="${y}" stroke="var(--ruler-ink)" stroke-width="${i%10===0?3:1.6}"/>`;
     if(i%10===0 && i>0) rs += `<text x="4" y="${y+8}" font-family="Montserrat" font-weight="800" font-size="20" fill="var(--ruler-ink)">${i}</text>`;
   }
   ru.innerHTML = rs;
 
   // papel rasgado
-  let p='M0,40'; for(let x=0;x<=1080;x+=18){ p+=` L${x},${18+r()*26}`; } p+=' L1080,400 L0,400 Z';
+  const tornSvg = document.querySelector('.info .torn'), th = tornSvg.getBoundingClientRect().height;
+  tornSvg.setAttribute('viewBox', `0 0 ${W} ${th}`);
+  let p='M0,40'; for(let x=0;x<=W;x+=18){ p+=` L${x},${18+r()*26}`; } p+=` L${W},${th} L0,${th} Z`;
   document.getElementById('torn').setAttribute('d',p);
 </script>
 </body>
