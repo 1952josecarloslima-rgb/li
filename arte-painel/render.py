@@ -8,7 +8,7 @@ here = pathlib.Path(__file__).parent.resolve()
 out = here / "final"
 out.mkdir(exist_ok=True)
 
-temas = {"a": "A-azul", "c": "C-vinho", "d": "D-petroleo"}
+temas = {"a": "azul"}
 formatos = {  # nome: (parametro, largura, altura)
     "story": ("v", 1080, 1920),      # exporta 2160×3840
     "projecao": ("h", 1920, 1080),   # exporta 3840×2160 (4K 16:9)

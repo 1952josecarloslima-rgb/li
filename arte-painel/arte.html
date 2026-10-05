@@ -69,7 +69,7 @@
   .kicker::before{left:-30px;top:-12px;transform:rotate(-32deg)}
   .kicker::after{right:-30px;bottom:-10px;transform:rotate(-32deg)}
 
-  .crescer{position:absolute;left:52px;top:288px;width:1000px;height:300px;z-index:3;
+  .crescer{position:absolute;left:52px;top:268px;width:1000px;height:300px;z-index:3;
     -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);
     -webkit-mask-size:1000px 350px;mask-size:1000px 350px;transform:rotate(-1.5deg)}
   .crescer span{position:absolute;left:0;top:0;font-family:'Anton';font-size:292px;line-height:1;
@@ -77,7 +77,7 @@
   .crescer .ext{color:var(--ext1);transform:translate(4px,4px)}
   .crescer .face{color:var(--title)}
 
-  .sem{position:absolute;left:120px;top:598px;z-index:4;transform:rotate(-6deg)}
+  .sem{position:absolute;left:120px;top:572px;z-index:4;transform:rotate(-6deg)}
   .sem .txt{font-family:'Knewave';font-size:124px;color:var(--script);white-space:nowrap;line-height:1;
     text-shadow:6px 6px 0 var(--script-outline)}
   .sem svg{position:absolute;left:30px;top:118px;width:760px;height:40px;overflow:visible}
@@ -86,34 +86,34 @@
     transform:rotate(1.2deg);opacity:var(--ruler-op)}
   .ruler svg{width:100%;height:100%}
 
-  .route{position:absolute;left:740px;top:770px;width:240px;height:260px;z-index:3;overflow:visible}
+  .route{display:none;position:absolute;left:740px;top:770px;width:240px;height:260px;z-index:3;overflow:visible}
 
-  .verse{position:absolute;left:78px;top:786px;width:540px;font-family:'Montserrat';font-weight:700;
-    color:var(--body);font-size:26px;line-height:1.36;z-index:3}
+  .verse{position:absolute;left:120px;top:762px;width:840px;font-family:'Montserrat';font-weight:700;
+    color:var(--body);font-size:24px;line-height:1.45;z-index:3;text-align:center}
   .verse b{color:var(--accent);font-weight:900;font-style:italic}
-  .verse .ref{display:inline-block;margin-top:12px;font-weight:900;font-size:22px;letter-spacing:.05em;
+  .verse .ref{display:inline-block;margin-left:10px;font-weight:900;font-size:20px;letter-spacing:.05em;
     background:var(--ref-bg);color:var(--ref-ink);padding:4px 12px}
 
-  .people{position:absolute;left:0;right:0;bottom:150px;height:900px}
+  .people{position:absolute;left:0;right:0;bottom:350px;height:900px}
   .p{position:absolute;bottom:0;
     filter:drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff)
            drop-shadow(14px 16px 0 rgba(0,0,0,.30));}
-  .p1{left:-50px;height:740px}
-  .p3{right:-60px;height:760px}
-  .p2{left:50%;transform:translateX(-50%);height:840px;z-index:2}
+  .p1{left:-10px;height:690px}
+  .p3{right:-40px;height:700px}
+  .p2{left:50%;transform:translateX(-50%);height:715px;z-index:2}
 
   .label{position:absolute;z-index:8;background:var(--label-bg);color:var(--label-ink);
     padding:10px 20px 8px;box-shadow:5px 6px 0 rgba(0,0,0,.35);white-space:nowrap;line-height:1}
   .label b{display:block;font-family:'Montserrat';font-weight:900;font-size:27px;letter-spacing:.01em}
   .label span{display:block;font-family:'Permanent Marker';font-size:33px;margin-top:5px}
   .label i{font-style:normal;color:var(--label-hi)}
-  .l1{left:22px;top:1462px;transform:rotate(-4deg)}
-  .l2{left:50%;top:1478px;transform:translateX(-50%) rotate(2deg)}
-  .l3{right:20px;top:1458px;transform:rotate(-3deg)}
+  .l1{left:30px;top:1505px;transform:rotate(-4deg)}
+  .l2{left:50%;top:1518px;transform:translateX(-50%) rotate(2deg)}
+  .l3{right:24px;top:1502px;transform:rotate(-3deg)}
 
   .info{position:absolute;left:0;right:0;bottom:0;height:372px;z-index:6}
   .info .torn{position:absolute;left:0;right:0;top:-26px;height:400px;width:100%}
-  .info .content{position:absolute;inset:0;padding:78px 40px 0;color:var(--band-ink);
+  .info .content{position:absolute;inset:0;padding:100px 40px 0;color:var(--band-ink);
     display:flex;flex-direction:column;align-items:center;text-align:center}
   .bp{font-family:'Montserrat';font-weight:800;font-size:25px;border:3px solid var(--band-ink);
     padding:7px 16px;letter-spacing:.01em}
@@ -136,18 +136,18 @@
   body.h .sem{left:120px;top:462px}
   body.h .sem .txt{font-size:112px}
   body.h .sem svg{width:700px;top:106px}
-  body.h .verse{left:100px;top:648px;width:720px;font-size:25px}
+  body.h .verse{left:100px;top:648px;width:760px;font-size:25px;text-align:left}
   body.h .route{display:none}
-  body.h .people{left:auto;right:30px;width:1000px;bottom:150px;height:900px}
-  body.h .p1{left:-20px;height:640px}
-  body.h .p3{right:-10px;height:660px}
-  body.h .p2{height:740px}
-  body.h .l1{left:900px;top:735px}
-  body.h .l2{left:1390px;top:752px}
-  body.h .l3{left:auto;right:40px;top:732px}
-  body.h .info{height:250px}
+  body.h .people{left:auto;right:30px;width:1000px;bottom:240px;height:900px}
+  body.h .p1{left:-20px;height:690px}
+  body.h .p3{right:-10px;height:710px}
+  body.h .p2{height:780px}
+  body.h .l1{left:900px;top:792px}
+  body.h .l2{left:1390px;top:806px}
+  body.h .l3{left:auto;right:40px;top:790px}
+  body.h .info{height:262px}
   body.h .info .torn{top:-24px;height:280px}
-  body.h .info .content{padding:52px 40px 0}
+  body.h .info .content{padding:80px 40px 0}
   body.h .row{display:flex;align-items:center;gap:44px;margin-top:14px}
   body.h .when{margin-top:0}
   body.h .addr{margin-top:0}
@@ -187,7 +187,7 @@
   </svg>
 
   <div class="verse">
-    “<b>cresçam na graça</b> e no conhecimento de nosso Senhor e Salvador Jesus Cristo.”<br>
+    “<b>cresçam na graça</b> e no conhecimento de nosso Senhor e Salvador Jesus Cristo.”
     <span class="ref">2 PEDRO 3:18</span>
   </div>
 
