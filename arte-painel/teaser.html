@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel Jovem — suspense</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{
+    --bg1:#1d2370; --bg2:#141850; --bg3:#0b0d33;
+    --cream:#efeadc; --aqua:#7ff0b4; --aqua2:#1f9a63; --green:#22c47a;
+    --navy:#141850; --ink:#0f1240; --red:#e2342b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;background:var(--bg2);overflow:hidden}
+  .art{position:relative;width:1080px;height:1920px;overflow:hidden;
+    background:radial-gradient(120% 70% at 50% 40%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%)}
+  svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+  .scan{position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 3px, transparent 3px 9px)}
+  .scene{display:none} body.t1 .s1, body.t2 .s2, body.t3 .s3, body.t4 .s4, body.t5 .s5, body.t6 .s6{display:block}
+
+  .logo{position:absolute;top:62px;left:50%;transform:translateX(-50%);width:112px;z-index:5}
+  .ruler{position:absolute;right:14px;top:-60px;width:92px;height:2040px;background:var(--cream);
+    transform:rotate(1.2deg);opacity:.30}
+  .ruler svg{width:100%;height:100%}
+
+  .tag{position:absolute;font-family:'Montserrat';font-weight:900;color:var(--ink);background:var(--cream);
+    padding:12px 30px 10px;box-shadow:6px 7px 0 rgba(0,0,0,.35);z-index:6;white-space:nowrap}
+  .tag::before,.tag::after{content:"";position:absolute;width:74px;height:30px;background:rgba(255,255,255,.45)}
+  .tag::before{left:-30px;top:-12px;transform:rotate(-32deg)}
+  .tag::after{right:-30px;bottom:-10px;transform:rotate(-32deg)}
+
+  /* letras desgastadas com extrusão */
+  .g{position:absolute;z-index:4;-webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);
+    -webkit-mask-size:1000px 350px;mask-size:1000px 350px}
+  .g span{position:absolute;left:0;top:0;font-family:'Anton';line-height:1;white-space:nowrap}
+  .g .ext{color:var(--aqua);transform:translate(4px,4px)}
+  .g .face{color:var(--cream)}
+  .brush{position:absolute;font-family:'Knewave';color:var(--aqua);white-space:nowrap;line-height:1;
+    text-shadow:6px 6px 0 var(--ink);z-index:5}
+  .mono{position:absolute;font-family:'Montserrat';font-weight:700;color:var(--cream);z-index:5}
+  .marker{position:absolute;font-family:'Permanent Marker';z-index:6;white-space:nowrap}
+
+  .soon{position:absolute;left:0;right:0;bottom:120px;text-align:center;z-index:6}
+  .soon .b{display:inline-block;font-family:'Archivo Black';font-size:64px;letter-spacing:.06em;
+    color:var(--ink);background:var(--aqua);padding:6px 34px;transform:rotate(-2deg);box-shadow:6px 7px 0 rgba(0,0,0,.35)}
+  .soon .s{display:block;margin-top:24px;font-family:'Montserrat';font-weight:800;font-size:26px;
+    letter-spacing:.32em;color:var(--cream);opacity:.85}
+
+  /* silhuetas */
+  .sil{position:absolute;bottom:0;filter:brightness(0) drop-shadow(5px 0 0 var(--aqua)) drop-shadow(-5px 0 0 var(--aqua))
+       drop-shadow(0 5px 0 var(--aqua)) drop-shadow(0 -5px 0 var(--aqua)) drop-shadow(14px 16px 0 rgba(0,0,0,.35))}
+  .q{position:absolute;font-family:'Knewave';font-size:170px;color:var(--aqua);z-index:7;
+    text-shadow:6px 6px 0 var(--ink)}
+
+  /* tarja de censura */
+  .censor{position:absolute;background:#08091f;z-index:7;box-shadow:5px 6px 0 rgba(0,0,0,.35)}
+</style>
+</head>
+<body>
+<div class="art" id="art">
+  <svg class="layer" id="topo" viewBox="0 0 1080 1920"></svg>
+  <div class="scan"></div>
+  <svg class="grain" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#n)"/>
+  </svg>
+  <div class="ruler"><svg id="ruler" viewBox="0 0 92 2040"></svg></div>
+  <img class="logo" src="logo_white.png" alt="">
+
+  <!-- ===== 1 — A PERGUNTA ===== -->
+  <div class="scene s1">
+    <div class="tag" style="left:50%;top:210px;font-size:40px;transform:translateX(-50%) rotate(-2deg)">PAINEL JOVEM</div>
+
+    <div class="mono" style="left:90px;top:420px;font-size:34px;letter-spacing:.2em;opacity:.8">UMA PERGUNTA:</div>
+    <div class="g" style="left:80px;top:480px;width:960px;height:240px"><span class="ext">VOCÊ ESTÁ</span><span class="face">VOCÊ ESTÁ</span></div>
+    <div class="g" style="left:80px;top:700px;width:960px;height:260px"><span class="ext big">CRESCENDO</span><span class="face big">CRESCENDO</span></div>
+    <div class="brush" style="left:110px;top:1000px;font-size:96px;transform:rotate(-6deg)">...ou só passando</div>
+    <div class="brush" style="left:380px;top:1110px;font-size:96px;transform:rotate(-6deg)">o tempo?</div>
+
+    <!-- marca de altura na régua -->
+    <svg class="layer" viewBox="0 0 1080 1920" style="z-index:5">
+      <line x1="560" y1="1410" x2="1000" y2="1410" stroke="#e2342b" stroke-width="6" stroke-dasharray="18 12"/>
+      <path d="M 520 1460 C 380 1480, 260 1430, 230 1360" fill="none" stroke="#7ff0b4" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
+    </svg>
+    <div class="marker" style="left:600px;top:1340px;font-size:40px;color:var(--cream);transform:rotate(-3deg)">você está aqui?</div>
+
+    <div class="soon"><span class="b">EM BREVE</span><span class="s">FIQUE DE OLHO</span></div>
+  </div>
+
+  <!-- ===== 2 — OS CONVIDADOS ===== -->
+  <div class="scene s2">
+    <div class="tag" style="left:50%;top:210px;font-size:40px;transform:translateX(-50%) rotate(-2deg)">PAINEL JOVEM</div>
+
+    <div class="g" style="left:80px;top:400px;width:960px;height:200px"><span class="ext">3 CONVIDADOS</span><span class="face">3 CONVIDADOS</span></div>
+    <div class="brush" style="left:150px;top:620px;font-size:104px;transform:rotate(-5deg)">3 histórias reais</div>
+    <div class="mono" style="left:110px;top:790px;width:860px;font-size:31px;line-height:1.4;text-align:center">
+      gente como você, que coloca Deus em primeiro lugar na rotina, no trabalho e nos sonhos.
+    </div>
+
+    <img class="sil" src="p_farma.png" style="left:-10px;bottom:330px;height:620px" alt="">
+    <img class="sil" src="p_goleiro.png" style="right:-40px;bottom:330px;height:630px" alt="">
+    <img class="sil" src="p_samarco.png" style="left:50%;transform:translateX(-50%);bottom:330px;height:690px;z-index:2" alt="">
+    <div class="q" style="left:150px;top:1150px;transform:rotate(-8deg)">?</div>
+    <div class="q" style="left:470px;top:1080px;transform:rotate(4deg)">?</div>
+    <div class="q" style="left:820px;top:1150px;transform:rotate(-4deg)">?</div>
+
+    <div class="marker" style="left:50%;top:1500px;font-size:46px;color:var(--ink);background:var(--cream);padding:6px 26px;transform:translateX(-50%) rotate(-2deg);box-shadow:6px 7px 0 rgba(0,0,0,.35)">quem serão?</div>
+
+    <div class="soon"><span class="b">EM BREVE</span><span class="s">FIQUE DE OLHO</span></div>
+  </div>
+
+  <!-- ===== 3 — A DATA ===== -->
+  <div class="scene s3">
+    <div class="tag" style="left:50%;top:210px;font-size:40px;transform:translateX(-50%) rotate(-2deg)">PAINEL JOVEM</div>
+
+    <div class="brush" style="left:120px;top:380px;font-size:120px;transform:rotate(-6deg)">anota aí</div>
+    <div class="g" style="left:70px;top:520px;width:960px;height:420px"><span class="ext huge">17/10</span><span class="face huge">17/10</span></div>
+    <div class="mono" style="left:0;right:0;top:960px;text-align:center;font-family:'Archivo Black';font-size:64px;letter-spacing:.04em">
+      <span style="background:var(--aqua);color:var(--ink);padding:2px 22px">SÁBADO</span>&nbsp;&nbsp;19H30
+    </div>
+
+    <!-- tema censurado -->
+    <div class="mono" style="left:110px;top:1140px;font-size:32px;letter-spacing:.24em;opacity:.85">TEMA:</div>
+    <div class="censor" style="left:100px;top:1195px;width:640px;height:92px;transform:rotate(-1.5deg)"></div>
+    <div class="censor" style="left:150px;top:1300px;width:820px;height:92px;transform:rotate(1deg)"></div>
+    <div class="marker" style="left:520px;top:1235px;font-size:44px;color:var(--ink);background:var(--aqua);padding:4px 22px;transform:rotate(-6deg);z-index:8">em breve!</div>
+
+    <div class="mono" style="left:0;right:0;top:1490px;text-align:center">
+      <div style="font-weight:900;font-size:34px;letter-spacing:.04em">IGREJA CASA DA PATERNIDADE</div>
+      <div style="font-weight:600;font-size:24px;margin-top:6px;opacity:.9">Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</div>
+    </div>
+
+    <div class="soon"><span class="b">NÃO PERCA</span><span class="s">CHAMA OS AMIGOS</span></div>
+  </div>
+  <!-- ===== 4 — A PALAVRA ===== -->
+  <div class="scene s4">
+    <div class="tag" style="left:50%;top:210px;font-size:40px;transform:translateX(-50%) rotate(-2deg)">PAINEL JOVEM</div>
+
+    <div class="mono" style="left:90px;top:400px;font-size:32px;letter-spacing:.2em;opacity:.8">UMA PALAVRA PRA GUARDAR:</div>
+    <div class="brush" style="left:90px;top:470px;font-size:150px;transform:rotate(-6deg)">“cresçam</div>
+    <div class="g" data-size="225" style="left:80px;top:660px;width:960px;height:260px"><span class="ext">NA GRAÇA</span><span class="face">NA GRAÇA</span></div>
+    <div class="mono" style="left:90px;top:960px;width:800px;font-size:44px;line-height:1.3">
+      e no conhecimento de nosso Senhor e Salvador Jesus Cristo.”
+    </div>
+    <div class="mono" style="left:90px;top:1130px;font-family:'Archivo Black';font-size:40px;letter-spacing:.04em;
+      background:var(--aqua);color:var(--ink);padding:4px 20px">2 PEDRO 3:18</div>
+
+    <svg class="layer" viewBox="0 0 1080 1920" style="z-index:5">
+      <path d="M 640 1420 C 760 1460, 880 1400, 900 1300" fill="none" stroke="#7ff0b4" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
+      <g transform="translate(905 1285) rotate(8)" stroke="#e2342b" stroke-width="9" stroke-linecap="round">
+        <line x1="-20" y1="-20" x2="20" y2="20"/><line x1="20" y1="-20" x2="-20" y2="20"/>
+      </g>
+    </svg>
+    <div class="marker" style="left:140px;top:1380px;font-size:44px;color:var(--ink);background:var(--cream);padding:6px 24px;transform:rotate(-3deg);box-shadow:6px 7px 0 rgba(0,0,0,.35)">tem a ver com o tema...</div>
+
+    <div class="soon"><span class="b">EM BREVE</span><span class="s">FIQUE DE OLHO</span></div>
+  </div>
+
+  <!-- ===== 5 — A ENQUETE ===== -->
+  <div class="scene s5">
+    <div class="tag" style="left:50%;top:210px;font-size:40px;transform:translateX(-50%) rotate(-2deg)">PAINEL JOVEM</div>
+
+    <div class="mono" style="left:90px;top:400px;font-size:32px;letter-spacing:.2em;opacity:.8">SINCERAMENTE...</div>
+    <div class="g" data-size="172" style="left:80px;top:460px;width:960px;height:220px"><span class="ext">VOCÊ JÁ SE</span><span class="face">VOCÊ JÁ SE</span></div>
+    <div class="g" data-size="250" style="left:80px;top:650px;width:960px;height:280px"><span class="ext">SENTIU</span><span class="face">SENTIU</span></div>
+    <div class="brush" style="left:120px;top:930px;font-size:120px;transform:rotate(-6deg)">perdido?</div>
+
+    <!-- cartão estilo enquete -->
+    <div class="poll" style="position:absolute;left:140px;top:1150px;width:800px;background:var(--cream);border-radius:28px;
+      padding:34px 38px;box-shadow:8px 10px 0 rgba(0,0,0,.35);transform:rotate(-1.5deg);z-index:6;font-family:'Montserrat'">
+      <div style="font-weight:900;font-size:32px;color:var(--ink);text-align:center;margin-bottom:24px">tentando crescer na vida e na fé...</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:#dcd6c6;border-radius:16px;overflow:hidden;position:relative;height:74px;margin-bottom:16px">
+        <div style="position:absolute;inset:0;width:78%;background:var(--aqua)"></div>
+        <span style="position:relative;font-weight:900;font-size:30px;color:var(--ink);padding-left:26px">já me perdi, sim</span>
+        <span style="position:relative;font-weight:900;font-size:30px;color:var(--ink);padding-right:26px">78%</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:#dcd6c6;border-radius:16px;overflow:hidden;position:relative;height:74px">
+        <div style="position:absolute;inset:0;width:22%;background:#b9c9ff"></div>
+        <span style="position:relative;font-weight:900;font-size:30px;color:var(--ink);padding-left:26px">nunca aconteceu</span>
+        <span style="position:relative;font-weight:900;font-size:30px;color:var(--ink);padding-right:26px">22%</span>
+      </div>
+    </div>
+    <div class="marker" style="left:520px;top:1520px;font-size:42px;color:var(--cream);transform:rotate(-4deg)">você não tá sozinho.</div>
+
+    <div class="soon"><span class="b">EM BREVE</span><span class="s">VAMOS FALAR SOBRE ISSO</span></div>
+  </div>
+
+  <!-- ===== 6 — É HOJE ===== -->
+  <div class="scene s6">
+    <div class="tag" style="left:50%;top:210px;font-size:40px;transform:translateX(-50%) rotate(-2deg)">PAINEL JOVEM</div>
+
+    <div class="brush" style="left:0;right:0;top:420px;text-align:center;font-size:200px;transform:rotate(-6deg)">é hoje!</div>
+    <div class="g" data-size="330" data-center="1" style="left:60px;top:700px;width:960px;height:420px"><span class="ext">19H30</span><span class="face">19H30</span></div>
+    <div class="mono" style="left:0;right:0;top:1150px;text-align:center;font-family:'Archivo Black';font-size:64px;letter-spacing:.04em">
+      <span style="background:var(--aqua);color:var(--ink);padding:2px 22px">SÁBADO</span>&nbsp;&nbsp;17/10
+    </div>
+    <div class="mono" style="left:0;right:0;top:1330px;text-align:center">
+      <div style="font-weight:900;font-size:36px;letter-spacing:.04em">IGREJA CASA DA PATERNIDADE</div>
+      <div style="font-weight:600;font-size:25px;margin-top:6px;opacity:.9">Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</div>
+    </div>
+    <div class="marker" style="left:50%;top:1480px;font-size:44px;color:var(--ink);background:var(--cream);padding:6px 26px;transform:translateX(-50%) rotate(-2deg);box-shadow:6px 7px 0 rgba(0,0,0,.35)">bate-papo + comunhão</div>
+
+    <div class="soon"><span class="b">TE ESPERAMOS</span><span class="s">CHAMA OS AMIGOS</span></div>
+  </div>
+</div>
+
+<script>
+  const n = new URLSearchParams(location.search).get('n') || '1';
+  document.body.classList.add('t' + n);
+
+  // tamanhos e extrusão das letras desgastadas
+  const sizes = {'':200, big:212, huge:400};
+  document.querySelectorAll('.g span').forEach(el => {
+    const k = el.classList.contains('huge') ? 'huge' : el.classList.contains('big') ? 'big' : '';
+    const g = el.closest('.g');
+    el.style.fontSize = (g.dataset.size || (el.closest('.s2') ? 158 : sizes[k])) + 'px';
+    if (el.classList.contains('ext')) {
+      const sh = []; for (let i = 1; i <= 12; i++) sh.push(`${i}px ${i}px 0 ${i < 4 ? '#7ff0b4' : '#1f9a63'}`);
+      el.style.textShadow = sh.join(',');
+    }
+  });
+  // centraliza "17/10"
+  document.querySelectorAll('.s3 .g span, .g[data-center] span').forEach(el => el.style.left = ((960 - el.offsetWidth) / 2) + 'px');
+
+  let s = 11; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const centers = [[820,520,11],[180,1450,9],[640,1200,6]];
+  let svg = '';
+  centers.forEach(([cx,cy,k0])=>{
+    const ph = r()*6;
+    for(let k=1;k<=k0;k++){
+      const R=k*62; let d='';
+      for(let a=0;a<=64;a++){ const t=a/64*Math.PI*2;
+        const rr=R*(1+0.16*Math.sin(3*t+ph+k*.3)+0.08*Math.cos(5*t-ph));
+        d+=(a?'L':'M')+(cx+rr*Math.cos(t)).toFixed(1)+','+(cy+rr*0.82*Math.sin(t)).toFixed(1); }
+      svg+=`<path d="${d}Z" fill="none" stroke="#22c47a" stroke-opacity="${0.08+0.18*(k/k0)}" stroke-width="${k%4?1.6:3}"/>`;
+    }
+  });
+  document.getElementById('topo').innerHTML = svg;
+
+  let rs='';
+  for(let i=0;i<=203;i++){
+    const y=2030-i*10, L=i%10===0?52:(i%5===0?34:18);
+    rs+=`<line x1="${92-L}" y1="${y}" x2="92" y2="${y}" stroke="#0d0d12" stroke-width="${i%10===0?3:1.6}"/>`;
+    if(i%10===0&&i>0) rs+=`<text x="4" y="${y+8}" font-family="Montserrat" font-weight="800" font-size="20" fill="#0d0d12">${i}</text>`;
+  }
+  document.getElementById('ruler').innerHTML = rs;
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel Jovem — stickers</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--navy:#141850;--ink:#0f1240;--cream:#efeadc;--aqua:#7ff0b4;--aqua2:#1f9a63;--red:#e2342b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:transparent}
+  body.preview{background:#141850}
+  .sheet{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:20px;width:1400px}
+  .st{padding:40px;display:inline-block}            /* área transparente em volta do sticker */
+  /* recorte branco de adesivo */
+  .cut{filter:drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff)
+              drop-shadow(5px 7px 0 rgba(0,0,0,.28))}
+
+  /* 1 — título */
+  .titulo{background:var(--navy);padding:26px 34px 30px;border-radius:18px;transform:rotate(-3deg);width:560px}
+  .titulo .tg{display:inline-block;font-family:'Montserrat';font-weight:900;font-size:24px;letter-spacing:.06em;
+    background:var(--cream);color:var(--ink);padding:5px 14px;transform:rotate(-2deg)}
+  .g{position:relative;height:150px;width:520px;margin-top:8px;
+    -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);-webkit-mask-size:1000px 350px;mask-size:1000px 350px}
+  .g span{position:absolute;left:0;top:0;font-family:'Anton';font-size:146px;line-height:1;white-space:nowrap}
+  .g .ext{color:var(--aqua)} .g .face{color:var(--cream)}
+  .titulo .sem{font-family:'Knewave';font-size:62px;color:var(--aqua);transform:rotate(-5deg);margin:-4px 0 0 40px;
+    text-shadow:4px 4px 0 var(--ink)}
+
+  /* 2 — painel jovem (fita) */
+  .tape{position:relative;font-family:'Montserrat';font-weight:900;font-size:46px;color:var(--ink);background:var(--cream);
+    padding:14px 34px 12px;transform:rotate(-3deg);box-shadow:6px 7px 0 rgba(0,0,0,.3)}
+  .tape::before,.tape::after{content:"";position:absolute;width:80px;height:32px;background:rgba(255,255,255,.6)}
+  .tape::before{left:-32px;top:-12px;transform:rotate(-32deg)}
+  .tape::after{right:-32px;bottom:-10px;transform:rotate(-32deg)}
+
+  /* 3 — data */
+  .data{display:flex;border:6px solid var(--ink);background:var(--cream);transform:rotate(2deg)}
+  .data div{font-family:'Archivo Black';font-size:58px;color:var(--ink);padding:4px 24px;line-height:1.2}
+  .data div + div{border-left:6px solid var(--ink)}
+  .data .hi{background:var(--aqua)}
+
+  /* palavras em pincel */
+  .brush{font-family:'Knewave';color:var(--aqua);text-shadow:6px 6px 0 var(--ink);white-space:nowrap;line-height:1}
+
+  /* 5 — você está aqui */
+  .aqui{position:relative;width:440px;height:300px}
+  .aqui .lb{position:absolute;left:0;top:190px;font-family:'Permanent Marker';font-size:42px;color:var(--ink);
+    background:var(--cream);padding:6px 22px;transform:rotate(-4deg)}
+
+  /* 6 — crescendo... */
+  .load{background:var(--navy);border-radius:26px;padding:22px 28px;width:520px}
+  .load .t{display:flex;justify-content:space-between;font-family:'Montserrat';font-weight:900;font-size:34px;color:var(--cream)}
+  .load .t b{color:var(--aqua)}
+  .load .bar{margin-top:14px;height:30px;border-radius:15px;background:rgba(255,255,255,.15);overflow:hidden}
+  .load .bar i{display:block;height:100%;width:78%;border-radius:15px;
+    background:repeating-linear-gradient(-45deg,var(--aqua) 0 14px,#5fd89a 14px 28px)}
+
+  /* 7 — régua */
+  .regua{position:relative;width:620px}
+  .regua .q{font-family:'Permanent Marker';font-size:44px;color:var(--ink);background:var(--cream);display:inline-block;
+    padding:6px 22px;transform:rotate(-3deg);margin:0 0 -10px 30px;position:relative;z-index:2}
+
+  /* 8 — versículo */
+  .verso{background:var(--cream);padding:24px 34px 22px;transform:rotate(-2deg);border-radius:6px}
+  .verso .v{font-family:'Knewave';font-size:58px;color:var(--navy);line-height:1;white-space:nowrap}
+  .verso .r{display:inline-block;margin-top:12px;font-family:'Archivo Black';font-size:28px;background:var(--aqua);color:var(--ink);padding:2px 14px}
+
+  /* convidados */
+  .conv{display:flex;flex-direction:column;align-items:center}
+  .conv .c{width:300px;height:300px;border-radius:50%;background:var(--navy) no-repeat;border:8px solid var(--aqua);overflow:hidden}
+  .conv .n{margin-top:-30px;font-family:'Montserrat';font-weight:900;font-size:30px;color:var(--ink);background:var(--cream);
+    padding:8px 20px 6px;transform:rotate(-3deg);text-align:center;line-height:1.05}
+  .conv .n small{display:block;font-family:'Permanent Marker';font-weight:400;font-size:26px;color:var(--red);margin-top:2px}
+
+  /* barra simples */
+  .bar2{font-family:'Montserrat';font-weight:900;font-size:44px;letter-spacing:.04em;background:var(--aqua);color:var(--ink);
+    padding:12px 28px;transform:rotate(-2deg);display:flex;align-items:center;gap:16px}
+  .local{display:flex;align-items:center;gap:14px;background:var(--navy);border-radius:40px;padding:14px 30px 14px 20px}
+  .local strong{display:block;font-family:'Montserrat';font-weight:900;font-size:30px;color:var(--cream)}
+  .local small{display:block;font-family:'Montserrat';font-weight:600;font-size:20px;color:var(--aqua)}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="st" id="titulo"><div class="cut"><div class="titulo">
+    <span class="tg">PAINEL JOVEM</span>
+    <div class="g"><span class="ext" style="transform:translate(4px,4px);text-shadow:1px 1px 0 #7ff0b4,2px 2px 0 #7ff0b4,3px 3px 0 #1f9a63,4px 4px 0 #1f9a63,5px 5px 0 #1f9a63,6px 6px 0 #1f9a63,7px 7px 0 #1f9a63,8px 8px 0 #1f9a63">CRESCER</span><span class="face">CRESCER</span></div>
+    <div class="sem">sem se perder</div>
+  </div></div></div>
+
+  <div class="st" id="painel-jovem"><div class="tape">PAINEL JOVEM</div></div>
+
+  <div class="st" id="data"><div class="cut"><div class="data"><div class="hi">SÁBADO</div><div>17/10</div><div>19H30</div></div></div></div>
+
+  <div class="st" id="eu-vou"><div class="cut"><div class="brush" style="font-size:150px;transform:rotate(-7deg)">EU VOU!</div></div></div>
+
+  <div class="st" id="voce-esta-aqui"><div class="cut"><div class="aqui">
+    <svg width="440" height="220" viewBox="0 0 440 220" style="position:absolute;left:0;top:0">
+      <path d="M 40 200 C 60 120, 200 170, 230 100 S 330 60, 360 70" fill="none" stroke="#7ff0b4" stroke-width="9" stroke-dasharray="3 20" stroke-linecap="round"/>
+      <g transform="translate(380 60) rotate(8)" stroke="#e2342b" stroke-width="16" stroke-linecap="round">
+        <line x1="-30" y1="-30" x2="30" y2="30"/><line x1="30" y1="-30" x2="-30" y2="30"/>
+      </g>
+    </svg>
+    <div class="lb">você está aqui?</div>
+  </div></div></div>
+
+  <div class="st" id="crescendo"><div class="cut"><div class="load">
+    <div class="t"><span>crescendo...</span><b>78%</b></div>
+    <div class="bar"><i></i></div>
+  </div></div></div>
+
+  <div class="st" id="regua"><div class="cut"><div class="regua">
+    <div class="q">quanto você cresceu?</div>
+    <svg width="620" height="110" viewBox="0 0 620 110" id="rsvg"></svg>
+  </div></div></div>
+
+  <div class="st" id="versiculo"><div class="cut"><div class="verso">
+    <div class="v">“cresçam na graça”</div>
+    <span class="r">2 PEDRO 3:18</span>
+  </div></div></div>
+
+  <div class="st" id="so-nao-se-perca"><div class="cut"><div style="transform:rotate(-6deg)">
+    <div class="brush" style="font-size:96px">só não se perca</div>
+    <svg width="700" height="34" viewBox="0 0 760 40" preserveAspectRatio="none" style="display:block;margin:4px 0 0 20px"><path d="M8 26 C 180 14, 420 8, 752 4 C 600 16, 380 26, 120 36 Z" fill="#7ff0b4"/></svg>
+  </div></div></div>
+
+  <div class="st" id="convidada-nathallie"><div class="cut"><div class="conv">
+    <div class="c" style="background-image:url(p_farma.png);background-size:494px auto;background-position:-138px -5px"></div>
+    <div class="n">NATHALLIE BRAZ<small>na farmácia</small></div>
+  </div></div></div>
+
+  <div class="st" id="convidado-adriano"><div class="cut"><div class="conv">
+    <div class="c" style="background-image:url(p_samarco.png);background-size:675px auto;background-position:-196px 9px"></div>
+    <div class="n">ADRIANO RAMOS<small>na mineração</small></div>
+  </div></div></div>
+
+  <div class="st" id="convidado-gean"><div class="cut"><div class="conv">
+    <div class="c" style="background-image:url(p_goleiro.png);background-size:695px auto;background-position:-258px -49px"></div>
+    <div class="n">GEAN PIETRO<small>no esporte</small></div>
+  </div></div></div>
+
+  <div class="st" id="chama-os-amigos"><div class="cut"><div class="bar2">CHAMA OS AMIGOS
+    <svg width="46" height="40" viewBox="0 0 46 40"><path d="M2 20 H38 M24 4 L40 20 L24 36" fill="none" stroke="#0f1240" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div></div></div>
+
+  <div class="st" id="local"><div class="cut"><div class="local">
+    <svg width="44" height="58" viewBox="0 0 26 34"><path d="M13 0C5.8 0 0 5.8 0 13c0 9.7 13 21 13 21s13-11.3 13-21C26 5.8 20.2 0 13 0z" fill="#e2342b"/><circle cx="13" cy="13" r="5" fill="#efeadc"/></svg>
+    <div><strong>IGREJA CASA DA PATERNIDADE</strong><small>Av. Zulmira Rosa Antunes, 1424 · Anchieta - ES</small></div>
+  </div></div></div>
+
+  <div class="st" id="e-hoje"><div class="cut"><div class="brush" style="font-size:150px;transform:rotate(-6deg)">é hoje!</div></div></div>
+
+  <div class="st" id="em-breve"><div class="cut"><div class="bar2" style="font-family:'Archivo Black';font-size:60px;letter-spacing:.06em">EM BREVE</div></div></div>
+
+  <div class="st" id="brilhos"><div class="cut">
+    <svg width="260" height="220" viewBox="0 0 260 220">
+      <g fill="#7ff0b4"><path transform="translate(90 110) scale(4)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/></g>
+      <g fill="#efeadc"><path transform="translate(205 50) scale(2)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/>
+      <path transform="translate(210 175) scale(1.4)" d="M0,-18 C2,-4 4,-2 18,0 C4,2 2,4 0,18 C-2,4 -4,2 -18,0 C-4,-2 -2,-4 0,-18Z"/></g>
+    </svg>
+  </div></div>
+
+</div>
+<script>
+  if (new URLSearchParams(location.search).get('preview')) document.body.classList.add('preview');
+  // régua horizontal
+  let rs = '<rect x="0" y="0" width="620" height="110" rx="6" fill="#efeadc"/>';
+  for (let i = 0; i <= 60; i++) {
+    const x = 10 + i * 10, L = i % 10 === 0 ? 46 : (i % 5 === 0 ? 30 : 16);
+    rs += `<line x1="${x}" y1="0" x2="${x}" y2="${L}" stroke="#0f1240" stroke-width="${i % 10 === 0 ? 3 : 1.6}"/>`;
+    if (i % 10 === 0 && i < 60) rs += `<text x="${x + (i ? 0 : 8)}" y="80" text-anchor="${i ? 'middle' : 'start'}" font-family="Montserrat" font-weight="800" font-size="22" fill="#0f1240">${150 + i}</text>`;
+  }
+  rs += '<line x1="400" y1="0" x2="400" y2="110" stroke="#e2342b" stroke-width="5" stroke-dasharray="10 6"/>';
+  document.getElementById('rsvg').innerHTML = rs;
+</script>
+</body>
+</html>
