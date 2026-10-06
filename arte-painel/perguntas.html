@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel Jovem — perguntas do convidado</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--bg1:#1d2370;--bg2:#141850;--bg3:#0b0d33;--cream:#efeadc;--aqua:#7ff0b4;--aqua2:#1f9a63;--ink:#0f1240}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;background:var(--bg2);overflow:hidden}
+  .art{position:relative;width:1080px;height:1920px;overflow:hidden;
+    background:radial-gradient(120% 70% at 70% 20%, var(--bg1) 0%, var(--bg2) 60%, var(--bg3) 100%)}
+  svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:overlay;opacity:.55;pointer-events:none}
+  .scan{position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 3px, transparent 3px 9px)}
+
+  .logo{position:absolute;top:62px;left:72px;width:88px;z-index:6}
+  .tag{position:absolute;left:190px;top:76px;font-family:'Montserrat';font-weight:900;font-size:32px;color:var(--ink);
+    background:var(--cream);padding:9px 22px 7px;box-shadow:6px 7px 0 rgba(0,0,0,.35);transform:rotate(-2deg);z-index:6}
+  .tag::before,.tag::after{content:"";position:absolute;width:56px;height:22px;background:rgba(255,255,255,.45)}
+  .tag::before{left:-22px;top:-9px;transform:rotate(-32deg)}
+  .tag::after{right:-22px;bottom:-7px;transform:rotate(-32deg)}
+
+  .person{position:absolute;right:-30px;top:170px;height:520px;z-index:3;
+    filter:drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff)
+           drop-shadow(14px 16px 0 rgba(0,0,0,.30))}
+
+  .hi{position:absolute;left:72px;top:180px;z-index:6;width:640px}
+  .oi{font-family:'Knewave';font-size:84px;line-height:1;color:var(--aqua);text-shadow:5px 5px 0 var(--ink);transform:rotate(-4deg);transform-origin:left}
+  .g{position:relative;height:var(--h);width:700px;margin-top:6px;
+    -webkit-mask-image:url(grunge.png);mask-image:url(grunge.png);-webkit-mask-size:1000px 350px;mask-size:1000px 350px}
+  .g span{position:absolute;left:0;top:0;font-family:'Anton';line-height:1;white-space:nowrap}
+  .g .ext{color:var(--aqua);transform:translate(4px,4px)}
+  .g .face{color:var(--cream)}
+  .msg{margin-top:18px;font-family:'Montserrat';font-weight:600;font-size:25px;line-height:1.4;color:var(--cream);width:600px}
+  .msg b{color:var(--aqua);font-weight:900}
+
+  .card{position:absolute;left:44px;right:44px;top:700px;bottom:150px;background:var(--cream);color:var(--ink);z-index:7;
+    padding:38px 42px 30px;box-shadow:10px 12px 0 rgba(0,0,0,.38);font-family:'Montserrat'}
+  .card::before{content:"";position:absolute;left:50%;top:-18px;width:170px;height:38px;transform:translateX(-50%) rotate(-2deg);
+    background:rgba(255,255,255,.55)}
+  .sec{display:inline-block;font-weight:900;font-size:22px;letter-spacing:.18em;padding:6px 14px;margin-bottom:14px}
+  .sec.you{background:var(--ink);color:var(--aqua)}
+  .sec.all{background:var(--aqua);color:var(--ink);margin-top:26px}
+  ol{list-style:none;counter-reset:q var(--start,0)}
+  li{counter-increment:q;position:relative;padding-left:52px;font-weight:600;font-size:24.5px;line-height:1.34}
+  li + li{margin-top:13px}
+  li::before{content:counter(q);position:absolute;left:0;top:2px;width:36px;height:36px;border-radius:50%;
+    background:var(--ink);color:var(--aqua);font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center}
+  .all-list li::before{background:var(--aqua);color:var(--ink)}
+
+  .foot{position:absolute;left:0;right:0;bottom:44px;z-index:8;display:flex;justify-content:center;gap:18px;align-items:center;
+    font-family:'Montserrat';color:var(--cream)}
+  .foot .d{font-family:'Archivo Black';font-size:34px;background:var(--aqua);color:var(--ink);padding:2px 16px}
+  .foot .w{font-weight:900;font-size:24px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="art" id="art">
+  <svg class="layer" id="topo" viewBox="0 0 1080 1920"></svg>
+  <div class="scan"></div>
+  <svg class="grain" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#n)"/>
+  </svg>
+
+  <img class="logo" src="logo_white.png" alt="">
+  <div class="tag">PAINEL JOVEM</div>
+  <img class="person" id="photo" alt="">
+
+  <div class="hi">
+    <div class="oi" id="oi"></div>
+    <div class="g" id="g"><span class="ext" id="n1"></span><span class="face" id="n2"></span></div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="card">
+    <div class="sec you">SÓ PRA VOCÊ</div>
+    <ol id="you"></ol>
+    <div class="sec all">PARA TODOS OS CONVIDADOS</div>
+    <ol class="all-list" id="all" style="--start:5"></ol>
+  </div>
+
+  <div class="foot"><span class="d">SÁBADO 17/10 · 19H30</span><span class="w">IGREJA CASA DA PATERNIDADE</span></div>
+</div>
+
+<script>
+  const P = {
+    1: { first: 'NATHALLIE', oi: 'Oi, Nathallie!', img: 'p_farma.png', h: 540, q: [
+      'Ter uma empresa há mais de 20 anos significa ser a última a sair e a primeira a resolver problema. Como você separa o tempo da empresa do tempo de Deus e da família?',
+      'Você lidera casais. O que aprendeu no seu próprio casamento sobre equilibrar trabalho e casa?',
+      'Abrir e manter um negócio exige muito. Em algum momento a empresa “pediu” o lugar de Deus? Como você percebeu e reagiu?',
+      'Para o jovem que vai casar agora: o que um casal precisa combinar antes do casamento para não sair da igreja depois?',
+      'Liderar um ministério de casais exige estar bem em casa. O que você faz quando a semana em casa foi difícil e no sábado tem encontro do ministério?',
+    ]},
+    2: { first: 'ADRIANO', oi: 'Oi, Adriano!', img: 'p_samarco.png', h: 500, q: [
+      'Mineração tem escala, turno, cobrança por resultado. Como é ser pastor e analista ao mesmo tempo? Já teve que escolher entre os dois?',
+      'Como você faz para chegar em casa e ainda ser marido e pai presente para a Rubiene, a Sofia e o Emanuel?',
+      'Quando surgiu uma promoção, um turno melhor ou uma proposta que batia com o horário da igreja, o que você levou em conta para decidir?',
+      'Como pai, o que você quer que a Sofia e o Emanuel vejam em você sobre trabalho e fé?',
+      'Pastor também passa por deserto. Como você cuida da sua própria vida com Deus, para além de pregar e cuidar dos outros?',
+    ]},
+    3: { first: 'GEAN', oi: 'Oi, Gean!', img: 'p_goleiro.png', h: 520, q: [
+      'Atleta tem treino, jogo no fim de semana, viagem. Como fica o culto e o serviço na igreja com essa agenda?',
+      'Quando você está fora, num hotel em outro país, o que faz para não esfriar?',
+      'Defender a Seleção Brasileira é o sonho de muita gente. Quando isso aconteceu, o que mudou em você e o que você fez questão de não deixar mudar?',
+      'No esporte tem fama, festa, ambiente que não ajuda. Como você se posicionou como cristão no vestiário?',
+      'Goleiro é a última linha de defesa. Qual é a sua “última linha de defesa” para não se afastar de Deus?',
+    ]},
+  };
+  const ALL = [
+    'Descreve pra gente uma terça-feira normal sua: que horas acorda, o que faz, que horas termina o dia?',
+    'Por que você acha que tanto jovem se afasta da igreja justamente quando o sonho se realiza, no casamento ou no primeiro emprego?',
+    'O que é “servir” para você? Por que não basta só ir ao culto?',
+    'Qual hábito simples mantém você firme mesmo nas semanas mais cheias?',
+    'Se você pudesse voltar e dar um conselho para você mesmo aos 18 anos, qual seria? (resposta em uma frase)',
+  ];
+  const d = P[new URLSearchParams(location.search).get('p') || '1'];
+
+  document.getElementById('oi').textContent = d.oi;
+  const n1 = document.getElementById('n1'), n2 = document.getElementById('n2');
+  n1.textContent = n2.textContent = 'OBRIGADO!';
+  let fs = 150; n2.style.fontSize = fs + 'px';
+  while (n2.offsetWidth > 600 && fs > 80) { fs -= 4; n2.style.fontSize = fs + 'px'; }
+  n1.style.fontSize = fs + 'px';
+  document.getElementById('g').style.setProperty('--h', (fs * 1.04) + 'px');
+  const sh = []; for (let i = 1; i <= 10; i++) sh.push(`${i}px ${i}px 0 ${i < 4 ? '#7ff0b4' : '#1f9a63'}`);
+  n1.style.textShadow = sh.join(',');
+
+  document.getElementById('msg').innerHTML =
+    'Que alegria ter você no <b>Painel Jovem · Crescer sem se perder</b>. Estas são as perguntas do nosso bate-papo. Ore, lembre de uma história real da sua vida e fique à vontade: é uma conversa, não uma prova.';
+
+  const ph = document.getElementById('photo'); ph.src = d.img; ph.style.height = d.h + 'px';
+  ph.style.top = (700 - d.h + 40) + 'px';
+
+  document.getElementById('you').innerHTML = d.q.map(t => `<li>${t}</li>`).join('');
+  document.getElementById('all').innerHTML = ALL.map(t => `<li>${t}</li>`).join('');
+
+  let s = 17; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  let svg = '';
+  [[860,420,11],[180,1500,9],[600,1250,6]].forEach(([cx,cy,k0])=>{
+    const p0 = r()*6;
+    for(let k=1;k<=k0;k++){ const R=k*62; let dd='';
+      for(let a=0;a<=64;a++){ const t=a/64*Math.PI*2;
+        const rr=R*(1+0.16*Math.sin(3*t+p0+k*.3)+0.08*Math.cos(5*t-p0));
+        dd+=(a?'L':'M')+(cx+rr*Math.cos(t)).toFixed(1)+','+(cy+rr*0.82*Math.sin(t)).toFixed(1); }
+      svg+=`<path d="${dd}Z" fill="none" stroke="#22c47a" stroke-opacity="${0.08+0.18*(k/k0)}" stroke-width="${k%4?1.6:3}"/>`; }
+  });
+  document.getElementById('topo').innerHTML = svg;
+</script>
+</body>
+</html>
