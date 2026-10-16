@@ -45,5 +45,13 @@ with sync_playwright() as p:
         pg.wait_for_timeout(500)
         pg.locator("#art").screenshot(path=str(out / f"convidado-{n}-{nome}-story.png"))
     pg.close()
+    # convidados no telão (16:9, exporta 3840×2160)
+    pg = b.new_page(viewport={"width": 1920, "height": 1080}, device_scale_factor=2)
+    for n, nome in ((1, "nathallie"), (2, "adriano"), (3, "gean")):
+        pg.goto(base.replace("arte.html", "telao.html") + f"?p={n}")
+        pg.evaluate("document.fonts.ready")
+        pg.wait_for_timeout(500)
+        pg.locator("#art").screenshot(path=str(out / f"telao-convidado-{n}-{nome}.png"))
+    pg.close()
     b.close()
 srv.shutdown()
