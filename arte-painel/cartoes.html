@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cartões da Manu — Painel Jovem</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--navy:#141850;--ink:#0f1240;--aqua:#7ff0b4;--aqua2:#1f9a63;--cream:#efeadc;--muted:#5a5f86;--line:#d9dbe8;--red:#e2342b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Montserrat';color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* modo cartão único (A6) */
+  @page single{size:105mm 148mm;margin:0}
+  body.single .sheet{page:single}
+  body.single .card{display:none}
+  body.single .card.on{display:flex}
+  body.single .sheet{width:105mm;height:148mm}
+
+  /* modo folha A4 com 4 espaços e marcas de corte */
+  @page a4{size:210mm 297mm;margin:0}
+  body.a4 .sheet{page:a4;width:210mm;height:297mm;display:grid;grid-template-columns:105mm 105mm;grid-template-rows:148.5mm 148.5mm;position:relative}
+  body.a4 .sheet::before,body.a4 .sheet::after{content:"";position:absolute;background:none}
+  body.a4 .cutv{position:absolute;left:105mm;top:0;bottom:0;border-left:.2mm dashed #b8bbd0}
+  body.a4 .cuth{position:absolute;top:148.5mm;left:0;right:0;border-top:.2mm dashed #b8bbd0}
+  body.a4 .slot{display:flex;align-items:center;justify-content:center}
+  body.a4 .empty{font-size:7pt;color:#b8bbd0;text-align:center;line-height:1.4}
+
+  .card{width:105mm;height:148mm;display:flex;flex-direction:column;overflow:hidden;background:#fff}
+
+  .head{background:var(--navy);color:var(--cream);padding:3.6mm 4.5mm 3.2mm;position:relative}
+  .head .row{display:flex;align-items:center;gap:2.2mm}
+  .head img{width:6.5mm}
+  .head .pj{font-weight:900;font-size:6.2pt;letter-spacing:.14em;background:var(--cream);color:var(--navy);padding:.5mm 1.8mm}
+  .head .num{margin-left:auto;font-family:'Anton';font-size:19pt;line-height:1;color:var(--aqua)}
+  .head .num small{font-size:9pt;color:var(--cream);opacity:.7}
+  .head h1{font-family:'Anton';font-weight:400;font-size:21pt;line-height:1;margin-top:2.2mm;letter-spacing:.01em}
+  .head .manu{font-family:'Knewave';font-size:10.5pt;color:var(--aqua);margin-top:.6mm}
+  .head .when{position:absolute;right:4.5mm;bottom:3.4mm;font-weight:800;font-size:6.6pt;letter-spacing:.06em;color:var(--aqua)}
+
+  .body{flex:1;padding:3mm 4.5mm 2.4mm;display:flex;flex-direction:column;gap:2.2mm;font-size:var(--fs);line-height:1.32}
+  .lbl{display:inline-block;font-weight:900;font-size:5.8pt;letter-spacing:.14em;color:var(--ink);background:var(--aqua);padding:.4mm 1.6mm;margin-bottom:.8mm}
+  .lbl.dark{background:var(--navy);color:var(--aqua)}
+  .say{font-weight:800;font-size:10.5pt;color:var(--navy)}
+  ul{list-style:none}
+  ul li{position:relative;padding-left:3.2mm;margin:.55mm 0}
+  ul li::before{content:"";position:absolute;left:0;top:1.35mm;width:1.4mm;height:1.4mm;background:var(--aqua2);border-radius:50%}
+  ol{list-style:none;counter-reset:n}
+  ol li{counter-increment:n;position:relative;padding-left:4.2mm;margin:.55mm 0}
+  ol li::before{content:counter(n);position:absolute;left:0;top:.15mm;width:3.1mm;height:3.1mm;border-radius:50%;background:var(--navy);
+    color:var(--aqua);font-weight:900;font-size:5.6pt;display:flex;align-items:center;justify-content:center}
+  .q b{font-weight:900}
+  .who{display:inline-block;font-weight:900;font-size:5.6pt;letter-spacing:.08em;background:var(--cream);padding:.2mm 1.2mm;margin-right:1mm;vertical-align:.3mm}
+  .who.all{background:var(--aqua)}
+  .blk{border-left:.9mm solid var(--aqua);padding-left:2.2mm}
+  .blk h3{font-weight:900;font-size:7.6pt;letter-spacing:.06em;color:var(--navy);margin-bottom:.6mm}
+  .blk .q + .q{margin-top:.7mm}
+  .verse{font-style:italic;background:#f4f6fb;border-left:.9mm solid var(--aqua);padding:1.4mm 2.2mm}
+  .verse b{font-style:normal;font-weight:900;font-size:6pt;letter-spacing:.08em;color:var(--aqua2)}
+  .tip{margin-top:auto;background:var(--cream);border-radius:1.6mm;padding:1.8mm 2.4mm;font-size:7.4pt;line-height:1.3}
+  .tip b{font-weight:900;letter-spacing:.04em}
+  .final{font-family:'Knewave';font-size:15pt;color:var(--navy);line-height:1.1}
+  .final span{color:var(--aqua2)}
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet">
+
+  <!-- ===================== CARTÃO 1 · ABERTURA ===================== -->
+  <div class="slot"><div class="card" id="c1" style="--fs:8pt">
+    <div class="head">
+      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">1<small>/3</small></span></div>
+      <h1>ABERTURA</h1>
+      <div class="manu">com a Manu</div>
+      <div class="when">CRESCER SEM SE PERDER</div>
+    </div>
+    <div class="body">
+      <div>
+        <span class="lbl">1 · ACOLHIDA</span>
+        <div class="say">“Olá, pessoal! Boa noite!”</div>
+        <ul>
+          <li>Pergunte: <b>quem aqui tem um sonho?</b> (casar, emprego, negócio, jogar fora…)</li>
+          <li>Deus se alegra com os nossos sonhos.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="lbl">2 · O PROBLEMA</span>
+        <ul>
+          <li>Muitos casam, arrumam emprego, realizam o sonho… e <b>se afastam da igreja</b>.</li>
+          <li>Ninguém sai de uma vez: é um culto, uma semana de cada vez.</li>
+          <li>Hoje não é palestra, é <b>bate-papo</b> com quem continua firme.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="lbl">3 · TEXTO BASE</span>
+        <div class="verse">“Cresçam na graça e no conhecimento de nosso Senhor e Salvador Jesus Cristo.” <b>2 PEDRO 3:18</b></div>
+      </div>
+      <div>
+        <span class="lbl dark">4 · CHAME OS CONVIDADOS</span>
+        <ul>
+          <li><b>Nathallie Braz</b>: empresária (farmácia) há +20 anos; líder do Min. de Casais Casa na Rocha.</li>
+          <li><b>Adriano Ramos</b>: analista, está na mineração há +10 anos; pastor na AD Boas Novas.</li>
+          <li><b>Gean Pietro</b>: goleiro de beach soccer, já defendeu a Seleção Brasileira; serve na Igreja Missão.</li>
+        </ul>
+      </div>
+      <div class="tip"><b>LEMBRETE:</b> fale cada nome devagar e espere o convidado se sentar antes de chamar o próximo.</div>
+    </div>
+  </div></div>
+
+  <!-- ===================== CARTÃO 2 · PERGUNTAS ===================== -->
+  <div class="slot"><div class="card" id="c2" style="--fs:8.2pt">
+    <div class="head">
+      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">2<small>/3</small></span></div>
+      <h1>PERGUNTAS</h1>
+      <div class="manu">com a Manu</div>
+      <div class="when">3 BLOCOS · ~15 MIN CADA</div>
+    </div>
+    <div class="body" style="gap:2.2mm">
+      <div class="blk">
+        <h3>BLOCO 1 · A ROTINA REAL</h3>
+        <div class="q"><span class="who all">TODOS</span>Como é uma terça-feira normal sua, do acordar ao deitar?</div>
+        <div class="q"><span class="who">NATHALLIE</span>Como separa o tempo da empresa do tempo de Deus e da família?</div>
+        <div class="q"><span class="who">ADRIANO</span>Como é ser pastor e analista? Já teve que escolher?</div>
+        <div class="q"><span class="who">GEAN</span>Treino, jogo, viagem: como fica a igreja nessa agenda?</div>
+      </div>
+      <div class="blk">
+        <h3>BLOCO 2 · QUANDO O SONHO CHEGA</h3>
+        <div class="q"><span class="who all">TODOS</span>Por que tanto jovem se afasta quando o sonho se realiza?</div>
+        <div class="q"><span class="who">NATHALLIE</span>A empresa já “pediu” o lugar de Deus? Como reagiu?</div>
+        <div class="q"><span class="who">ADRIANO</span>Proposta no horário da igreja: o que levou em conta?</div>
+        <div class="q"><span class="who">GEAN</span>Na Seleção, o que mudou e o que não deixou mudar?</div>
+      </div>
+      <div class="blk">
+        <h3>BLOCO 3 · CONSTÂNCIA</h3>
+        <div class="q"><span class="who all">TODOS</span>O que é “servir”? Por que não basta ir ao culto?</div>
+        <div class="q"><span class="who all">TODOS</span>Qual hábito simples te mantém firme na semana cheia?</div>
+        <div class="q"><span class="who all">RELÂMPAGO</span>Um conselho para você aos 18 anos, em uma frase.</div>
+      </div>
+      <div class="tip"><b>COMO CONDUZIR:</b> faça a pergunta direcionada e depois abra para os outros dois. Uns 4 a 5 min por pergunta. Ficou longo? Agradeça e passe adiante.</div>
+    </div>
+  </div></div>
+
+  <!-- ===================== CARTÃO 3 · FECHAMENTO ===================== -->
+  <div class="slot"><div class="card" id="c3" style="--fs:8.9pt">
+    <div class="head">
+      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">3<small>/3</small></span></div>
+      <h1>FECHAMENTO</h1>
+      <div class="manu">com a Manu</div>
+      <div class="when">PLATEIA · PALAVRA · ORAÇÃO</div>
+    </div>
+    <div class="body">
+      <div>
+        <span class="lbl">1 · PERGUNTAS DA PLATEIA</span>
+        <ul>
+          <li>Sorteie um número; quem tiver o cartão lê e escolhe o convidado.</li>
+          <li>Faça de <b>4 a 6</b> perguntas. Ninguém quis ler? Você lê.</li>
+          <li>Boas para fechar: <b>3, 11 e 15</b>.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="lbl">2 · DIRECIONAMENTO</span>
+        <ol>
+          <li><b>Crescer é ordem.</b> Pedro não diz “fiquem parados”, diz “cresçam”.</li>
+          <li><b>Primeiro na graça.</b> Com Deus como primeira medida, o resto cresce no lugar certo.</li>
+          <li><b>A glória é dele.</b> Quem cresce para Deus encontra o caminho.</li>
+        </ol>
+      </div>
+      <div>
+        <span class="lbl dark">3 · APELO E ORAÇÃO</span>
+        <ul>
+          <li>Cada jovem escreve no verso do cartão <b>um compromisso</b> para não se perder.</li>
+          <li>Ore pelos jovens e chame os convidados para orar junto.</li>
+        </ul>
+      </div>
+      <div class="final">“Cresça. <span>Só não se perca.</span>”</div>
+      <div class="tip"><b>ANTES DE SAIR:</b> agradeça aos 3 convidados · convide para a comunhão · fotos na régua · lembrancinhas na saída.</div>
+    </div>
+  </div></div>
+
+  <div class="slot"><div class="empty">espaço livre<br>(corte e descarte)</div></div>
+  <div class="cutv"></div><div class="cuth"></div>
+</div>
+<script>
+  const q = new URLSearchParams(location.search), c = q.get('c');
+  if (c) { document.body.classList.add('single'); document.getElementById('c' + c).classList.add('on');
+           document.querySelectorAll('.cutv,.cuth,.empty').forEach(e => e.remove()); }
+  else document.body.classList.add('a4');
+</script>
+</body>
+</html>
