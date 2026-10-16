@@ -101,7 +101,7 @@
       });
       pg.innerHTML = `
         <div class="info top"><span><b>FOLHA ${p + 1} DE ${PAGES}</b> · ${p === 0 ? '↑ TOPO DA RÉGUA' : 'cola embaixo da folha ' + p}</span><span>${vTop.toFixed(0)} cm → ${vBot.toFixed(0)} cm</span></div>
-        <div class="seg"><img src="final/regua/trecho-${p + 1}.png" style="display:block;width:190mm;height:270mm"></div>
+        <div class="seg"><img src="final/regua/trecho-${p + 1}.jpg" style="display:block;width:190mm;height:270mm"></div>
         ${marks.join('')}
         <div class="info bot"><span>Imprima em <b>100% / tamanho real</b> e corte nas marcas</span><span>${p === PAGES - 1 ? '↓ BASE DA RÉGUA' : 'a folha ' + (p + 2) + ' vem embaixo'}</span></div>`;
       holder.appendChild(pg);
