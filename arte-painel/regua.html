@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Régua gigante — Painel Jovem</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  @page{size:210mm 297mm;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-family:'Montserrat'}
+  .page{width:210mm;height:297mm;position:relative;page-break-after:always;overflow:hidden;background:#fff}
+  .seg{position:absolute;left:10mm;top:13.5mm;width:190mm;height:270mm}
+  .seg svg{display:block;width:190mm;height:270mm}
+  .mark{position:absolute;background:#000}
+  .info{position:absolute;left:10mm;right:10mm;font-size:7.5pt;color:#555;display:flex;justify-content:space-between}
+  .info.top{top:4.5mm}
+  .info.bot{bottom:4mm}
+  .info b{color:#000}
+</style>
+</head>
+<body>
+<div id="pages"></div>
+<script>
+  // ===== parâmetros =====
+  const PAGES = 7;            // folhas
+  const SEG = 270;            // mm de régua por folha (área útil, dentro das marcas de corte)
+  const W = 190;              // largura da régua em mm
+  const TOTAL = PAGES * SEG;  // 1890 mm
+  const BASE = 20;            // valor (cm) na borda de baixo da régua montada
+  const TOP = BASE + TOTAL / 10;   // 209 cm
+  const yOf = v => (TOP - v) * 10; // mm a partir do topo
+
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+  // ===== desenho completo (coordenadas em mm) =====
+  const mkDefs = (y0, h) => `
+    <filter id="paper" x="0" y="${y0}" width="${W}" height="${h}" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency=".09 .35" numOctaves="4" seed="4" result="t"/>
+      <feColorMatrix in="t" type="matrix" values="0 0 0 0 .36  0 0 0 0 .26  0 0 0 0 .14  0 0 0 .55 0"/>
+    </filter>
+    <filter id="fine" x="0" y="${y0}" width="${W}" height="${h}" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="9"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 .25  0 0 0 0 .18  0 0 0 0 .1  0 0 0 .35 0"/>
+    </filter>
+    <filter id="rough" x="-5" y="${y0}" width="${W + 10}" height="${h}" filterUnits="userSpaceOnUse">
+      <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" seed="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale=".45"/>
+    </filter>
+    <linearGradient id="edge" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#5a3b18" stop-opacity=".55"/><stop offset=".07" stop-color="#5a3b18" stop-opacity=".12"/>
+      <stop offset=".5" stop-color="#5a3b18" stop-opacity="0"/>
+      <stop offset=".93" stop-color="#5a3b18" stop-opacity=".12"/><stop offset="1" stop-color="#5a3b18" stop-opacity=".55"/>
+    </linearGradient>
+    <radialGradient id="stain"><stop offset="0" stop-color="#6b4a20" stop-opacity=".22"/><stop offset=".7" stop-color="#6b4a20" stop-opacity=".08"/><stop offset="1" stop-color="#6b4a20" stop-opacity="0"/></radialGradient>
+    <radialGradient id="ring"><stop offset=".82" stop-color="#6b4a20" stop-opacity="0"/><stop offset=".92" stop-color="#6b4a20" stop-opacity=".22"/><stop offset="1" stop-color="#6b4a20" stop-opacity="0"/></radialGradient>`;
+
+  let body = `<rect width="${W}" height="${TOTAL}" fill="#dcc59a"/>`;
+  // faixas de tom, como papel/madeira envelhecidos
+  for (let y = 0; y < TOTAL; y += 40) body += `<rect y="${y}" width="${W}" height="40" fill="#b8925a" opacity="${(rnd() * .12).toFixed(3)}"/>`;
+  body += `<rect width="${W}" height="${TOTAL}" filter="url(#paper)"/>`;
+  // manchas
+  for (let i = 0; i < 46; i++) {
+    const x = rnd() * W, y = rnd() * TOTAL, rr = 8 + rnd() * 38;
+    body += `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rr.toFixed(1)}" ry="${(rr * (.6 + rnd() * .8)).toFixed(1)}" fill="url(#${i % 7 ? 'stain' : 'ring'})"/>`;
+  }
+  body += `<rect width="${W}" height="${TOTAL}" fill="url(#edge)"/>`;
+  body += `<rect width="${W}" height="${TOTAL}" filter="url(#fine)"/>`;
+
+  // marcações (lado esquerdo) e números
+  const ink = '#2a1d10';
+  let ticks = '';
+  for (let v = BASE; v <= Math.floor(TOP); v++) {
+    const y = yOf(v);
+    const L = v % 10 === 0 ? 92 : (v % 5 === 0 ? 58 : 32);
+    const sw = v % 10 === 0 ? 2.4 : (v % 5 === 0 ? 1.5 : 1.0);
+    ticks += `<line x1="0" y1="${y}" x2="${L}" y2="${y}" stroke="${ink}" stroke-width="${sw}"/>`;
+    if (v - BASE < 3) continue;
+    if (v % 20 === 0) ticks += `<text x="${W - 14}" y="${y + 13}" text-anchor="end" font-family="Archivo Black" font-size="40" fill="${ink}">${v}</text>`;
+    else if (v % 10 === 0) ticks += `<text x="${W - 14}" y="${y + 7}" text-anchor="end" font-family="Archivo Black" font-size="19" fill="${ink}" opacity=".8">${v}</text>`;
+  }
+  body += `<g filter="url(#rough)" opacity=".92">${ticks}</g>`;
+
+
+  // ===== uma folha por trecho =====
+  const q = new URLSearchParams(location.search);
+  const holder = document.getElementById('pages');
+  if (q.has('seg')) {
+    // modo imagem: só o trecho da régua, para virar PNG
+    const p = +q.get('seg'), y0 = p * SEG;
+    document.body.style.margin = '0';
+    holder.innerHTML = `<svg id="segsvg" viewBox="0 ${y0} ${W} ${SEG}" style="display:block;width:${W}mm;height:${SEG}mm" preserveAspectRatio="none"><defs>${mkDefs(y0 - 2, SEG + 4)}</defs>${body}</svg>`;
+  } else {
+    for (let p = 0; p < PAGES; p++) {
+      const y0 = p * SEG, vTop = TOP - y0 / 10, vBot = vTop - SEG / 10;
+      const pg = document.createElement('div'); pg.className = 'page';
+      const marks = [];
+      [[10, 13.5], [200, 13.5], [10, 283.5], [200, 283.5]].forEach(([x, y]) => {
+        const sx = x < 100 ? -1 : 1, sy = y < 100 ? -1 : 1;
+        marks.push(`<div class="mark" style="left:${x + (sx < 0 ? -8 : 1)}mm;top:${y - .1}mm;width:7mm;height:.2mm"></div>`);
+        marks.push(`<div class="mark" style="left:${x - .1}mm;top:${y + (sy < 0 ? -8 : 1)}mm;width:.2mm;height:7mm"></div>`);
+      });
+      pg.innerHTML = `
+        <div class="info top"><span><b>FOLHA ${p + 1} DE ${PAGES}</b> · ${p === 0 ? '↑ TOPO DA RÉGUA' : 'cola embaixo da folha ' + p}</span><span>${vTop.toFixed(0)} cm → ${vBot.toFixed(0)} cm</span></div>
+        <div class="seg"><img src="final/regua/trecho-${p + 1}.png" style="display:block;width:190mm;height:270mm"></div>
+        ${marks.join('')}
+        <div class="info bot"><span>Imprima em <b>100% / tamanho real</b> e corte nas marcas</span><span>${p === PAGES - 1 ? '↓ BASE DA RÉGUA' : 'a folha ' + (p + 2) + ' vem embaixo'}</span></div>`;
+      holder.appendChild(pg);
+    }
+  }
+  document.body.dataset.ready = '1';
+</script>
+</body>
+</html>
