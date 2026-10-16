@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel Jovem — tela do bate-papo</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--navy:#14204f;--navy2:#0d1640;--navy3:#08102e;--paper:#e2d9c6;--paper2:#cfc3aa;--ink:#141414;--green:#5fe06a;--red:#e2342b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy2)}
+  .art{position:relative;width:1920px;height:1080px;overflow:hidden;
+    background:radial-gradient(80% 90% at 45% 45%, #1b2a63 0%, var(--navy2) 60%, var(--navy3) 100%)}
+  svg.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:overlay;opacity:.6;pointer-events:none}
+
+  .logo{position:absolute;left:50%;top:70px;transform:translateX(-50%);width:120px;z-index:5}
+
+  .tag{position:absolute;left:470px;top:250px;z-index:6;background:var(--paper);padding:10px 34px 6px;transform:rotate(-1.5deg);
+    font-family:'Permanent Marker';font-size:54px;color:var(--ink);box-shadow:5px 6px 0 rgba(0,0,0,.35)}
+
+  .crescer{position:absolute;left:420px;top:300px;width:1100px;height:330px;z-index:5;text-align:center}
+  .crescer span{display:inline-block;font-family:'Anton';color:#fff;line-height:1;white-space:nowrap;transform-origin:top center;
+    text-shadow:0 6px 0 rgba(0,0,0,.25)}
+
+  .sem{position:absolute;left:500px;top:668px;z-index:6;transform:rotate(-5deg);transform-origin:left center}
+  .sem .t{font-family:'Knewave';font-size:150px;line-height:1;color:var(--green);white-space:nowrap;text-shadow:5px 6px 0 rgba(0,0,0,.35)}
+  .sem svg{position:absolute;left:300px;top:150px;width:780px;height:46px;overflow:visible}
+</style>
+</head>
+<body>
+<div class="art" id="art">
+  <svg class="layer" id="topo" viewBox="0 0 1920 1080"></svg>
+  <svg class="grain" preserveAspectRatio="none">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#n)"/>
+  </svg>
+
+  <!-- papéis rasgados com mapa -->
+  <svg class="layer" id="papers" viewBox="0 0 1920 1080" style="z-index:3">
+    <defs>
+      <filter id="pn"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="4" seed="3"/><feColorMatrix type="matrix"
+        values="0 0 0 0 .55  0 0 0 0 .5  0 0 0 0 .42  0 0 0 .22 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+      <filter id="sh"><feDropShadow dx="-8" dy="6" stdDeviation="8" flood-color="#000" flood-opacity=".45"/></filter>
+      <clipPath id="clipR"><path id="rightPathClip"/></clipPath>
+      <clipPath id="clipL"><path id="leftPathClip"/></clipPath>
+    </defs>
+    <g filter="url(#sh)">
+      <path id="rightPath" fill="#e2d9c6"/>
+      <path id="leftPath" fill="#e2d9c6"/>
+    </g>
+    <g clip-path="url(#clipR)"><g id="mapR"></g><rect width="1920" height="1080" filter="url(#pn)" fill="#fff"/></g>
+    <g clip-path="url(#clipL)"><g id="mapL"></g><rect width="1920" height="1080" filter="url(#pn)" fill="#fff"/></g>
+    <!-- dobra (ponta descolada) -->
+    <path d="M 1640 0 L 1760 0 C 1735 40, 1700 95, 1655 128 C 1660 80, 1652 40, 1640 0 Z" fill="#f1ebdd" filter="url(#sh)"/>
+    <path d="M 1655 128 C 1700 95, 1735 40, 1760 0" fill="none" stroke="#bfb29a" stroke-width="2"/>
+    <!-- régua -->
+    <g id="ruler"></g>
+    <!-- pino + rota + X -->
+    <g transform="translate(1690 330)" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round">
+      <path d="M0 0 C -30 0 -48 22 -48 46 C -48 80 0 122 0 122 C 0 122 48 80 48 46 C 48 22 30 0 0 0 Z"/>
+      <circle cx="0" cy="46" r="15"/>
+    </g>
+    <path d="M 1690 470 C 1640 520, 1640 560, 1680 585 C 1730 615, 1720 650, 1680 665 C 1630 685, 1640 730, 1680 750 S 1700 790, 1675 815"
+      fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="14 14" stroke-linecap="round"/>
+    <g transform="translate(1672 862)" stroke="#e2342b" stroke-width="13" stroke-linecap="round">
+      <line x1="-28" y1="-28" x2="28" y2="28"/><line x1="28" y1="-28" x2="-28" y2="28"/>
+    </g>
+  </svg>
+
+  <!-- coroa rabiscada -->
+  <svg class="layer" viewBox="0 0 1920 1080" style="z-index:4">
+    <g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" transform="translate(205 215) rotate(-8)">
+      <path d="M 10 110 L 0 30 L 45 70 L 75 10 L 105 70 L 150 30 L 140 110 Z"/>
+      <path d="M 18 95 L 132 95"/>
+      <circle cx="0" cy="26" r="8"/><circle cx="75" cy="4" r="8"/><circle cx="150" cy="26" r="8"/>
+    </g>
+    <!-- seta verde -->
+    <g fill="none" stroke="#5fe06a" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 0 485 C 140 470, 255 515, 300 640"/>
+      <path d="M 238 600 L 302 652 L 330 572"/>
+    </g>
+  </svg>
+
+  <img class="logo" src="logo_white.png" alt="">
+  <div class="tag">PAINEL JOVEM</div>
+  <div class="crescer"><span id="cr">CRESCER</span></div>
+  <div class="sem">
+    <div class="t">SEM SE PERDER</div>
+    <svg viewBox="0 0 780 46" preserveAspectRatio="none"><path d="M6 30 C 200 18, 480 10, 774 6 C 620 20, 380 32, 110 42 Z" fill="#5fe06a"/></svg>
+  </div>
+</div>
+
+<script>
+  // CRESCER: preenche 1100 × 330
+  document.fonts.load("300px Anton").then(() => {
+    const cr = document.getElementById('cr');
+    cr.style.fontSize = '300px';
+    const sx = 1100 / cr.offsetWidth; cr.style.fontSize = (300 * sx) + 'px';
+    const sy = 330 / (cr.offsetHeight * 0.86);
+    cr.style.transform = `scaleY(1.05)`;
+    document.body.dataset.ready = '1';
+  });
+
+  let s = 23; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const topoLines = (centers, stroke, op) => {
+    let out = '';
+    centers.forEach(([cx, cy, n, sc]) => { const ph = r() * 6;
+      for (let k = 1; k <= n; k++) { const R = k * (sc || 58); let d = '';
+        for (let a = 0; a <= 72; a++) { const t = a / 72 * Math.PI * 2;
+          const rr = R * (1 + .17 * Math.sin(3 * t + ph + k * .35) + .09 * Math.cos(5 * t - ph) + .04 * Math.sin(9 * t + k));
+          d += (a ? 'L' : 'M') + (cx + rr * Math.cos(t)).toFixed(1) + ',' + (cy + rr * .8 * Math.sin(t)).toFixed(1); }
+        out += `<path d="${d}Z" fill="none" stroke="${stroke}" stroke-opacity="${op * (0.5 + 0.5 * k / n)}" stroke-width="${k % 5 ? 1.6 : 3}"/>`; } });
+    return out;
+  };
+  document.getElementById('topo').innerHTML =
+    topoLines([[300, 250, 9], [1250, 820, 12], [900, 150, 7], [150, 900, 8]], '#5d76c9', .32);
+
+  // papel rasgado
+  const jag = (pts) => pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ') + ' Z';
+  const right = [[1640, 0]];
+  for (let y = 0; y <= 1080; y += 14) right.push([1600 + 30 * Math.sin(y / 90) + 20 * Math.sin(y / 23) + r() * 18 - (y > 980 ? 0 : 0), y]);
+  right.push([1920, 1080], [1920, 0]);
+  const left = [[0, 870]];
+  for (let x = 0; x <= 600; x += 14) left.push([x, 880 + x * 0.36 + r() * 20 + 10 * Math.sin(x / 40)]);
+  left.push([600, 1080], [0, 1080]);
+  ['rightPath', 'rightPathClip'].forEach(id => document.getElementById(id).setAttribute('d', jag(right)));
+  ['leftPath', 'leftPathClip'].forEach(id => document.getElementById(id).setAttribute('d', jag(left)));
+  document.getElementById('mapR').innerHTML = topoLines([[1780, 260, 10, 44], [1700, 780, 12, 44], [1900, 560, 6, 40]], '#8a7a5c', .55);
+  document.getElementById('mapL').innerHTML = topoLines([[220, 1040, 9, 40], [520, 1100, 6, 40]], '#8a7a5c', .55);
+
+  // régua na borda direita
+  let rs = '<rect x="1832" y="0" width="88" height="1080" fill="#ece5d6"/>';
+  for (let i = 0; i <= 108; i++) { const y = 1070 - i * 10, L = i % 10 === 0 ? 50 : (i % 5 === 0 ? 32 : 18);
+    rs += `<line x1="${1920 - L}" y1="${y}" x2="1920" y2="${y}" stroke="#2a2a2a" stroke-width="${i % 10 === 0 ? 3 : 1.6}"/>`;
+    if (i % 10 === 0 && i > 0) rs += `<text x="1840" y="${y + 7}" font-family="Montserrat" font-weight="800" font-size="18" fill="#2a2a2a">${i}</text>`; }
+  rs += '<line x1="1832" y1="0" x2="1832" y2="1080" stroke="#bfb29a" stroke-width="2"/>';
+  document.getElementById('ruler').innerHTML = rs;
+</script>
+</body>
+</html>
