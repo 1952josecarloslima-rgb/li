@@ -58,6 +58,14 @@
   .verse b{font-style:normal;font-weight:900;font-size:6pt;letter-spacing:.08em;color:var(--aqua2)}
   .tip{margin-top:auto;background:var(--cream);border-radius:1.6mm;padding:1.8mm 2.4mm;font-size:7.4pt;line-height:1.3}
   .tip b{font-weight:900;letter-spacing:.04em}
+  .qs li{counter-increment:none;padding-left:0;margin:0}
+  .qs li::before{display:none}
+  .qs li + li{margin-top:1.1mm;padding-top:1.1mm;border-top:.15mm dashed var(--line)}
+  .intro{font-size:7.2pt;color:var(--muted);font-weight:600}
+  .flash h3{color:var(--aqua2)}
+  .res{border-left-color:var(--cream)}
+  .res h3{color:var(--muted)}
+  .head h1{font-size:19pt}
   .final{font-family:'Knewave';font-size:15pt;color:var(--navy);line-height:1.1}
   .final span{color:var(--aqua2)}
 </style>
@@ -65,114 +73,95 @@
 <body>
 <div class="sheet" id="sheet">
 
-  <!-- ===================== CARTÃO 1 · ABERTURA ===================== -->
-  <div class="slot"><div class="card" id="c1" style="--fs:8pt">
+  <!-- ===================== CARTÃO 1 · ABERTURA + BLOCO 1 ===================== -->
+  <div class="slot"><div class="card" id="c1" style="--fs:7.3pt">
     <div class="head">
       <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">1<small>/3</small></span></div>
       <h1>ABERTURA</h1>
       <div class="manu">com a Manu</div>
-      <div class="when">CRESCER SEM SE PERDER</div>
+      <div class="when">+ BLOCO 1 · A ROTINA REAL</div>
     </div>
     <div class="body">
       <div>
-        <span class="lbl">1 · ACOLHIDA</span>
+        <span class="lbl">ABERTURA</span>
         <div class="say">“Olá, pessoal! Boa noite!”</div>
         <ul>
-          <li>Pergunte: <b>quem aqui tem um sonho?</b> (casar, emprego, negócio, jogar fora…)</li>
-          <li>Deus se alegra com os nossos sonhos.</li>
+          <li>Quem aqui tem um sonho? Muitos realizam… e <b>se afastam da igreja</b>. Hoje é <b>bate-papo</b> com quem continua firme.</li>
+          <li>Leia <b>2 Pedro 3:18</b>: “cresçam na graça e no conhecimento…”</li>
+          <li>Chame: <b>Nathallie</b> (farmácia, Min. de Casais) · <b>Adriano</b> (mineração, pastor) · <b>Gean</b> (beach soccer, Seleção).</li>
         </ul>
       </div>
-      <div>
-        <span class="lbl">2 · O PROBLEMA</span>
-        <ul>
-          <li>Muitos casam, arrumam emprego, realizam o sonho… e <b>se afastam da igreja</b>.</li>
-          <li>Ninguém sai de uma vez: é um culto, uma semana de cada vez.</li>
-          <li>Hoje não é palestra, é <b>bate-papo</b> com quem continua firme.</li>
-        </ul>
-      </div>
-      <div>
-        <span class="lbl">3 · TEXTO BASE</span>
-        <div class="verse">“Cresçam na graça e no conhecimento de nosso Senhor e Salvador Jesus Cristo.” <b>2 PEDRO 3:18</b></div>
-      </div>
-      <div>
-        <span class="lbl dark">4 · CHAME OS CONVIDADOS</span>
-        <ul>
-          <li><b>Nathallie Braz</b>: empresária (farmácia) há +20 anos; líder do Min. de Casais Casa na Rocha.</li>
-          <li><b>Adriano Ramos</b>: analista, está na mineração há +10 anos; pastor na AD Boas Novas.</li>
-          <li><b>Gean Pietro</b>: goleiro de beach soccer, já defendeu a Seleção Brasileira; serve na Igreja Missão.</li>
-        </ul>
-      </div>
-      <div class="tip"><b>LEMBRETE:</b> fale cada nome devagar e espere o convidado se sentar antes de chamar o próximo.</div>
-    </div>
-  </div></div>
-
-  <!-- ===================== CARTÃO 2 · PERGUNTAS ===================== -->
-  <div class="slot"><div class="card" id="c2" style="--fs:8.2pt">
-    <div class="head">
-      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">2<small>/3</small></span></div>
-      <h1>PERGUNTAS</h1>
-      <div class="manu">com a Manu</div>
-      <div class="when">3 BLOCOS · ~15 MIN CADA</div>
-    </div>
-    <div class="body" style="gap:2.2mm">
       <div class="blk">
         <h3>BLOCO 1 · A ROTINA REAL</h3>
-        <div class="q"><span class="who all">TODOS</span>Como é uma terça-feira normal sua, do acordar ao deitar?</div>
-        <div class="q"><span class="who">NATHALLIE</span>Como separa o tempo da empresa do tempo de Deus e da família?</div>
-        <div class="q"><span class="who">ADRIANO</span>Como é ser pastor e analista? Já teve que escolher?</div>
-        <div class="q"><span class="who">GEAN</span>Treino, jogo, viagem: como fica a igreja nessa agenda?</div>
-      </div>
-      <div class="blk">
-        <h3>BLOCO 2 · QUANDO O SONHO CHEGA</h3>
-        <div class="q"><span class="who all">TODOS</span>Por que tanto jovem se afasta quando o sonho se realiza?</div>
-        <div class="q"><span class="who">NATHALLIE</span>A empresa já “pediu” o lugar de Deus? Como reagiu?</div>
-        <div class="q"><span class="who">ADRIANO</span>Proposta no horário da igreja: o que levou em conta?</div>
-        <div class="q"><span class="who">GEAN</span>Na Seleção, o que mudou e o que não deixou mudar?</div>
-      </div>
-      <div class="blk">
-        <h3>BLOCO 3 · CONSTÂNCIA</h3>
-        <div class="q"><span class="who all">TODOS</span>O que é “servir”? Por que não basta ir ao culto?</div>
-        <div class="q"><span class="who all">TODOS</span>Qual hábito simples te mantém firme na semana cheia?</div>
-        <div class="q"><span class="who all">RELÂMPAGO</span>Um conselho para você aos 18 anos, em uma frase.</div>
-      </div>
-      <div class="tip"><b>COMO CONDUZIR:</b> faça a pergunta direcionada e depois abra para os outros dois. Uns 4 a 5 min por pergunta. Ficou longo? Agradeça e passe adiante.</div>
-    </div>
-  </div></div>
-
-  <!-- ===================== CARTÃO 3 · FECHAMENTO ===================== -->
-  <div class="slot"><div class="card" id="c3" style="--fs:8.9pt">
-    <div class="head">
-      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">3<small>/3</small></span></div>
-      <h1>FECHAMENTO</h1>
-      <div class="manu">com a Manu</div>
-      <div class="when">PLATEIA · PALAVRA · ORAÇÃO</div>
-    </div>
-    <div class="body">
-      <div>
-        <span class="lbl">1 · PERGUNTAS DA PLATEIA</span>
-        <ul>
-          <li>Sorteie um número; quem tiver o cartão lê e escolhe o convidado.</li>
-          <li>Faça de <b>4 a 6</b> perguntas. Ninguém quis ler? Você lê.</li>
-          <li>Boas para fechar: <b>3, 11 e 15</b>.</li>
-        </ul>
-      </div>
-      <div>
-        <span class="lbl">2 · DIRECIONAMENTO</span>
-        <ol>
-          <li><b>Crescer é ordem.</b> Pedro não diz “fiquem parados”, diz “cresçam”.</li>
-          <li><b>Primeiro na graça.</b> Com Deus como primeira medida, o resto cresce no lugar certo.</li>
-          <li><b>A glória é dele.</b> Quem cresce para Deus encontra o caminho.</li>
+        <ol class="qs">
+          <li><span class="who all">TODOS · 6</span>Descreve uma terça-feira normal sua: que horas acorda, o que faz, que horas termina o dia?</li>
+          <li><span class="who ">NATHALLIE · 1</span>Ter uma empresa há mais de 20 anos é ser a última a sair e a primeira a resolver problema. Como você separa o tempo da empresa do tempo de Deus e da família?</li>
+          <li><span class="who ">NATHALLIE · 2</span>Você lidera casais. O que aprendeu no seu casamento sobre equilibrar trabalho e casa?</li>
+          <li><span class="who ">ADRIANO · 1</span>Mineração tem escala, turno, cobrança por resultado. Como é ser pastor e analista ao mesmo tempo? Já teve que escolher entre os dois?</li>
+          <li><span class="who ">ADRIANO · 2</span>Como você faz para chegar em casa e ainda ser marido e pai presente para a Rubiene, a Sophia e o Emanuel?</li>
+          <li><span class="who ">GEAN · 1</span>Atleta tem treino, jogo no fim de semana, viagem. Como fica o culto e o serviço na igreja com essa agenda?</li>
+          <li><span class="who ">GEAN · 2</span>Quando você está fora, num hotel em outro país, o que faz para não esfriar?</li>
         </ol>
       </div>
-      <div>
-        <span class="lbl dark">3 · APELO E ORAÇÃO</span>
-        <ul>
-          <li>Cada jovem escreve no verso do cartão <b>um compromisso</b> para não se perder.</li>
-          <li>Ore pelos jovens e chame os convidados para orar junto.</li>
-        </ul>
+      <div class="tip"><b>COMO CONDUZIR:</b> pergunta direcionada primeiro, depois abra para os outros dois. Uns 4 a 5 min por pergunta.</div>
+    </div>
+  </div></div>
+  <!-- ===================== CARTÃO 2 · BLOCO 2 ===================== -->
+  <div class="slot"><div class="card" id="c2" style="--fs:7.9pt">
+    <div class="head">
+      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">2<small>/3</small></span></div>
+      <h1>BLOCO 2</h1>
+      <div class="manu">com a Manu</div>
+      <div class="when">QUANDO O SONHO CHEGA</div>
+    </div>
+    <div class="body">
+      <div class="intro">Casamento, emprego, carreira, viagens: o que muda e o que tenta afastar da igreja.</div>
+      <div class="blk">
+        <ol class="qs">
+          <li><span class="who all">TODOS · 7</span>Por que vocês acham que tanto jovem se afasta da igreja justamente quando o sonho se realiza, no casamento ou no primeiro emprego?</li>
+          <li><span class="who ">NATHALLIE · 3</span>Abrir e manter um negócio exige muito. Em algum momento a empresa “pediu” o lugar de Deus? Como você percebeu e reagiu?</li>
+          <li><span class="who ">NATHALLIE · 4</span>Para o jovem que vai casar agora: o que um casal precisa combinar antes do casamento para não sair da igreja depois?</li>
+          <li><span class="who ">ADRIANO · 3</span>Quando surgiu uma promoção, um turno melhor ou uma proposta que batia com o horário da igreja, o que você levou em conta para decidir?</li>
+          <li><span class="who ">ADRIANO · 4</span>Como pai, o que você quer que a Sophia e o Emanuel vejam em você sobre trabalho e fé?</li>
+          <li><span class="who ">GEAN · 3</span>Defender a Seleção Brasileira é o sonho de muita gente. Quando isso aconteceu, o que mudou em você e o que fez questão de não deixar mudar?</li>
+          <li><span class="who ">GEAN · 4</span>No esporte tem fama, festa, ambiente que não ajuda. Como você se posicionou como cristão no vestiário?</li>
+        </ol>
       </div>
-      <div class="final">“Cresça. <span>Só não se perca.</span>”</div>
-      <div class="tip"><b>ANTES DE SAIR:</b> agradeça aos 3 convidados · convide para a comunhão · fotos na régua · lembrancinhas na saída.</div>
+      <div class="tip"><b>LEMBRETE:</b> resposta longa? Agradeça com carinho e passe para o próximo. Puxe histórias reais: “me conta uma vez em que…”</div>
+    </div>
+  </div></div>
+  <!-- ===================== CARTÃO 3 · BLOCO 3 + ENCERRAMENTO ===================== -->
+  <div class="slot"><div class="card" id="c3" style="--fs:8.1pt">
+    <div class="head">
+      <div class="row"><img src="logo_white.png" alt=""><span class="pj">PAINEL JOVEM</span><span class="num">3<small>/3</small></span></div>
+      <h1>BLOCO 3</h1>
+      <div class="manu">com a Manu</div>
+      <div class="when">CONSTÂNCIA + PASSAGEM</div>
+    </div>
+    <div class="body">
+      <div class="intro">O que mantém cada um firme no ministério, nas fases boas e ruins.</div>
+      <div class="blk">
+        <ol class="qs">
+          <li><span class="who all">TODOS · 8</span>O que é “servir” para vocês? Por que não basta só ir ao culto?</li>
+          <li><span class="who all">TODOS · 9</span>Qual hábito simples mantém vocês firmes mesmo nas semanas mais cheias?</li>
+          <li><span class="who ">NATHALLIE · 5</span>Liderar casais exige estar bem em casa. O que você faz quando a semana em casa foi difícil e no sábado tem encontro do ministério?</li>
+          <li><span class="who ">ADRIANO · 5</span>Pastor também passa por deserto. Como você cuida da sua vida com Deus, para além de pregar e cuidar dos outros?</li>
+          <li><span class="who ">GEAN · 5</span>Goleiro é a última linha de defesa. Qual é a sua “última linha de defesa” para não se afastar de Deus?</li>
+        </ol>
+      </div>
+      <div class="blk flash">
+        <h3>⚡ RELÂMPAGO · UMA FRASE CADA</h3>
+        <ol class="qs"><li><span class="who all">TODOS · 10</span>Se pudesse voltar e dar um conselho para você mesmo aos 18 anos, qual seria?</li></ol>
+      </div>
+      <div class="blk res">
+        <h3>RESERVA · SE SOBRAR TEMPO</h3>
+        <ol class="qs">
+          <li><span class="who all">TODOS</span>Como saber se estou crescendo de verdade ou só ficando ocupado?</li>
+          <li><span class="who all">TODOS</span>Dá para ter um sonho grande e ainda servir na igreja?</li>
+          <li><span class="who all">TODOS</span>Só um minuto para convencer um jovem a não largar a igreja: o que diriam?</li>
+        </ol>
+      </div>
+      <div class="tip"><b>PARA FECHAR:</b> agradeça aos 3 convidados, peça palmas e chame quem vai fazer o encerramento. Lembre da comunhão no final.</div>
     </div>
   </div></div>
 

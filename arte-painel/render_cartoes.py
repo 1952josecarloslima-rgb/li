@@ -15,7 +15,7 @@ srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 base = f"http://127.0.0.1:{srv.server_port}/cartoes.html"
 
-nomes = {1: "abertura", 2: "perguntas", 3: "fechamento"}
+nomes = {1: "abertura-bloco-1", 2: "bloco-2", 3: "bloco-3"}
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path='/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
     pg = b.new_page()
