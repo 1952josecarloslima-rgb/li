@@ -1,0 +1,12 @@
+{
+  "melhores_por_familia": {
+    "nao_linear": "knn",
+    "arvore": "lightgbm",
+    "linear": "huber"
+  },
+  "componentes_ensemble": [
+    "knn",
+    "lightgbm",
+    "huber"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "modelo": "ridge",
+  "hiperparametros": {
+    "m__alpha": 22.5510845514435
+  },
+  "variaveis_entrada_ordem": [
+    "sio2",
+    "p",
+    "ppc",
+    "densidade",
+    "pfuf",
+    "pm",
+    "pfsa",
+    "is_pfsa",
+    "is_ppc_alto",
+    "orig_navio",
+    "orig_patio",
+    "desidratante"
+  ],
+  "n_lotes_treino": 60,
+  "periodo": [
+    "2025-01-09",
+    "2026-10-15"
+  ],
+  "margem_seguranca_pp": {
+    "90": 0.3500428372409736,
+    "95": 0.5359917118393334,
+    "98": 0.6990364105103968
+  },
+  "dominio": {
+    "sio2": [
+      1.47,
+      4.88
+    ],
+    "p": [
+      0.048,
+      0.076
+    ],
+    "ppc": [
+      2.89,
+      4.42
+    ],
+    "densidade": [
+      4.511,
+      4.778
+    ],
+    "pfuf": [
+      0.0,
+      11.27
+    ],
+    "pm": [
+      0.0,
+      10.21
+    ],
+    "pfsa": [
+      0.0,
+      6.88
+    ]
+  },
+  "rmse_cv_agrupada": 0.2861532046389548,
+  "rmse_teste_final": 0.39418612953004417,
+  "uso": "TML_estimado = pipeline.predict(X); TML_seguro = TML_estimado - margem_95"
+}

@@ -1,0 +1,6 @@
+modelo,rmse,sd,pct_super_0p5
+média (só navios),0.31,0.064,2.857
+linear PPC,0.266,0.073,1.2
+"ridge química (SiO2, P, PPC, dens.)",0.215,0.059,0.0
+ridge química + blend,0.219,0.059,0.0
+ridge completo (modelo escolhido),0.225,0.057,0.0

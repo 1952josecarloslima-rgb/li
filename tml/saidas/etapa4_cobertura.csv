@@ -1,0 +1,9 @@
+metodo,alfa,cobertura_media,cobertura_sd,largura_media,margem_media,cobertura_nominal
+conformal_limite_inferior,0.05,0.961,0.077,,0.55,0.95
+conformal_limite_inferior,0.1,0.93,0.118,,0.406,0.9
+conformal_simetrico,0.05,0.95,0.089,1.434,0.717,0.95
+conformal_simetrico,0.1,0.913,0.108,1.065,0.533,0.9
+quantilica_limite_inferior,0.05,0.917,0.117,,0.574,0.95
+quantilica_limite_inferior,0.1,0.851,0.15,,0.341,0.9
+quantilica_simetrica,0.05,0.928,0.113,1.337,,0.95
+quantilica_simetrica,0.1,0.796,0.144,0.937,,0.9

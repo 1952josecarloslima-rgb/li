@@ -1,0 +1,11 @@
+{
+  "margem_90": 0.3500428372409736,
+  "margem_95": 0.5359917118393334,
+  "margem_98": 0.6990364105103968,
+  "modelo": "ridge",
+  "n_calibracao": 49,
+  "erro_medio_oof": -0.019307201508266935,
+  "sd_erro_oof": 0.30492372153847896,
+  "sd_repetibilidade_ensaio": 0.029,
+  "sd_alvo_dev": 0.41448812276296254
+}

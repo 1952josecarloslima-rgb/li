@@ -1,0 +1,7 @@
+origem,n,vies,rmse
+alimentacao_usina,3,0.066,0.16
+filtrado,3,-0.181,0.253
+navio,25,0.012,0.264
+outro,1,-0.492,0.492
+patio,6,-0.097,0.434
+producao,11,0.001,0.246
