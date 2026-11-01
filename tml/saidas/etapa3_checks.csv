@@ -1,0 +1,11 @@
+teste,resultado,veredito
+1. Permutação do alvo,RMSE permutado 0.42 (nível de acaso) contra 0.29 real; p = 0.032,aprovado
+2. Ganho sobre linhas de base,ganho de 0.12 pp de RMSE sobre a média (p = 0.008); sobre a regressão simples em PPC 0.05 pp (p = 0.206),atenção
+3. Sobreajuste (treino x validação),RMSE treino 0.23 contra validação 0.29 (razão 1.27); curva de aprendizado ainda cai 0.006 pp entre 80% e 100% dos dados,aprovado
+4. Multicolinearidade,VIF máximo 14.9 (sio2); coeficientes com sinal instável: nenhum relevante,atenção
+5. Proxy e confundidores,RMSE todas 0.28; só química 0.32; só contexto 0.31; só tempo 0.41; contexto sozinho explica 82% do ganho sobre a média,reprovado
+6. Tendência espúria,"ACF1 do TML 0.46, DW 1.07; ACF1 resíduos 0.30, DW 1.38; RMSE detrendizado 0.28 contra 0.29 original",atenção
+7. Estabilidade temporal e deriva,"walk-forward: RMSE por bloco [0.18, 0.55, 0.18, 0.41], viés [0.16, 0.45, -0.1, -0.3], superestimações > 0,5 pp [0.0, 54.0, 0.0, 0.0]%; vence a média histórica em 4 de 4 blocos; maior deriva dev->teste: is_pfsa (SMD 0.52)",atenção
+8. Plausibilidade física,"sinais PDP: sio2 -, p -, ppc +, densidade -, pfuf -, pm -, is_ppc_alto -, orig_navio -, orig_patio +, desidratante -; incoerentes: nenhum",aprovado
+9. Resíduos,"Shapiro p = 0.09; Breusch-Pagan p = 0.52; viés por faixa de TML: TML < 10,9: +0.22, 10,9 a 11,3: +0.01, > 11,3: -0.17",atenção
+10. Domínio de aplicação,"PFN com SiO2 1.47 a 4.88, PPC 2.89 a 4.42, densidade 4.511 a 4.778; produtos no treino {'PFN': 42, 'PF_SA': 6, 'PFN_PPC_ALTO': 1}; teste final fora da faixa: 2 variável(is)",atenção

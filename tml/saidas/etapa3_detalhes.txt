@@ -1,0 +1,151 @@
+Melhor RMSE numérico: voting; candidatos em empate: ['ridge', 'lasso', 'elasticnet', 'huber', 'pcr', 'svr_linear', 'knn', 'svr_rbf', 'processo_gaussiano', 'arvore', 'random_forest', 'extra_trees', 'gradient_boosting', 'xgboost', 'lightgbm', 'catboost', 'voting', 'stacking']; ESCOLHIDO (mais simples): ridge
+Hiperparâmetros fixados (moda das dobras): {'m__alpha': 10.330275785848755}
+
+[1] Teste de permutação do alvo
+RMSE real (CV agrupada) = 0.286; RMSE com alvo permutado = 0.415 ± 0.020 (mín 0.364); desvio padrão do alvo = 0.414; p = 0.032
+
+[2] Comparação com as linhas de base
+  vs media_historica     : RMSE base 0.410; ganho 0.124 pp; p (Nadeau-Bengio) = 0.0078
+  vs mediana_por_produto : RMSE base 0.405; ganho 0.119 pp; p (Nadeau-Bengio) = 0.0063
+  vs linear_ppc          : RMSE base 0.335; ganho 0.049 pp; p (Nadeau-Bengio) = 0.2055
+
+[3] Treino x validação e curva de aprendizado
+RMSE treino = 0.226; RMSE validação = 0.286; razão = 1.27
+  fração 0.30: treino 0.183 | validação 0.367 ± 0.100
+  fração 0.45: treino 0.181 | validação 0.304 ± 0.062
+  fração 0.60: treino 0.208 | validação 0.308 ± 0.093
+  fração 0.80: treino 0.204 | validação 0.284 ± 0.062
+  fração 1.00: treino 0.215 | validação 0.278 ± 0.061
+
+[4] Multicolinearidade: VIF e estabilidade dos coeficientes
+VIF:
+sio2            14.89
+p                2.07
+ppc              3.58
+densidade        6.38
+pfuf             1.86
+pm               1.14
+pfsa             1.61
+is_pfsa         13.48
+is_ppc_alto      1.33
+orig_navio       1.92
+orig_patio       2.18
+desidratante     1.44
+Coeficientes padronizados nas 25 dobras:
+              media     sd  sinal_consistente_%
+sio2         -0.019  0.013                 88.0
+p            -0.058  0.017                100.0
+ppc           0.132  0.016                100.0
+densidade    -0.060  0.018                100.0
+pfuf         -0.042  0.017                100.0
+pm           -0.043  0.015                100.0
+pfsa          0.036  0.023                 80.0
+is_pfsa      -0.005  0.013                 72.0
+is_ppc_alto  -0.007  0.006                 72.0
+orig_navio   -0.106  0.013                100.0
+orig_patio    0.077  0.020                100.0
+desidratante -0.042  0.013                100.0
+
+[5] Proxy e confundidores: conjuntos alternativos de variáveis (busca aninhada em cada dobra)
+  todas                                         RMSE = 0.283 ± 0.061
+  sem_contexto (só química + blend)             RMSE = 0.315 ± 0.062
+  só_química                                    RMSE = 0.319 ± 0.063
+  só_contexto (produto, origem, desidratante)   RMSE = 0.306 ± 0.070
+  todas + tempo (t_dias)                        RMSE = 0.284 ± 0.060
+  só_tempo                                      RMSE = 0.415 ± 0.117
+
+[6] Autocorrelação do alvo e dos resíduos; modelo sem tendência
+ACF do TML (lags 1 a 3, ordem cronológica): [0.46 0.28 0.32]; Durbin-Watson = 1.07; Ljung-Box p(3) = 0.000
+ACF dos resíduos fora da dobra: [ 0.3  -0.05  0.2 ]; Durbin-Watson = 1.38; Ljung-Box p(3) = 0.075
+RMSE com alvo detrendizado (tendência devolvida) = 0.284; erro na componente sem tendência = 0.284; original = 0.286
+
+[7] Estabilidade temporal (walk-forward) e deriva das variáveis
+           rep  n_treino  n_teste  rmse   vies  pct_super_0p5  rmse_media_hist
+wf0_2025-09-01        13        4 0.178  0.161          0.000            0.179
+wf1_2025-11-01        17       13 0.552  0.452         53.846            0.565
+wf2_2025-12-01        30        7 0.181 -0.097          0.000            0.357
+wf3_2026-01-01        37       12 0.409 -0.304          0.000            0.595
+Deriva desenvolvimento -> teste final (SMD = diferença padronizada de médias):
+    variavel  media_dev  media_teste    smd  ks_p
+        sio2      2.221        2.299  0.109 0.009
+           p      0.061        0.062  0.265 0.380
+         ppc      3.566        3.646  0.250 0.893
+   densidade      4.693        4.688 -0.105 0.410
+        pfuf      0.651        2.000  0.464 0.825
+          pm      0.296        1.095  0.342 0.825
+        pfsa      0.211        0.629  0.309 0.980
+     is_pfsa      0.122        0.000 -0.523 0.995
+ is_ppc_alto      0.020        0.091  0.299 1.000
+  orig_navio      0.510        0.636  0.250 0.993
+  orig_patio      0.184        0.273  0.207 1.000
+desidratante      0.082        0.000 -0.417 1.000
+TML médio no desenvolvimento: 2025 = 11.14 (n=37), 2026 = 11.57 (n=12); teste final = 11.01
+
+[8] Plausibilidade física (PDP e SHAP no modelo ajustado em todo o desenvolvimento)
+    variavel  efeito_pdp_pp sinal_modelo sinal_esperado           avaliacao                                                                                                        justificativa
+        sio2         -0.078            -              ?            coerente                     quartzo é grosso e não poroso (reduz TML) mas aqui marca o produto PF SA (sem expectativa única)
+           p         -0.222            -              ?            coerente                                                            sem mecanismo físico direto; acompanha goethita (fraco +)
+         ppc          0.459            +              +            coerente                                               PPC alto = goethita/hidroxilas, poroso, retém mais água antes de fluir
+   densidade         -0.204            -              -            coerente                           menor densidade = mais goethita/porosidade = TML maior; densidade alta = hematita compacta
+        pfuf         -0.157            -              ?            coerente ultrafino: superfície específica eleva retenção de água, mas finos reduzem porosidade; sem sinal único na literatura
+          pm         -0.066            -              ?            coerente                                                                                             composição não informada
+        pfsa          0.000            0              + indeterminado (n=2)                                                                         PF SA tem TML médio maior (11,4 contra 11,1)
+     is_pfsa         -0.019            0              +            coerente                                                                                   PF SA: menor densidade e maior PPC
+ is_ppc_alto         -0.086            -              + indeterminado (n=1)                                                                                               PPC alto por definição
+  orig_navio         -0.217            -              ?            coerente                                                                sem mecanismo físico: variável de contexto/amostragem
+  orig_patio          0.202            +              ?            coerente                                                                                                                 idem
+desidratante         -0.152            -              ?            coerente                                                            aditivo age na umidade, efeito sobre TML não estabelecido
+Importância SHAP (média do |valor|, pp de TML):
+    variavel  shap_medio_abs  direcao_corr_valor
+         ppc           0.114                 1.0
+  orig_navio           0.109                -1.0
+  orig_patio           0.061                 1.0
+           p           0.048                -1.0
+   densidade           0.045                -1.0
+        pfuf           0.030                -1.0
+desidratante           0.023                -1.0
+          pm           0.019                -1.0
+        pfsa           0.017                 1.0
+        sio2           0.014                -1.0
+     is_pfsa           0.004                -1.0
+ is_ppc_alto           0.003                -1.0
+
+[9] Análise de resíduos fora da dobra (média das 5 repetições por lote)
+Shapiro-Wilk p = 0.089 (normalidade); Breusch-Pagan p = 0.518 (heterocedasticidade vs previsto)
+Por faixa_tml:
+              n   vies   rmse
+faixa_tml                    
+TML < 10,9   11  0.215  0.285
+10,9 a 11,3  16  0.015  0.235
+> 11,3       22 -0.169  0.321
+Por produto:
+               n   vies   rmse
+produto                       
+PFN           42 -0.031  0.284
+PFN_PPC_ALTO   1  0.057  0.057
+PF_SA          6  0.025  0.333
+Por origem:
+                    n   vies   rmse
+origem                             
+alimentacao_usina   3  0.066  0.160
+filtrado            3 -0.181  0.253
+navio              25  0.012  0.264
+outro               1 -0.492  0.492
+patio               6 -0.097  0.434
+producao           11  0.001  0.246
+Por ano:
+       n   vies   rmse
+ano                   
+2025  37  0.036  0.245
+2026  12 -0.205  0.390
+
+[10] Domínio de aplicação
+             min    p05    p95    max
+sio2       1.470  1.600  4.556  4.880
+p          0.048  0.054  0.072  0.076
+ppc        2.890  2.972  4.110  4.420
+densidade  4.511  4.563  4.771  4.778
+pfuf       0.000  0.000  5.516  6.340
+pm         0.000  0.000  1.884  8.220
+pfsa       0.000  0.000  0.000  6.880
+Lotes do teste final fora da faixa de treino: ["pfuf: ['PFN STD - Navio Alice Ordendor']", "pm: ['PFN STD Navio Sea Puma - Suez ']"]

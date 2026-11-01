@@ -1,0 +1,16 @@
+TML (%) = +15,3010 -0,0612 x SiO2 (%) -11,1386 x P (%) +0,3496 x PPC (%) -0,9421 x Densidade (g/cm³) -0,0203 x PFUF no blend (%) -0,0179 x PM no blend (%) +0,0377 x PFSA no blend (%) +0,0867 x Produto PF SA +0,0489 x Produto PPC alto -0,2352 x Amostra de navio +0,1433 x Amostra de pátio/filtrado -0,0939 x Com desidratante
+TML seguro (limite inferior 95%) = TML - 0,54
+
+Coeficientes padronizados (efeito de +1 desvio padrão da variável, em pp de TML):
+  PPC (%)                      +0,118
+  Amostra de navio             -0,117
+  Amostra de pátio/filtrado    +0,057
+  P (%)                        -0,054
+  Densidade (g/cm³)            -0,054
+  SiO2 (%)                     -0,048
+  PFSA no blend (%)            +0,045
+  PFUF no blend (%)            -0,044
+  PM no blend (%)              -0,031
+  Produto PF SA                +0,026
+  Com desidratante             -0,023
+  Produto PPC alto             +0,009

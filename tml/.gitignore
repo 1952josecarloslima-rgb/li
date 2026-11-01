@@ -1,0 +1,4 @@
+__pycache__/
+saidas/log_*.txt
+saidas/*.npy
+saidas/*.pkl

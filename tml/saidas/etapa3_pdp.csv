@@ -1,0 +1,13 @@
+variavel,efeito_pdp_pp,sinal_modelo,sinal_esperado,avaliacao,justificativa
+sio2,-0.078,-,?,coerente,quartzo é grosso e não poroso (reduz TML) mas aqui marca o produto PF SA (sem expectativa única)
+p,-0.222,-,?,coerente,sem mecanismo físico direto; acompanha goethita (fraco +)
+ppc,0.459,+,+,coerente,"PPC alto = goethita/hidroxilas, poroso, retém mais água antes de fluir"
+densidade,-0.204,-,-,coerente,menor densidade = mais goethita/porosidade = TML maior; densidade alta = hematita compacta
+pfuf,-0.157,-,?,coerente,"ultrafino: superfície específica eleva retenção de água, mas finos reduzem porosidade; sem sinal único na literatura"
+pm,-0.066,-,?,coerente,composição não informada
+pfsa,0.0,0,+,indeterminado (n=2),"PF SA tem TML médio maior (11,4 contra 11,1)"
+is_pfsa,-0.019,0,+,coerente,PF SA: menor densidade e maior PPC
+is_ppc_alto,-0.086,-,+,indeterminado (n=1),PPC alto por definição
+orig_navio,-0.217,-,?,coerente,sem mecanismo físico: variável de contexto/amostragem
+orig_patio,0.202,+,?,coerente,idem
+desidratante,-0.152,-,?,coerente,"aditivo age na umidade, efeito sobre TML não estabelecido"
