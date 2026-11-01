@@ -1,0 +1,391 @@
+====================================================================================================
+1. ESTRUTURA
+====================================================================================================
+Aba 'Histórico PFN 2025-2026': 65 linhas x 19 colunas
+Aba 'Histórico PSC 2025-2026': 3 linhas x 11 colunas
+Total concatenado: 68 linhas x 21 colunas
+
+Tipos e preenchimento por coluna (base concatenada):
+                         tipo  n_preenchidos  pct_faltante  n_distintos
+ano                     int64             68           0.0            2
+material                  str             68           0.0           67
+pfuf                  float64             12          82.4           12
+pm                    float64              7          89.7            6
+pfsa                  float64              4          94.1            4
+data           datetime64[us]             67           1.5           60
+sio2                  float64             68           0.0           44
+p                     float64             68           0.0           18
+ppc                   float64             67           1.5           50
+densidade             float64             68           0.0           51
+menos_325             float64             26          61.8           19
+hem_especular         float64             24          64.7           21
+hem_porosa            float64             54          20.6           51
+magnetita             float64             23          66.2           19
+goethita              float64             54          20.6           51
+tml                   float64             67           1.5           55
+umid_embarque         float64             36          47.1           27
+umid_x_tml            float64             67           1.5           35
+validade       datetime64[us]             65           4.4           59
+aba                       str             68           0.0            2
+linha_excel             int64             68           0.0           65
+
+====================================================================================================
+2. METADADOS EXTRAÍDOS DO CAMPO 'Material'
+====================================================================================================
+
+Produto (classificado por regra textual):
+aba                      produto     
+Histórico PFN 2025-2026  PFN             55
+                         PFN_PPC_ALTO     2
+                         PF_SA            8
+Histórico PSC 2025-2026  PSC              3
+
+Origem da amostra:
+origem
+navio                36
+producao             13
+patio                 7
+filtrado              7
+alimentacao_usina     3
+outro                 2
+
+Amostras com desidratante mencionado: 4
+Amostras marcadas como réplica/teste repetido (T01/T02/Interlaboratorial): 9
+
+Navios identificados e nº de amostras por navio:
+                    n   produtos                           tml
+navio                                                         
+Azimuth             4        PFN  [10.86, 11.35, 10.75, 11.01]
+Alexandra           2        PFN                [10.81, 10.85]
+Asl Classic         2  PFN,PF_SA                [11.13, 11.24]
+Ksl Sydney          2        PFN                [10.56, 10.53]
+Alba                1        PFN                       [10.58]
+Alice Oldendorff    1        PFN                       [11.16]
+Annabel L           1        PFN                       [11.47]
+Alpha Gallant       1        PFN                       [10.69]
+Berge Townsend      1        PFN                       [10.57]
+Bulk Norway         1        PFN                       [11.03]
+Cape Satsuki        1        PFN                       [10.86]
+Cape Supplier       1        PSC                       [12.45]
+Cic Rolaco          1        PFN                       [10.61]
+Agri Ocean          1        PSC                       [12.62]
+Frontier Explorer   1        PFN                       [10.43]
+Gcl Dunkirk         1        PFN                       [11.23]
+Ipswich             1        PFN                       [11.25]
+Lv Mangas           1        PFN                       [11.11]
+Maran Astronomer    1        PFN                       [11.28]
+Margret Oldendorff  1        PFN                       [11.41]
+Marlene Oldendorff  1        PFN                       [10.53]
+Marvellous          1        PFN                       [11.08]
+Mathilde            1        PFN                       [11.31]
+Mineral Marouani    1        PFN                       [10.81]
+Ngm Bond            1        PFN                       [11.35]
+Nigthski 1          1        PFN                       [10.97]
+Sea Puma            1        PFN                       [11.01]
+Ssi Brave           1        PFN                       [10.79]
+Xin He              1      PF_SA                        [11.3]
+Yasa Spring         1        PFN                       [10.66]
+
+Nº de navios distintos: 30; amostras ligadas a navio: 36; amostras sem navio (pátio/produção/alimentação): 32
+
+Clientes identificados:
+cliente
+NaN           43
+Suez Steel     9
+Tosyali        5
+Psu            2
+Vitol          1
+Minmetals      1
+Vibrantz       1
+Sharpmax       1
+Hbis           1
+Hoa Phat       1
+Imr            1
+Cargill        1
+Am Gent        1
+
+Conferência manual da extração (linha, material -> produto | origem | navio | cliente):
+  L 5 | TML - PFN produção 09/01                                       -> PFN          | producao          | nan                    | nan
+  L 6 | TML - PFN Batch  30                                            -> PFN          | producao          | nan                    | nan
+  L 7 | TML - PFN produção 07 à 19/02                                  -> PFN          | producao          | nan                    | nan
+  L 8 | TML - PFN produção 06-25 (Oficial PFN)                         -> PFN          | producao          | nan                    | nan
+  L 9 | TML - PF/SA comp Geral p embarque( Oficial PF SA)              -> PF_SA        | outro             | nan                    | nan
+  L10 | TML - PFN produção 06/07 - T01                                 -> PFN          | producao          | nan                    | nan
+  L11 | TML - PF/SA  - Pot Grate T02                                   -> PF_SA        | producao          | nan                    | nan
+  L12 | TML - PFN produção 09/07                                       -> PFN          | producao          | nan                    | nan
+  L13 | TML - PFN produção 14/07 - Interlaboratorial                   -> PFN          | producao          | nan                    | nan
+  L14 | TML - PFN Bancada Inferior Pátio A 18/08                       -> PFN          | patio             | nan                    | nan
+  L15 | TML PFN Embarcado Navio GCL Dunkirk                            -> PFN          | navio             | Gcl Dunkirk            | nan
+  L16 | TML PFN Embarcado Navio LV Mangas                              -> PFN          | navio             | Lv Mangas              | nan
+  L17 | TML PFN Embarcado Navio Maran Astronomer                       -> PFN          | navio             | Maran Astronomer       | nan
+  L18 | TML PF/SA  Embarcado Navio ASL Classic                         -> PF_SA        | navio             | Asl Classic            | nan
+  L19 | TML PFN Embarcado Navio ASL Classic                            -> PFN          | navio             | Asl Classic            | nan
+  L20 | TML PF S/A  Embarcado Navio Xin He                             -> PF_SA        | navio             | Xin He                 | nan
+  L21 | TML PF SA Empilhado patio com Desidratante                     -> PF_SA        | patio             | nan                    | nan
+  L22 | TML PFN Embarcado Navio Marlene Oldendorff                     -> PFN          | navio             | Marlene Oldendorff     | nan
+  L23 | TML PFN Embarcado Navio Cic Rolaco - Vitol                     -> PFN          | navio             | Cic Rolaco             | Vitol
+  L24 | TML PFN Embarcado Navio:  Ksl   Sydneiy - Suez Steel           -> PFN          | navio             | Ksl Sydney             | Suez Steel
+  L25 | TML PFN Embarcado Desidratante Navio:  Ksl   Sydney            -> PFN          | navio             | Ksl Sydney             | nan
+  L26 | TML PFN Embarcado Navio  Yasa Spring  - PSU Fino               -> PFN          | navio             | Yasa Spring            | Psu
+  L27 | TML PFN Alimentação 04 - 13/11/25                              -> PFN          | alimentacao_usina | nan                    | nan
+  L28 | TML PFN Embarcado Navio Cape Satsuki - Minmetals               -> PFN          | navio             | Cape Satsuki           | Minmetals
+  L29 | TML PFN Embarcado Navio Ipswich - Vibrantz                     -> PFN          | navio             | Ipswich                | Vibrantz
+  L30 | TML PF PPC Alto Pot Grate                                      -> PFN_PPC_ALTO | producao          | nan                    | nan
+  L31 | TML PFN STD EMB. Navio Ngm Bond - Sharpmax - 08-06-25          -> PFN          | navio             | Ngm Bond               | Sharpmax
+  L32 | TML PFN STD Embarcado Navio: Nigthski 1 Cliente: Hbis          -> PFN          | navio             | Nigthski 1             | Hbis
+  L33 | TML PFN Embarcado  Navio: Azimuth Cliente: Tosyali             -> PFN          | navio             | Azimuth                | Tosyali
+  L34 | TML PFN Alimentação 04 - 27/11/25 - Amostra instantânea        -> PFN          | alimentacao_usina | nan                    | nan
+  L35 | TML PFN STD Emb. Navio Azimuth Cliente: Tosyali ofc            -> PFN          | navio             | Azimuth                | Tosyali
+  L36 | TML PFN Alimentação 04 - 29/11/25 - Amostra instantânea        -> PFN          | alimentacao_usina | nan                    | nan
+  L37 | TML PFN Pátio A e B - 01/12/25                                 -> PFN          | patio             | nan                    | nan
+  L38 | TML PFN Embarcado  Sem Desidratante Navio: Azimuth             -> PFN          | navio             | Azimuth                | nan
+  L39 | TML PFN Embarcado  Com Desidratante Navio: Azimuth             -> PFN          | navio             | Azimuth                | nan
+  L40 | TML PFN Embarcado Navio:Mineral Marouani Cliente: Suez Steel   -> PFN          | navio             | Mineral Marouani       | Suez Steel
+  L41 | TML PFN Embarcado  Navio:Alba     Cliente: PSU                 -> PFN          | navio             | Alba                   | Psu
+  L42 | TML PFN Embarcado Navio Bulk Norway - Cliente Hoa Phat         -> PFN          | navio             | Bulk Norway            | Hoa Phat
+  L43 | PF SA produção 06/01 - INT. VALE  T- 01                        -> PF_SA        | producao          | nan                    | nan
+  L44 | PF SA produção 06/01 - INT. VALE  T- 02                        -> PF_SA        | producao          | nan                    | nan
+  L45 | PFN STD pátio A  - 14/01                                       -> PFN          | patio             | nan                    | nan
+  L46 | PFN Embarcado - Navio Mathilde  - Cliente Suez Steel           -> PFN          | navio             | Mathilde               | Suez Steel
+  L47 | PFN STD pátio A  - 17/01                                       -> PFN          | patio             | nan                    | nan
+  L48 | PFN STD pátio A e B - 11/02                                    -> PFN          | patio             | nan                    | nan
+  L49 | PFN STD filtrado para pátio 09 à 16/02                         -> PFN          | filtrado          | nan                    | nan
+  L50 | PFN STD Navio Annabel L.- Cliente Tosyale                      -> PFN          | navio             | Annabel L              | Tosyali
+  L51 | PFN STD filtrado para pátio comp. 25-02                        -> PFN          | filtrado          | nan                    | nan
+  L52 | PFN STD US 03/04 PPC baixo 24-02                               -> PFN          | producao          | nan                    | nan
+  L53 | PFN STD Navio Margret Oldendorf - Cliente Suez Steel           -> PFN          | navio             | Margret Oldendorff     | Suez Steel
+  L54 | PFN STD filtrado para pátio Interlaboratorial Vale - T01       -> PFN          | filtrado          | nan                    | nan
+  L55 | PFN STD filtrado para pátio Interlaboratorial Vale - T01       -> PFN          | filtrado          | nan                    | nan
+  L56 | PFN STD - Navio Alexandra para Suez Steel. T 01                -> PFN          | navio             | Alexandra              | Suez Steel
+  L57 | PFN STD - Navio Alexandra para Suez Steel. T02                 -> PFN          | navio             | Alexandra              | Suez Steel
+  L58 | PFN STD - Navio Alice Ordendorff para Suez Steel               -> PFN          | navio             | Alice Oldendorff       | Suez Steel
+  L59 | PFN STD Navio Berge Townsend -Cliente Tosyale                  -> PFN          | navio             | Berge Townsend         | Tosyali
+  L60 | PFN STD filtrado para pátio comp. 01 à 06/2026                 -> PFN          | filtrado          | nan                    | nan
+  L61 | PFN STD filtrado para pátio 15/06/2026                         -> PFN          | filtrado          | nan                    | nan
+  L62 | PFN STD filtrado para pátio 19/06/2026                         -> PFN          | filtrado          | nan                    | nan
+  L63 | PFN STD Navio Frontier Explorer                                -> PFN          | navio             | Frontier Explorer      | nan
+  L64 | PFN STD Navio Sea Puma - Suez Steel                            -> PFN          | navio             | Sea Puma               | Suez Steel
+  L65 | PFN STD Navio Alpha Gallant - Suez steel                       -> PFN          | navio             | Alpha Gallant          | Suez Steel
+  L66 | PFN STD Navio Marvellous - Tosyale                             -> PFN          | navio             | Marvellous             | Tosyali
+  L67 | PFN STD Navio SSI Brave - Cliente IMR                          -> PFN          | navio             | Ssi Brave              | Imr
+  L68 | PFN STAD PPC Alto ref. 12/08/2026                              -> PFN_PPC_ALTO | outro             | nan                    | nan
+  L69 | PF SA produção 07/01                                           -> PF_SA        | producao          | nan                    | nan
+  L 5 | PSC Pátio C                                                    -> PSC          | patio             | nan                    | nan
+  L 6 | PSC Embarcado Navio Cape Supplier - Cliente Cargill            -> PSC          | navio             | Cape Supplier          | Cargill
+  L 7 | PSC Navio Agri Ocean - Cliente AM Gent                         -> PSC          | navio             | Agri Ocean             | Am Gent
+
+====================================================================================================
+3. DATAS
+====================================================================================================
+Faixa: 2025-01-09 a 2026-10-15; sem data: 1 linha(s) -> [69]
+Amostras por ano-mês:
+data
+2025-01     1
+2025-02     2
+2025-06     2
+2025-07     4
+2025-08     4
+2025-09     2
+2025-10     2
+2025-11    14
+2025-12     9
+2026-01     3
+2026-02     7
+2026-03     5
+2026-04     1
+2026-05     1
+2026-06     3
+2026-07     2
+2026-08     2
+2026-09     2
+2026-10     1
+Freq: M
+Linhas fora de ordem cronológica em relação à anterior: 5
+
+====================================================================================================
+4. FALTANTES / CONSTANTES (apenas aba PFN, n=65, pois PSC é outro produto)
+====================================================================================================
+               n_preenchidos  pct_faltante  pct_falt_2025  pct_falt_2026  n_distintos  cv_pct                     flag
+pfuf                      12          81.5           86.8           74.1           12    65.5            >30% faltante
+pm                         7          89.2           89.5           88.9            6   101.6            >30% faltante
+pfsa                       4          93.8          100.0           85.2            4    49.8            >30% faltante
+sio2                      65           0.0            0.0            0.0           42    35.9                         
+p                         65           0.0            0.0            0.0           18     7.9                         
+ppc                       64           1.5            0.0            3.7           47     9.4                         
+densidade                 65           0.0            0.0            0.0           48     1.3  quase constante (CV<5%)
+menos_325                 26          60.0          100.0            3.7           19     1.5            >30% faltante
+hem_especular             24          63.1          100.0           11.1           21    21.5            >30% faltante
+hem_porosa                54          16.9           18.4           14.8           51    25.5                         
+magnetita                 23          64.6          100.0           14.8           19    27.8            >30% faltante
+goethita                  54          16.9           18.4           14.8           51    32.8                         
+tml                       64           1.5            0.0            3.7           52     3.8  quase constante (CV<5%)
+umid_embarque             34          47.7           42.1           55.6           25     2.0            >30% faltante
+
+Densidade: CV baixo é esperado (propriedade física pouco variável), mas a faixa 4,51 a 4,78 g/cm³ é informativa.
+Densidade em função do produto (média):
+              count   mean    min    max
+produto                                 
+PFN              55  4.708  4.598  4.778
+PFN_PPC_ALTO      2  4.654  4.629  4.680
+PF_SA             8  4.566  4.511  4.597
+PSC               3  4.965  4.939  4.999
+
+====================================================================================================
+5. DESCRITIVA, UNIDADES E OUTLIERS
+====================================================================================================
+               count    mean     std     min     25%     50%     75%     max
+pfuf            12.0   4.493   2.941   0.500   1.998   4.895   5.858  11.270
+pm               7.0   3.790   3.850   0.720   0.920   2.660   5.550  10.210
+pfsa             4.0   4.320   2.149   1.860   3.075   4.270   5.515   6.880
+sio2            68.0   2.271   0.799   1.470   1.895   1.995   2.212   4.880
+p               68.0   0.061   0.005   0.048   0.059   0.061   0.063   0.076
+ppc             67.0   3.429   0.763   0.230   3.335   3.580   3.740   4.420
+densidade       68.0   4.701   0.082   4.511   4.678   4.698   4.730   4.999
+menos_325       26.0  86.612   1.280  84.500  86.000  86.300  87.175  89.900
+hem_especular   24.0  27.177   5.846   4.260  24.712  27.735  30.782  34.890
+hem_porosa      54.0  41.500  10.595  18.850  35.048  40.870  46.270  65.920
+magnetita       23.0   2.523   0.702   1.550   2.090   2.530   3.040   3.710
+goethita        54.0  24.025   7.870  13.000  16.958  21.880  32.550  43.570
+tml             67.0  11.264   0.475  10.430  10.900  11.270  11.555  12.640
+umid_embarque   36.0  10.889   0.249  10.130  10.772  10.930  11.080  11.290
+
+Valores fora de faixa física plausível:
+  nenhum. Unidades coerentes (óxidos e TML em %, densidade em g/cm³).
+
+Outliers estatísticos (regra 1,5*IQR, dentro de cada produto, variáveis principais):
+  PFN          sio2           linhas [67] valores [3.85]  (faixa típica 1.42 a 2.54)
+  PFN          p              linhas [6, 8, 14] valores [0.072, 0.072, 0.048]  (faixa típica 0.05 a 0.07)
+  PFN          ppc            linhas [47] valores [4.32]  (faixa típica 2.76 a 4.30)
+  PFN          densidade      linhas [47, 67] valores [4.598, 4.603]  (faixa típica 4.62 a 4.80)
+  PFN          menos_325      linhas [59, 66] valores [89.0, 89.9]  (faixa típica 84.45 a 88.85)
+  PFN          hem_porosa     linhas [7, 28] valores [18.85, 65.92]  (faixa típica 21.16 a 61.85)
+  PFN          tml            linhas [47] valores [12.64]  (faixa típica 9.86 a 12.44)
+  PF_SA        p              linhas [9, 11] valores [0.073, 0.076]  (faixa típica 0.06 a 0.07)
+
+Soma das fases mineralógicas (esperado ~95 a 100% quando todas as fases são reportadas):
+              count   min  median   max
+ano  n_fases                           
+2025 2           31  41.5    63.4  84.6
+2026 1            1   4.3     4.3   4.3
+     4           23  96.2    97.2  97.6
+Leitura: em 2025 só 2 fases são reportadas (Hematita Porosa e Goethita) e a soma fica entre ~28 e ~85%,
+portanto a mineralogia de 2025 NÃO é comparável à de 2026 (4 fases, soma ~96 a 98%). Em 2025 a 'Hematita Porosa'
+provavelmente representa hematita total ou foi medida por outro método. Tratar como regimes distintos.
+
+====================================================================================================
+6. DUPLICIDADES
+====================================================================================================
+Linhas com química (SiO2, P, PPC) idêntica a outra linha (mesma amostra física ensaiada mais de uma vez ou cópia):
+ linha_excel                                                 material       data  sio2     p  ppc  densidade   tml  umid_embarque
+          24     TML PFN Embarcado Navio:  Ksl   Sydneiy - Suez Steel 2025-11-14  1.82 0.065 3.38      4.724 10.56          11.08
+          25      TML PFN Embarcado Desidratante Navio:  Ksl   Sydney 2025-11-17  1.82 0.065 3.38      4.774 10.53            NaN
+          33       TML PFN Embarcado  Navio: Azimuth Cliente: Tosyali 2025-11-27  1.83 0.058 3.26      4.718 10.86          11.12
+          35      TML PFN STD Emb. Navio Azimuth Cliente: Tosyali ofc 2025-11-28  1.83 0.058 3.26      4.718 11.35          10.98
+          56          PFN STD - Navio Alexandra para Suez Steel. T 01 2026-03-31  1.96 0.062 3.37      4.710 10.81          10.89
+          57           PFN STD - Navio Alexandra para Suez Steel. T02 2026-03-31  1.96 0.062 3.37      4.710 10.85          10.89
+          54 PFN STD filtrado para pátio Interlaboratorial Vale - T01 2026-03-28  2.21 0.056 3.51      4.678 11.94            NaN
+          55 PFN STD filtrado para pátio Interlaboratorial Vale - T01 2026-03-29  2.21 0.056 3.51      4.678 11.89            NaN
+          43                  PF SA produção 06/01 - INT. VALE  T- 01 2026-01-07  3.38 0.064 3.93      4.597 11.60            NaN
+          44                  PF SA produção 06/01 - INT. VALE  T- 02 2026-01-07  3.38 0.064 3.93      4.597 11.63            NaN
+          20                       TML PF S/A  Embarcado Navio Xin He 2025-10-02  4.88 0.062 3.74      4.570 11.30          11.17
+          21               TML PF SA Empilhado patio com Desidratante 2025-10-14  4.88 0.062 3.74      4.554 11.33            NaN
+
+Linhas totalmente duplicadas (todas as variáveis + data): 0
+
+Pares de réplica da MESMA amostra (dão estimativa da repetibilidade do ensaio TML):
+  L43/L44 PF SA Int. Vale T01/T02                  TML = 11.60 / 11.63  dif = 0.03 pp
+  L54/L55 PFN Interlab Vale T01 (2 datas)          TML = 11.94 / 11.89  dif = 0.05 pp
+  L56/L57 Alexandra T01/T02                        TML = 10.81 / 10.85  dif = 0.04 pp
+  L20/L21 Xin He vs empilhado c/ desidratante      TML = 11.30 / 11.33  dif = 0.03 pp
+  L24/L25 Ksl Sydney sem/com desidratante          TML = 10.56 / 10.53  dif = 0.03 pp
+  L38/L39 Azimuth sem/com desidratante             TML = 10.75 / 11.01  dif = 0.26 pp
+  L33/L35 Azimuth embarcado vs 'ofc'               TML = 10.86 / 11.35  dif = 0.49 pp
+
+Desvio padrão de repetibilidade estimado com as 3 réplicas verdadeiras: 0.029 pp (limite de repetibilidade 2,8*sd = 0.08 pp). Qualquer modelo com RMSE abaixo disso está sobreajustado.
+
+ALERTA L35: 'PFN STD Emb. Navio Azimuth ofc' tem química idêntica à L33 (Azimuth), mas TML=11,35 e Umidade Embarque=10,98,
+valores idênticos aos da L31 (navio Ngm Bond). Validade +89 dias em vez de +179. Forte suspeita de erro de digitação/cópia.
+Decisão: excluir L35 da modelagem (não é réplica confiável nem lote novo).
+
+====================================================================================================
+7. VAZAMENTO DE INFORMAÇÃO E DISPONIBILIDADE NO MOMENTO DA PREVISÃO
+====================================================================================================
+umid_x_tml : fórmula =(TML - Umidade Embarque)/TML. Calculada a partir do alvo. VAZAMENTO DIRETO. Excluída.
+validade   : fórmula =Data+179 (uma linha com +89). Sem informação própria. Excluída.
+umid_embarque: umidade real do lote embarcado, medida DEPOIS do TML e controlada pela operação para ficar abaixo do TML
+             (tipicamente ~90% do TML). Não existe no momento da previsão e é consequência do TML. VAZAMENTO INDIRETO. Excluída.
+             Correlação TML x Umidade embarque (n=36): r = -0.19; razão média umid/TML = 0.985
+             Lotes embarcados com Umidade > TML: 18 de 36 -> [{'linha_excel': 16, 'navio': 'Lv Mangas', 'tml': 11.11, 'umid_embarque': 11.29}, {'linha_excel': 22, 'navio': 'Marlene Oldendorff', 'tml': 10.53, 'umid_embarque': 10.69}, {'linha_excel': 23, 'navio': 'Cic Rolaco', 'tml': 10.61, 'umid_embarque': 10.67}, {'linha_excel': 24, 'navio': 'Ksl Sydney', 'tml': 10.56, 'umid_embarque': 11.08}, {'linha_excel': 26, 'navio': 'Yasa Spring', 'tml': 10.66, 'umid_embarque': 11.08}, {'linha_excel': 32, 'navio': 'Nigthski 1', 'tml': 10.97, 'umid_embarque': 11.12}, {'linha_excel': 33, 'navio': 'Azimuth', 'tml': 10.86, 'umid_embarque': 11.12}, {'linha_excel': 38, 'navio': 'Azimuth', 'tml': 10.75, 'umid_embarque': 10.87}, {'linha_excel': 40, 'navio': 'Mineral Marouani', 'tml': 10.81, 'umid_embarque': 10.89}, {'linha_excel': 41, 'navio': 'Alba', 'tml': 10.58, 'umid_embarque': 10.65}, {'linha_excel': 56, 'navio': 'Alexandra', 'tml': 10.81, 'umid_embarque': 10.89}, {'linha_excel': 57, 'navio': 'Alexandra', 'tml': 10.85, 'umid_embarque': 10.89}, {'linha_excel': 59, 'navio': 'Berge Townsend', 'tml': 10.57, 'umid_embarque': 10.71}, {'linha_excel': 63, 'navio': 'Frontier Explorer', 'tml': 10.43, 'umid_embarque': 10.83}, {'linha_excel': 64, 'navio': 'Sea Puma', 'tml': 11.01, 'umid_embarque': 11.02}, {'linha_excel': 65, 'navio': 'Alpha Gallant', 'tml': 10.69, 'umid_embarque': 11.02}, {'linha_excel': 66, 'navio': 'Marvellous', 'tml': 11.08, 'umid_embarque': 11.1}, {'linha_excel': 67, 'navio': 'Ssi Brave', 'tml': 10.79, 'umid_embarque': 11.0}]
+ano        : redundante com data. Excluída como variável; usada apenas para estratificação temporal.
+material   : texto livre com identidade do navio/cliente. Usado SÓ para derivar produto, origem, desidratante e grupo.
+navio/cliente: identidade. Entram apenas como GRUPO da validação cruzada, nunca como preditor.
+pfuf, pm, pfsa: preenchidos em 17 linhas. Hipótese: % de outros produtos (PF ultrafino, PM, PF SA) misturados ao lote
+             embarcado; vazio = 0% (lote puro). Disponíveis antes do embarque (plano de blend). Mantidas com imputação 0, sob confirmação.
+sio2, p, ppc, densidade, -325#, mineralogia: ensaios de caracterização da mesma amostra, independentes do ensaio de TML. Candidatas legítimas.
+
+====================================================================================================
+8. CORRELAÇÃO DE SPEARMAN COM O TML (aba PFN, n variável por coluna; exploratório)
+====================================================================================================
+     variavel  n  spearman  pearson
+         sio2 64      0.04     0.06
+            p 64     -0.14    -0.08
+          ppc 64      0.60     0.57
+    densidade 64     -0.50    -0.40
+    menos_325 26     -0.28    -0.25
+hem_especular 23     -0.37    -0.37
+   hem_porosa 54     -0.42    -0.40
+    magnetita 23      0.56     0.54
+     goethita 54      0.51     0.56
+         pfuf 12     -0.22    -0.13
+           pm  7      0.09    -0.06
+umid_embarque 34      0.21     0.13
+
+TML por produto e ano:
+                   count   mean   std    min    max
+produto      ano                                   
+PFN          2025     32  11.10  0.35  10.53  11.79
+             2026     23  11.28  0.52  10.43  12.64
+PFN_PPC_ALTO 2025      1  11.56   NaN  11.56  11.56
+             2026      1  11.68   NaN  11.68  11.68
+PF_SA        2025      5  11.35  0.27  11.13  11.80
+             2026      2  11.62  0.02  11.60  11.63
+PSC          2025      2  12.05  0.57  11.65  12.45
+             2026      1  12.62   NaN  12.62  12.62
+
+TML por origem da amostra (PFN):
+                   count   mean   std
+origem                               
+alimentacao_usina      3  11.22  0.31
+filtrado               7  11.53  0.42
+navio                 34  10.96  0.30
+outro                  2  11.74  0.08
+patio                  6  11.72  0.49
+producao              12  11.43  0.17
+
+Correlação entre preditores (Pearson, PFN):
+               sio2     p   ppc  densidade  menos_325  hem_especular  hem_porosa  magnetita  goethita
+sio2           1.00  0.39  0.30      -0.80      -0.36          -0.66       -0.44      -0.08      0.11
+p              0.39  1.00  0.44      -0.35      -0.27          -0.10       -0.29      -0.37      0.22
+ppc            0.30  0.44  1.00      -0.67      -0.32          -0.25       -0.49       0.18      0.60
+densidade     -0.80 -0.35 -0.67       1.00       0.46           0.65        0.57      -0.23     -0.43
+menos_325     -0.36 -0.27 -0.32       0.46       1.00           0.35        0.16      -0.14     -0.34
+hem_especular -0.66 -0.10 -0.25       0.65       0.35           1.00        0.01      -0.56     -0.54
+hem_porosa    -0.44 -0.29 -0.49       0.57       0.16           0.01        1.00      -0.29     -0.58
+magnetita     -0.08 -0.37  0.18      -0.23      -0.14          -0.56       -0.29       1.00      0.44
+goethita       0.11  0.22  0.60      -0.43      -0.34          -0.54       -0.58       0.44      1.00
+
+====================================================================================================
+9. DECISÕES DE LIMPEZA E IMPACTO NO TAMANHO DA BASE
+====================================================================================================
+Linhas lidas (2 abas):                                   68
+Após excluir sem alvo, L35 suspeita e aba PSC:           63
+Após consolidar réplicas T01/T02 pela média (3 pares):   60  (base de modelagem PFN + PF SA)
+  dos quais PFN/PFN_PPC_ALTO: 56, PF_SA: 7
+  com mineralogia completa (4 fases) e -325#: 23 (todos de 2026)
+  ligados a navio (grupo real): 33 amostras em 28 navios
+
+Tratamento de faltantes (a ser aplicado DENTRO de cada dobra, via pipeline):
+  pfuf/pm/pfsa -> 0 (ausência = não há mistura), sob confirmação.
+  menos_325, mineralogia 2026 -> cenário A: usar só base 2026 completa; cenário B: excluir essas variáveis e usar toda a base.
+  mineralogia 2025 (2 fases) -> não usar como se fosse a mesma grandeza de 2026.
+  Imputação por mediana apenas para faltas pontuais (< 10%) em sio2/p/ppc/densidade; aqui não há nenhuma.
