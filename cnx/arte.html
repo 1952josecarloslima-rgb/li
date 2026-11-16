@@ -1,0 +1,91 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Marker;src:url(fonts/permanent-marker-latin-400-normal.woff2)}
+@font-face{font-family:Mont;font-weight:600;src:url(fonts/montserrat-latin-600-normal.woff2)}
+@font-face{font-family:Mont;font-weight:800;src:url(fonts/montserrat-latin-800-normal.woff2)}
+@font-face{font-family:Mont;font-weight:900;src:url(fonts/montserrat-latin-900-normal.woff2)}
+@font-face{font-family:Mont;font-weight:700;font-style:italic;src:url(fonts/montserrat-latin-700-italic.woff2)}
+:root{--almond:#D3B49F;--paper:#E6D2C1;--maple:#C16804;--wine:#562C1E;--cider:#903500;--mahog:#421404;--caramel:#8C522D;--H:1350px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:var(--H);overflow:hidden;background:var(--mahog);font-family:Mont}
+body.story{--H:1920px}
+#art{position:relative;width:1080px;height:var(--H);background:radial-gradient(ellipse 85% 60% at 50% 42%,#6a3018 0%,#4b1a08 55%,#3a1103 100%);overflow:hidden}
+svg.full{position:absolute;inset:0;width:100%;height:100%}
+.abs{position:absolute}
+.logo{left:50%;top:60px;width:96px;transform:translateX(-50%)}
+.story .logo{top:250px;width:110px}
+.hero{left:0;right:0;top:215px;text-align:center}
+.story .hero{top:480px}.story .cnx{height:560px}.story .cnx span{font:400 650px/560px Anton}
+.tape{position:relative;display:inline-block;background:var(--paper);color:var(--mahog);font:900 40px Mont;letter-spacing:5px;padding:13px 34px 12px;transform:rotate(-4deg);margin-left:-430px;box-shadow:4px 6px 0 rgba(0,0,0,.28);z-index:5}
+.tape i{position:absolute;width:74px;height:30px;background:rgba(211,180,159,.42);backdrop-filter:brightness(1.25)}
+.tape i:first-child{left:-36px;top:-13px;transform:rotate(-32deg)}
+.tape i:last-child{right:-34px;bottom:-12px;transform:rotate(-30deg)}
+.cnx{position:relative;height:490px;margin-top:-30px}
+.cnx span{position:absolute;left:0;right:0;top:0;font:400 570px/490px Anton;letter-spacing:6px;transform:rotate(-3deg)}
+.cnx .ext{color:var(--maple);text-shadow:1px 1px 0 #C16804,2px 2px 0 #C16804,3px 3px 0 #C16804,4px 4px 0 #C16804,5px 5px 0 #C16804,6px 6px 0 #C16804,7px 7px 0 #C16804,8px 8px 0 #C16804,9px 9px 0 #C16804,10px 10px 0 #C16804,11px 11px 0 #C16804,12px 12px 0 #C16804,13px 13px 0 #C16804,14px 14px 0 #C16804,15px 15px 0 #C16804,16px 16px 0 #C16804,17px 17px 0 #C16804,18px 18px 0 #C16804,26px 30px 0 rgba(0,0,0,.35)}
+.cnx .face{color:var(--paper);filter:url(#grunge)}
+.script{position:relative;margin-top:-4px;font:400 104px/1 Marker;color:var(--maple);transform:rotate(-5deg);text-shadow:5px 6px 0 rgba(0,0,0,.35);z-index:4}
+.under{display:block;margin:-6px auto 0;width:640px;transform:rotate(-5deg) translateX(40px)}
+.verse{left:86px;top:940px;width:600px;color:var(--paper);font:600 25px/1.4 Mont}
+.story .verse{top:1290px}
+.verse b{font:italic 700 25px Mont;color:var(--maple)}
+.verse em{display:inline-block;margin-top:12px;font:900 18px Mont;font-style:normal;letter-spacing:2px;background:var(--maple);color:var(--mahog);padding:5px 12px}
+.foot{left:0;right:0;bottom:0;height:245px;text-align:center;color:var(--mahog)}
+.story .foot{height:420px}
+.row{display:inline-flex;margin-top:48px;border:4px solid var(--mahog);font:900 62px/1 Mont}
+.story .row{margin-top:70px}
+.row div{padding:12px 32px 10px;border-left:4px solid var(--mahog)}
+.row div:first-child{border-left:0;background:var(--maple);color:var(--paper);background:var(--cider)}
+.addr{margin-top:22px;display:flex;justify-content:center;align-items:center;gap:14px;text-align:left}
+.addr b{display:block;font:900 27px Mont;letter-spacing:1px}
+.addr span{font:600 21px Mont}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="grunge" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="7" result="n"/><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="3" result="big"/><feComposite in="n" in2="big" operator="arithmetic" k1="1.9" k2="0" k3="0" k4="0" result="m"/><feColorMatrix in="m" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  9 0 0 0 -3.75" result="sp"/><feComposite in="SourceGraphic" in2="sp" operator="out"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .9  0 0 0 0 .8  0 0 0 .5 -.18"/></filter>
+<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>
+</defs></svg>
+<div id="art">
+<svg class="full" id="topo"></svg>
+<svg class="full" id="route"></svg>
+<svg class="abs logo" viewBox="100 0 665 710" style="color:var(--paper)"><use href="#logo"/></svg>
+<div class="abs hero">
+  <div class="tape"><i></i>CULTO<i></i></div>
+  <div class="cnx"><span class="ext">CNX</span><span class="face">CNX</span></div>
+  <div class="script">Conexão Jovem</div>
+  <svg class="under" viewBox="0 0 640 30"><path d="M6 20C150 6 420 4 634 12C440 12 200 18 10 27Z" fill="#C16804"/></svg>
+</div>
+<div class="abs verse">“Como é bom e agradável quando os irmãos <b>convivem em união!</b>”<br><em>SALMOS 133:1</em></div>
+<svg class="full" id="paper"></svg>
+<div class="abs foot">
+  <div class="row"><div>SÁBADO</div><div>21/11</div><div>19H</div></div>
+  <div class="addr"><svg width="34" height="46" viewBox="0 0 34 46"><path fill="#903500" d="M17 0C7.6 0 0 7.4 0 16.6C0 29 17 46 17 46S34 29 34 16.6C34 7.4 26.4 0 17 0Z"/><circle cx="17" cy="16.5" r="6.5" fill="#E6D2C1"/></svg><div><b>IGREJA CASA DA PATERNIDADE</b><span>Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</span></div></div>
+</div>
+<svg class="full" style="mix-blend-mode:overlay;opacity:.55;pointer-events:none"><rect width="100%" height="100%" filter="url(#grain)"/></svg>
+</div>
+<script>
+const story=location.search.includes('story'); if(story)document.body.classList.add('story');
+const H=story?1920:1350, W=1080, footH=story?420:245;
+let s=42;const R=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296};
+// topographic contours
+let t='';const blobs=[[120,180,7],[980,420,8],[200,H*0.62,9],[900,H*0.8,7],[560,H*0.33,6],[520,H*1.0,6]];
+for(const[cx,cy,n]of blobs){const ph=[R()*6,R()*6,R()*6],am=[.16+R()*.12,.08+R()*.08,.05+R()*.05];
+ for(let k=1;k<=n;k++){const r=40+k*62;let d='';for(let a=0;a<=64;a++){const th=a/64*Math.PI*2;
+  const rr=r*(1+am[0]*Math.sin(2*th+ph[0]+k*.13)+am[1]*Math.sin(3*th+ph[1]-k*.2)+am[2]*Math.sin(5*th+ph[2]));
+  d+=(a?'L':'M')+(cx+rr*Math.cos(th)*1.25).toFixed(1)+' '+(cy+rr*Math.sin(th)).toFixed(1)}
+  t+=`<path d="${d}Z" fill="none" stroke="#D3B49F" stroke-opacity=".085" stroke-width="1.6"/>`}}
+topo.innerHTML=t;
+// torn paper
+const y0=H-footH;let p=`M0 ${H}L0 ${y0+10}`,p2=`M0 ${H}L0 ${y0-4}`;let y=y0+10;
+for(let x=0;x<=W;x+=7+R()*13){y+= (R()-.5)*16; y=Math.max(y0-14,Math.min(y0+30,y)); if(R()<.05)y+=(R()-.5)*34; p+=`L${x.toFixed(0)} ${y.toFixed(0)}`;p2+=`L${x.toFixed(0)} ${(y-9-R()*9).toFixed(0)}`}
+p+=`L${W} ${y}L${W} ${H}Z`;p2+=`L${W} ${y-12}L${W} ${H}Z`;
+paper.innerHTML=`<path d="${p2}" fill="#000" opacity=".3" transform="translate(0,-7)"/><path d="${p2}" fill="#f3e6da"/><path d="${p}" fill="#E6D2C1"/>`;
+// connection route: nodes joined by dashed line, ending in pin
+const vy=story?1300:945;
+const pts=[[1010,vy-70],[900,vy+10],[985,vy+85],[860,vy+150]];
+route.innerHTML=`<path d="M${pts[0]} C 930 ${vy-75}, 880 ${vy-40}, ${pts[1]} S 1010 ${vy+40}, ${pts[2]} S 900 ${vy+100}, ${pts[3]}" fill="none" stroke="#D3B49F" stroke-width="4" stroke-dasharray="3 13" stroke-linecap="round"/>
+<g transform="translate(${pts[0][0]-21},${pts[0][1]-58})"><path d="M21 3C11 3 3 11 3 21C3 35 21 55 21 55S39 35 39 21C39 11 31 3 21 3Z" fill="none" stroke="#D3B49F" stroke-width="4"/><circle cx="21" cy="21" r="6" fill="none" stroke="#D3B49F" stroke-width="4"/></g>
+<g stroke="#C16804" stroke-width="7" stroke-linecap="round"><path d="M${pts[3][0]-15} ${pts[3][1]-15}l30 30m0 -30l-30 30"/></g>
+<g fill="#D3B49F"><path transform="translate(92,${story?330:150}) scale(1.5)" d="M0-14Q2-2 14 0Q2 2 0 14Q-2 2-14 0Q-2-2 0-14Z"/><path transform="translate(985,${story?520:245})" d="M0-14Q2-2 14 0Q2 2 0 14Q-2 2-14 0Q-2-2 0-14Z"/></g>`;
+</script></body></html>
