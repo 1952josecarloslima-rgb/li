@@ -1,0 +1,67 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Bagel;src:url(fonts/bagel-fat-one-latin-400-normal.woff2)}
+@font-face{font-family:Marker;src:url(fonts/permanent-marker-latin-400-normal.woff2)}
+@font-face{font-family:Mont;font-weight:600;src:url(fonts/montserrat-latin-600-normal.woff2)}
+@font-face{font-family:Mont;font-weight:900;src:url(fonts/montserrat-latin-900-normal.woff2)}
+*{margin:0;padding:0}body{background:#2A41F5;overflow:hidden}svg{display:block}
+</style></head><body><div id="root"></div>
+<script>
+const story=location.search.includes('story'),H=story?1920:1350;
+const INK='#101246',Y='#FFD21F',P='#FF5FA8',O='#FF6A1A',L='#C6F432',C='#FFF6E5',B='#2A41F5';
+const topY=story?215:0, hero=story?310:0, bot=story?385:0;
+const st=(inner,x,y,r=0,s=1)=>`<g filter="url(#stk)" transform="translate(${x},${y}) rotate(${r}) scale(${s})">${inner}</g>`;
+const letter=(ch,x,y,r,fill)=>`<g transform="translate(${x},${y}) rotate(${r})"><text x="14" y="18" text-anchor="middle" font-family="Bagel" font-size="530" fill="${INK}" stroke="${INK}" stroke-width="30" stroke-linejoin="round">${ch}</text><text text-anchor="middle" font-family="Bagel" font-size="530" fill="${fill}" stroke="${INK}" stroke-width="30" stroke-linejoin="round" paint-order="stroke">${ch}</text></g>`;
+const pill=(x,y,w,txt,fill,r)=>`<g transform="translate(${x},${y}) rotate(${r} ${w/2} 55)"><rect x="8" y="10" width="${w}" height="112" rx="56" fill="${INK}"/><rect width="${w}" height="112" rx="56" fill="${fill}" stroke="${INK}" stroke-width="7"/><text x="${w/2}" y="80" text-anchor="middle" font-family="Mont" font-weight="900" font-size="66" fill="${INK}">${txt}</text></g>`;
+const spark=(x,y,s,f='#fff')=>`<path transform="translate(${x},${y}) scale(${s})" fill="${f}" d="M0-14Q2-2 14 0Q2 2 0 14Q-2 2-14 0Q-2-2 0-14Z"/>`;
+let burst='';for(let i=0;i<28;i++){const a=i/28*Math.PI*2,r=i%2?92:70;burst+=(i?'L':'M')+(r*Math.cos(a)).toFixed(1)+' '+(r*Math.sin(a)).toFixed(1)}
+let petals='';for(let i=0;i<7;i++){const a=i/7*Math.PI*2;petals+=`<circle cx="${(44*Math.cos(a)).toFixed(1)}" cy="${(44*Math.sin(a)).toFixed(1)}" r="30" fill="${C}" stroke="${INK}" stroke-width="6"/>`}
+let chk='';for(let i=0;i<14;i++)for(let j=0;j<2;j++)if((i+j)%2)chk+=`<rect x="${i*36}" y="${j*36}" width="36" height="36"/>`;
+let rays='';for(let i=0;i<24;i++){const a0=i/24*Math.PI*2,a1=(i+.5)/24*Math.PI*2,R=1700;rays+=`<path d="M540 ${H*0.42}L${540+R*Math.cos(a0)} ${H*0.42+R*Math.sin(a0)}L${540+R*Math.cos(a1)} ${H*0.42+R*Math.sin(a1)}Z"/>`}
+const S={
+smile:`<circle r="80" fill="${Y}" stroke="${INK}" stroke-width="8"/><ellipse cx="-27" cy="-18" rx="10" ry="19" fill="${INK}"/><ellipse cx="27" cy="-18" rx="10" ry="19" fill="${INK}"/><path d="M-44 18Q0 68 44 18" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round"/>`,
+flame:`<path d="M0-95C10-55 58-40 58 20C58 62 30 90 0 90C-30 90-58 62-58 22C-58-5-42-22-34-45C-22-28-14-22-8-22C-16-50-10-75 0-95Z" fill="${O}" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><path d="M0 0C6 18 26 26 26 48C26 66 14 78 0 78C-14 78-26 66-26 50C-26 32-8 22 0 0Z" fill="${Y}"/>`,
+bolt:`<path d="M18-95L-52 12H-6L-24 95L54-22H6Z" fill="${Y}" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>`,
+heart:`<path d="M0 70C-80 20-86-62-36-66C-14-67-4-52 0-42C4-52 14-67 36-66C86-62 80 20 0 70Z" fill="${P}" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><path d="M-44-34Q-52-20-44-4" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>`,
+burst:`<path d="${burst}Z" fill="${L}" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/><text y="-2" text-anchor="middle" font-family="Mont" font-weight="900" font-size="25" fill="${INK}">TRAZ UM</text><text y="26" text-anchor="middle" font-family="Mont" font-weight="900" font-size="25" fill="${INK}">AMIGO</text>`,
+bubble:`<path d="M-120-62H120Q150-62 150-32V28Q150 58 120 58H-30L-78 100L-70 58H-120Q-150 58-150 28V-32Q-150-62-120-62Z" fill="${C}" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><text y="22" text-anchor="middle" font-family="Marker" font-size="72" fill="${INK}">bora?!</text>`,
+flower:`${petals}<circle r="26" fill="${O}" stroke="${INK}" stroke-width="6"/>`,
+link:`<g fill="none" stroke-linecap="round"><rect x="-92" y="-34" width="112" height="68" rx="34" stroke="${INK}" stroke-width="34"/><rect x="-20" y="-34" width="112" height="68" rx="34" stroke="${INK}" stroke-width="34"/><rect x="-92" y="-34" width="112" height="68" rx="34" stroke="${L}" stroke-width="18"/><rect x="-20" y="-34" width="112" height="68" rx="34" stroke="${P}" stroke-width="18"/><path d="M-20 0V-0.1" stroke="${INK}" stroke-width="0"/></g>`,
+};
+root.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="${H}" viewBox="0 0 1080 ${H}">
+<defs>
+<filter id="stk" x="-30%" y="-30%" width="160%" height="160%"><feMorphology in="SourceAlpha" operator="dilate" radius="9" result="d"/><feFlood flood-color="#fff"/><feComposite in2="d" operator="in" result="w"/><feDropShadow in="w" dx="6" dy="9" stdDeviation="0" flood-color="#0b0d3a" flood-opacity=".55" result="sh"/><feMerge><feMergeNode in="sh"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.3 -.5"/></filter>
+<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>
+</defs>
+<rect width="1080" height="${H}" fill="${B}"/>
+<g fill="#3D55FF">${rays}</g>
+<g transform="translate(0,${topY})">
+  <use href="#logo" x="64" y="52" width="74" height="79" color="#fff"/>
+  <text x="156" y="86" font-family="Mont" font-weight="900" font-size="25" fill="#fff" letter-spacing="1.5">JOVENS</text>
+  <text x="156" y="118" font-family="Mont" font-weight="600" font-size="23" fill="#fff" letter-spacing="1">Casa da Paternidade</text>
+  <g transform="translate(742,62) rotate(3)"><rect x="5" y="6" width="276" height="58" rx="29" fill="${INK}"/><rect width="276" height="58" rx="29" fill="${P}" stroke="${INK}" stroke-width="5"/><text x="138" y="39" text-anchor="middle" font-family="Mont" font-weight="900" font-size="23" fill="${INK}" letter-spacing="1.5">CULTO DE JOVENS</text></g>
+</g>
+<g transform="translate(0,${hero})">
+  ${spark(70,250,2.2)}${spark(1010,640,1.6,Y)}${spark(520,190,1.3,L)}
+  <g filter="url(#stk)">
+  ${letter('C',225,705,-7,Y)}${letter('N',545,690,4,P)}${letter('X',858,710,-5,L)}
+  </g>
+  ${st(S.smile,915,270,12,1.0)}
+  ${st(S.flame,112,770,-12,1.0)}
+  ${st(S.bolt,392,235,10,.9)}
+  <g transform="translate(540,880) rotate(-4)"><rect x="-398" y="-58" width="820" height="132" rx="18" fill="${INK}"/><rect x="-410" y="-70" width="820" height="132" rx="18" fill="${O}" stroke="${INK}" stroke-width="8"/><text y="32" text-anchor="middle" font-family="Marker" font-size="100" fill="#fff" stroke="${INK}" stroke-width="10" stroke-linejoin="round" paint-order="stroke">Conexão Jovem</text></g>
+  ${st(S.bubble,205,1010,-8,.8)}
+  ${st(S.burst,930,985,10,1.05)}
+  ${st(S.flower,650,225,0,.72)}
+  ${st(S.heart,585,1030,-10,.6)}
+</g>
+<g transform="translate(0,${bot})">
+  ${pill(62,1108,400,'SÁBADO',Y,-2)}${pill(486,1108,292,'21/11',C,2)}${pill(802,1108,216,'19H',L,-2)}
+  <text x="540" y="1275" text-anchor="middle" font-family="Mont" font-weight="900" font-size="27" fill="#fff" letter-spacing="1.5">IGREJA CASA DA PATERNIDADE</text>
+  <text x="540" y="1308" text-anchor="middle" font-family="Mont" font-weight="600" font-size="22" fill="#fff">Av. Zulmira Rosa Antunes, 1424 · Centro, Anchieta - ES</text>
+</g>
+<g fill="${INK}" transform="translate(-10,${H-0}) " opacity="0"></g>
+<rect width="1080" height="${H}" filter="url(#grain)" style="mix-blend-mode:overlay" opacity=".5"/>
+</svg>`;
+</script></body></html>
