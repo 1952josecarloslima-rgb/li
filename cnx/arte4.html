@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Brush;src:url(fonts/caveat-brush-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(fonts/space-mono-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/space-mono-latin-700-normal.woff2)}
+@font-face{font-family:Mont;font-weight:600;src:url(fonts/montserrat-latin-600-normal.woff2)}
+@font-face{font-family:Mont;font-weight:900;src:url(fonts/montserrat-latin-900-normal.woff2)}
+*{margin:0;padding:0}body{background:#0A0C24;overflow:hidden}svg{display:block}
+</style></head><body><div id="root"></div>
+<script>
+const story=location.search.includes('story'),H=story?1920:1350;
+const BG='#0A0C24',BLUE='#2F45FF',MAG='#FF2D8A',LIME='#D7FF3C',OFF='#F3F0E8';
+const T=story?200:0, M=story?300:0, Bt=story?400:0;
+const star=(x,y,s,f)=>`<path transform="translate(${x},${y}) scale(${s})" fill="${f}" d="M0-14Q1.6-1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6-14 0Q-1.6-1.6 0-14Z"/>`;
+const strip=(y,rot,fill,ink,txt,size)=>{let s='';for(let i=0;i<8;i++)s+=txt+'  ✦  ';return `<g transform="translate(540,${y}) rotate(${rot})"><rect x="-900" y="-${size*0.78}" width="1800" height="${size*1.42}" fill="${fill}"/><text x="-880" y="${size*0.34}" font-family="Anton" font-size="${size}" fill="${ink}" letter-spacing="2">${s}</text></g>`};
+let bars='';let bx=0;const bw=[3,1,2,1,4,1,1,3,2,1,1,2,3,1,2,4,1,2,1,3,1,1,2,1,3,2,1];for(const w of bw){bars+=`<rect x="${bx}" width="${w*2.4}" height="54" fill="${OFF}"/>`;bx+=w*2.4+3}
+root.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="${H}" viewBox="0 0 1080 ${H}">
+<defs>
+<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="110"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.5 -.5"/></filter>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="2.6" fill="${OFF}"/></pattern>
+<linearGradient id="fade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#000"/></linearGradient>
+<mask id="dm"><rect width="1080" height="${H}" fill="url(#fade)"/></mask>
+<linearGradient id="cnxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9E4D8"/></linearGradient>
+<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>
+</defs>
+<rect width="1080" height="${H}" fill="${BG}"/>
+<g filter="url(#blur)">
+  <circle cx="160" cy="${M+330}" r="330" fill="${BLUE}"/>
+  <circle cx="980" cy="${M+560}" r="300" fill="${MAG}" opacity=".9"/>
+  <circle cx="520" cy="${M+900}" r="260" fill="${BLUE}" opacity=".85"/>
+  <circle cx="900" cy="${M+120}" r="160" fill="${LIME}" opacity=".35"/>
+</g>
+<rect width="1080" height="${H}" fill="url(#dots)" mask="url(#dm)" opacity=".16"/>
+
+<g transform="translate(0,${T})">
+  <use href="#logo" x="64" y="58" width="58" height="62" color="${OFF}"/>
+  <text x="140" y="84" font-family="Mono" font-weight="700" font-size="19" fill="${OFF}" letter-spacing="2.5">JOVENS</text>
+  <text x="140" y="112" font-family="Mono" font-size="19" fill="${OFF}" letter-spacing="2.5">CASA DA PATERNIDADE</text>
+  <g transform="translate(1016,66)"><rect x="-262" width="262" height="46" fill="${LIME}"/><text x="-131" y="31" text-anchor="middle" font-family="Mono" font-weight="700" font-size="18" fill="${BG}" letter-spacing="2.5">CULTO DE JOVENS</text></g>
+  <line x1="64" x2="1016" y1="152" y2="152" stroke="${OFF}" stroke-opacity=".35" stroke-width="2"/>
+</g>
+
+<g transform="translate(0,${M})">
+  <g font-family="Anton" font-size="640" text-anchor="middle" letter-spacing="-8">
+    <text x="540" y="770" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(18,130)" opacity=".4">CNX</text>
+    <text x="540" y="770" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(9,65)" opacity=".75">CNX</text>
+    <text x="540" y="770" fill="url(#cnxg)">CNX</text>
+  </g>
+  ${strip(1010,4,LIME,BG,'SÁBADO — 21.11 — 19H',46)}
+  ${strip(900,-6,MAG,OFF,'CONEXÃO JOVEM',66)}
+  ${star(86,215,2.2,OFF)}${star(968,232,1.5,LIME)}${star(1000,300,.8,OFF)}
+  <text x="68" y="1118" font-family="Brush" font-size="58" fill="${LIME}" transform="rotate(-4 68 1118)">vem com a galera</text>
+  
+  
+</g>
+
+<g transform="translate(0,${Bt})">
+  <line x1="64" x2="1016" y1="1152" y2="1152" stroke="${OFF}" stroke-opacity=".35" stroke-width="2"/>
+  <text x="64" y="1212" font-family="Anton" font-size="66" fill="${OFF}" letter-spacing="1">SÁB 21.11 <tspan fill="${LIME}">·</tspan> 19H</text>
+  <text x="64" y="1258" font-family="Mono" font-weight="700" font-size="18" fill="${OFF}" letter-spacing="2">IGREJA CASA DA PATERNIDADE</text>
+  <text x="64" y="1286" font-family="Mono" font-size="17" fill="${OFF}" fill-opacity=".8" letter-spacing="1">AV. ZULMIRA ROSA ANTUNES, 1424 — CENTRO, ANCHIETA/ES</text>
+  <g transform="translate(${1016-bx},1176)">${bars}<text x="0" y="82" font-family="Mono" font-size="15" fill="${OFF}" letter-spacing="3">CNX—NOV—2026</text></g>
+  <text x="1016" y="1286" text-anchor="end" font-family="Mono" font-weight="700" font-size="17" fill="${LIME}" letter-spacing="2">@JOVENS.DACASA</text>
+</g>
+<rect width="1080" height="${H}" filter="url(#grain)" style="mix-blend-mode:overlay" opacity=".7"/>
+</svg>`;
+</script></body></html>
