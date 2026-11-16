@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Brush;src:url(fonts/caveat-brush-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(fonts/space-mono-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/space-mono-latin-700-normal.woff2)}
+*{margin:0;padding:0}body{width:1080px;height:1920px;background:#0A0C24;overflow:hidden;position:relative}
+svg{display:block;position:absolute;inset:0}
+img{position:absolute;filter:drop-shadow(14px 24px 22px rgba(3,4,20,.7))}
+.ov{z-index:5}
+</style></head><body>
+<svg id="base" width="1080" height="1920"></svg>
+<img src="obj/mega.png"   style="left:-50px;top:345px;width:380px;transform:rotate(-10deg)">
+<img src="obj/phones.png" style="left:790px;top:335px;width:330px;transform:rotate(10deg)">
+<img src="obj/laptop.png" style="left:-40px;top:1665px;width:430px;transform:rotate(7deg)">
+<img src="obj/mouse.png"  style="left:850px;top:1670px;width:240px;transform:rotate(-14deg)">
+<svg id="toplayer" width="1080" height="1920" style="pointer-events:none"></svg>
+<script>
+const H=1920,BG='#0A0C24',BLUE='#2F45FF',MAG='#FF2D8A',LIME='#D7FF3C',OFF='#F3F0E8';
+const star=(x,y,s,f)=>`<path transform="translate(${x},${y}) scale(${s})" fill="${f}" d="M0-14Q1.6-1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6-14 0Q-1.6-1.6 0-14Z"/>`;
+const strip=(y,rot,fill,ink,txt,size)=>{let s='';for(let i=0;i<8;i++)s+=txt+'  ✦  ';return `<g transform="translate(540,${y}) rotate(${rot})"><rect x="-900" y="-${size*0.78}" width="1800" height="${size*1.42}" fill="${fill}"/><text x="-880" y="${size*0.34}" font-family="Anton" font-size="${size}" fill="${ink}" letter-spacing="2">${s}</text></g>`};
+const logo=`<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>`;
+base.innerHTML=`<defs>
+<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="120"/></filter>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="2.6" fill="${OFF}"/></pattern>
+<linearGradient id="fade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#000"/></linearGradient>
+<mask id="dm"><rect width="1080" height="${H}" fill="url(#fade)"/></mask>
+<linearGradient id="cnxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9E4D8"/></linearGradient>${logo}</defs>
+<rect width="1080" height="${H}" fill="${BG}"/>
+<g filter="url(#blur)">
+  <circle cx="150" cy="700" r="360" fill="${BLUE}"/>
+  <circle cx="1000" cy="1000" r="330" fill="${MAG}" opacity=".9"/>
+  <circle cx="480" cy="1450" r="300" fill="${BLUE}" opacity=".8"/>
+  <circle cx="900" cy="450" r="170" fill="${LIME}" opacity=".3"/>
+  <circle cx="150" cy="1850" r="240" fill="${MAG}" opacity=".45"/>
+</g>
+<rect width="1080" height="${H}" fill="url(#dots)" mask="url(#dm)" opacity=".15"/>
+<use href="#logo" x="64" y="212" width="58" height="62" color="${OFF}"/>
+<text x="140" y="238" font-family="Mono" font-weight="700" font-size="19" fill="${OFF}" letter-spacing="2.5">JOVENS</text>
+<text x="140" y="266" font-family="Mono" font-size="19" fill="${OFF}" letter-spacing="2.5">CASA DA PATERNIDADE</text>
+<g transform="translate(1016,220)"><rect x="-262" width="262" height="46" fill="${LIME}"/><text x="-131" y="31" text-anchor="middle" font-family="Mono" font-weight="700" font-size="18" fill="${BG}" letter-spacing="2.5">CULTO DE JOVENS</text></g>
+<line x1="64" x2="1016" y1="306" y2="306" stroke="${OFF}" stroke-opacity=".35" stroke-width="2"/>
+<g font-family="Anton" font-size="560" text-anchor="middle" letter-spacing="-6">
+  <text x="540" y="1130" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(16,116)" opacity=".4">CNX</text>
+  <text x="540" y="1130" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(8,58)" opacity=".75">CNX</text>
+  <text x="540" y="1130" fill="url(#cnxg)">CNX</text>
+</g>
+${star(470,560,1.5,LIME)}${star(1020,720,.9,OFF)}${star(60,1060,1.1,OFF)}`;
+toplayer.innerHTML=`
+${strip(1310,4,LIME,BG,'SÁBADO — 21.11 — 19H',46)}
+${strip(1205,-6,MAG,OFF,'CONEXÃO JOVEM',66)}
+<text x="540" y="1460" text-anchor="middle" font-family="Brush" font-size="60" fill="${LIME}" transform="rotate(-3 540 1460)">vem com a galera</text>
+<text x="540" y="1565" text-anchor="middle" font-family="Anton" font-size="78" fill="${OFF}" letter-spacing="1">SÁB 21.11 <tspan fill="${LIME}">·</tspan> 19H</text>
+<text x="540" y="1608" text-anchor="middle" font-family="Mono" font-weight="700" font-size="19" fill="${OFF}" letter-spacing="2">IGREJA CASA DA PATERNIDADE</text>
+<text x="540" y="1638" text-anchor="middle" font-family="Mono" font-size="17" fill="${OFF}" fill-opacity=".8" letter-spacing="1">AV. ZULMIRA ROSA ANTUNES, 1424 — CENTRO, ANCHIETA/ES</text>
+<text x="540" y="1670" text-anchor="middle" font-family="Mono" font-weight="700" font-size="17" fill="${LIME}" letter-spacing="2">@JOVENS.DACASA</text>`;
+</script>
+<svg width="1080" height="1920" style="mix-blend-mode:overlay;opacity:.6;z-index:9"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.5 -.5"/></filter><rect width="1080" height="1920" filter="url(#grain)"/></svg>
+</body></html>
