@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Serif;font-style:italic;src:url(fonts/instrument-serif-latin-400-italic.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(fonts/space-mono-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/space-mono-latin-700-normal.woff2)}
+:root{--bone:#EDE9DF;--ink:#0A0908;--hot:#FF4B14;--H:1350px;--pad:64px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:var(--H);overflow:hidden;background:var(--ink)}
+body.story{--H:1920px}
+#art{position:relative;width:1080px;height:var(--H);background:var(--ink);overflow:hidden;color:var(--bone);font-family:Mono}
+.abs{position:absolute}
+.glow{left:-140px;top:calc(var(--H)*.30);width:1400px;height:calc(var(--H)*.62);background:radial-gradient(closest-side at 62% 55%,#FF4B14 0%,#E0340B 28%,rgba(160,30,5,.55) 55%,transparent 100%),radial-gradient(closest-side at 22% 40%,rgba(255,150,40,.75),transparent 70%);filter:blur(60px)}
+.top{left:var(--pad);right:var(--pad);top:56px;display:flex;justify-content:space-between;align-items:center;font:700 19px/1.35 Mono;letter-spacing:2.5px;text-transform:uppercase}
+.story .top{top:230px}
+.top .l{display:flex;align-items:center;gap:18px}
+.top svg{width:54px;height:58px;color:var(--bone)}
+.top .r{text-align:right}
+.rule{left:var(--pad);right:var(--pad);height:2px;background:var(--bone);opacity:.9}
+.r1{top:140px}.story .r1{top:314px}
+.kick{left:var(--pad);right:var(--pad);top:164px;display:flex;justify-content:space-between;font:400 19px Mono;letter-spacing:2.5px;text-transform:uppercase}
+.story .kick{top:338px}
+.cnx{left:-60px;right:-60px;top:215px;text-align:center;font:400 745px/0.86 Anton;letter-spacing:-4px;color:var(--bone);white-space:nowrap}
+.story .cnx{top:470px;transform:scaleY(1.22);transform-origin:top}
+.echo{left:-60px;right:-60px;text-align:center;font:400 800px/0.86 Anton;letter-spacing:-6px;color:transparent;-webkit-text-stroke:2px rgba(237,233,223,.5);white-space:nowrap}
+.serif{left:0;right:0;top:470px;text-align:center;font:italic 400 172px/1 Serif;color:var(--hot);transform:rotate(-7deg);letter-spacing:-4px;text-shadow:0 0 0 var(--hot);white-space:nowrap}
+.story .serif{top:815px}
+.badge{right:44px;top:775px;width:230px;height:230px;animation:none}
+.story .badge{top:1075px}
+.bot{left:var(--pad);right:var(--pad);bottom:58px}
+.story .bot{bottom:270px}
+.bot .date{display:flex;align-items:flex-end;justify-content:space-between}
+.bot .d{font:400 250px/.8 Anton;letter-spacing:-2px}
+.bot .d sup{font:400 250px/.8 Anton;color:var(--ink);-webkit-text-stroke:0}
+.bot .side{text-align:right;font:400 86px/.95 Anton;letter-spacing:1px;padding-bottom:2px}
+.bot .side small{display:block;font:700 19px Mono;letter-spacing:2.5px;margin-bottom:14px}
+.bot .addr{margin-top:26px;padding-top:18px;border-top:2px solid var(--bone);display:flex;justify-content:space-between;font:400 18px/1.4 Mono;letter-spacing:1.5px;text-transform:uppercase}
+.bot .addr b{font-weight:700}
+svg.full{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.6 -.55"/></filter>
+<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>
+</defs></svg>
+<div id="art">
+<div class="abs glow"></div>
+<div class="abs top"><div class="l"><svg viewBox="100 0 665 710"><use href="#logo"/></svg><div>Jovens<br>Casa da Paternidade</div></div><div class="r">Culto de jovens<br>Nov — 2026</div></div>
+<div class="abs rule r1"></div>
+<div class="abs kick"><span>(CNX)</span><span>Todo 3º sábado do mês</span><span>Nº 11</span></div>
+<div class="abs cnx">CNX</div>
+<div class="abs serif">conexão jovem</div>
+<svg class="abs badge" viewBox="0 0 230 230"><circle cx="115" cy="115" r="115" fill="#EDE9DF"/><path id="c" d="M115 115m-84 0a84 84 0 1 1 168 0a84 84 0 1 1-168 0" fill="none"/><text font-family="Mono" font-weight="700" font-size="18" letter-spacing="2.2" fill="#0A0908"><textPath href="#c" textLength="520">VEM E TRAZ UM AMIGO • VEM E TRAZ UM AMIGO •</textPath></text><path transform="translate(115,115) scale(3.6)" fill="#FF4B14" d="M0-14Q2-2 14 0Q2 2 0 14Q-2 2-14 0Q-2-2 0-14Z"/></svg>
+<div class="abs bot">
+  <div class="date"><div class="d">21.11</div><div class="side"><small>SÁBADO</small>19H</div></div>
+  <div class="addr"><span><b>Igreja Casa da Paternidade</b><br>Av. Zulmira Rosa Antunes, 1424 — Centro</span><span style="text-align:right"><b>Anchieta / ES</b><br>@jovens.dacasa</span></div>
+</div>
+<svg class="full" style="mix-blend-mode:overlay;opacity:.9"><rect width="100%" height="100%" filter="url(#grain)"/></svg>
+</div>
+<script>if(location.search.includes('story'))document.body.classList.add('story')</script>
+</body></html>
