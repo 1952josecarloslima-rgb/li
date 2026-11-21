@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/space-mono-latin-700-normal.woff2)}
+*{margin:0;padding:0}body{width:1920px;height:1080px;overflow:hidden;background:#0A0C24}svg{display:block}
+</style></head><body>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+<filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="150"/></filter>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.5 -.5"/></filter>
+<linearGradient id="cnxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9E4D8"/></linearGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#05061A" stop-opacity="0"/><stop offset="1" stop-color="#05061A" stop-opacity=".75"/></radialGradient>
+<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>
+</defs>
+<rect width="1920" height="1080" fill="#0A0C24"/>
+<g filter="url(#blur)">
+  <circle cx="420" cy="420" r="430" fill="#2F45FF"/>
+  <circle cx="1560" cy="680" r="420" fill="#FF2D8A" opacity=".85"/>
+  <circle cx="960" cy="980" r="320" fill="#2F45FF" opacity=".7"/>
+  <circle cx="1450" cy="160" r="200" fill="#D7FF3C" opacity=".22"/>
+</g>
+<rect width="1920" height="1080" fill="url(#vig)"/>
+<g font-family="Anton" font-size="540" text-anchor="middle" letter-spacing="-5">
+  <text x="960" y="700" fill="none" stroke="#D7FF3C" stroke-width="3" transform="translate(16,116)" opacity=".35">CNX</text>
+  <text x="960" y="700" fill="none" stroke="#D7FF3C" stroke-width="3" transform="translate(8,58)" opacity=".7">CNX</text>
+  <text x="960" y="700" fill="url(#cnxg)">CNX</text>
+</g>
+<g transform="translate(960,935)">
+  <line x1="-400" x2="-205" y1="-11" y2="-11" stroke="#F3F0E8" stroke-opacity=".4" stroke-width="2"/>
+  <line x1="215" x2="410" y1="-11" y2="-11" stroke="#F3F0E8" stroke-opacity=".4" stroke-width="2"/>
+  <text text-anchor="middle" font-family="Mono" font-weight="700" font-size="30" fill="#D7FF3C" letter-spacing="10" y="0" x="5">CONEXÃO JOVEM</text>
+</g>
+<use href="#logo" x="928" y="78" width="64" height="68" color="#F3F0E8" opacity=".9"/>
+<path transform="translate(330,250) scale(1.6)" fill="#D7FF3C" d="M0-14Q1.6-1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6-14 0Q-1.6-1.6 0-14Z"/>
+<path transform="translate(1610,820) scale(1.1)" fill="#F3F0E8" opacity=".8" d="M0-14Q1.6-1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6-14 0Q-1.6-1.6 0-14Z"/>
+<rect width="1920" height="1080" filter="url(#grain)" style="mix-blend-mode:overlay" opacity=".5"/>
+</svg></body></html>
