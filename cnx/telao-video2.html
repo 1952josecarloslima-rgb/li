@@ -1,0 +1,63 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(fonts/space-mono-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/space-mono-latin-700-normal.woff2)}
+*{margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#0A0C24;position:relative}
+.L{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%;filter:blur(110px)}
+.dots{background-image:radial-gradient(rgba(243,240,232,.9) 2.2px,transparent 2.4px);background-size:18px 18px;opacity:.07;-webkit-mask-image:radial-gradient(ellipse at center,transparent 35%,#000 90%)}
+.vig{background:radial-gradient(ellipse at center,transparent 55%,rgba(5,6,26,.7) 100%)}
+.tick{position:absolute;left:0;width:1920px;overflow:hidden;white-space:nowrap;font:400 18px Mono;letter-spacing:6px;color:rgba(243,240,232,.45)}
+.tick span{display:inline-block}
+svg{position:absolute;inset:0}
+</style></head><body>
+<div class="L" id="bg"></div>
+<div class="L dots"></div>
+<div class="L vig"></div>
+<div class="tick" style="top:1022px"><span id="tk"></span></div>
+<svg id="mid" width="1920" height="1080"></svg>
+<svg width="1920" height="1080" style="mix-blend-mode:overlay;opacity:.5"><filter id="grain"><feTurbulence id="turb" type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="1"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.5 -.5"/></filter><rect width="1920" height="1080" filter="url(#grain)"/></svg>
+<script>
+const T=16,TAU=Math.PI*2,LIME='#D7FF3C',MAG='#FF2D8A',BLUE='#2F45FF',OFF='#F3F0E8';
+const S=(t,k=1,ph=0)=>Math.sin(TAU*(k*t/T+ph)), C=(t,k=1,ph=0)=>Math.cos(TAU*(k*t/T+ph));
+const blobs=[[BLUE,950,430,420,1,0,280,150,.9],[MAG,880,1490,660,1,.4,240,170,.85],[BLUE,650,960,1000,1,.65,320,90,.7],[LIME,420,1420,170,1,.15,220,120,.22],[MAG,520,320,960,1,.85,260,110,.5]];
+bg.innerHTML=blobs.map((b,i)=>`<div class="blob" id="b${i}" style="width:${b[1]}px;height:${b[1]}px;background:${b[0]};opacity:${b[8]}"></div>`).join('');
+const seg='CONEXÃO JOVEM  ✦  CULTO DE JOVENS  ✦  CASA DA PATERNIDADE  ✦  ';tk.textContent=seg.repeat(8);
+const logo=`<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>`;
+const star=(x,y,s,f,o)=>`<path transform="translate(${x},${y}) scale(${s})" fill="${f}" opacity="${o}" d="M0-14Q1.6-1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6-14 0Q-1.6-1.6 0-14Z"/>`;
+const stars=[[420,260,1.5,LIME,0],[1560,800,1.1,OFF,.5],[1500,230,.8,OFF,.25],[360,820,.8,OFF,.75]];
+let w=0;
+function render(t){
+  blobs.forEach((b,i)=>{document.getElementById('b'+i).style.transform=`translate(${b[2]+b[6]*S(t,b[4],b[5])-b[1]/2}px,${b[3]+b[7]*C(t,b[4],b[5])-b[1]/2}px)`});
+  if(!w)w=tk.getBoundingClientRect().width/8;
+  tk.style.transform=`translateX(${-((t/T)*w)%w}px)`;
+  const beat=Math.pow(Math.max(0,Math.cos(TAU*8*t/T)),10);   // 1 pulse every 2s
+  const breathe=.5+.5*S(t,1,.25);
+  const oy=50+14*breathe+16*beat;
+  const sp=(t/T*2)%1, shx=-500+sp*2900;
+  const sc=1+.01*beat;
+  mid.innerHTML=`<defs>${logo}<linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#E9E4D8"/></linearGradient>
+  <linearGradient id="sh" gradientUnits="userSpaceOnUse" x1="${shx}" y1="0" x2="${shx+300}" y2="140"><stop offset="0" stop-color="${LIME}" stop-opacity="0"/><stop offset=".5" stop-color="${LIME}" stop-opacity=".9"/><stop offset="1" stop-color="${LIME}" stop-opacity="0"/></linearGradient></defs>
+  <use href="#logo" x="932" y="86" width="56" height="60" color="${OFF}" opacity=".9"/>
+  <g font-family="Anton" font-size="520" text-anchor="middle" letter-spacing="-5">
+   <text x="960" y="690" fill="none" stroke="${MAG}" stroke-width="2.5" transform="translate(-8,${-oy*.55})" opacity="${.18+.35*beat}">CNX</text>
+   <text x="960" y="690" fill="none" stroke="${LIME}" stroke-width="2.5" transform="translate(16,${oy*2})" opacity="${.25+.15*breathe}">CNX</text>
+   <text x="960" y="690" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(8,${oy})" opacity="${.55+.25*breathe}">CNX</text>
+   <g transform="translate(960,470) scale(${sc}) translate(-960,-470)">
+    <text x="960" y="690" fill="url(#cg)">CNX</text>
+    <text x="960" y="690" fill="url(#sh)">CNX</text>
+   </g>
+  </g>
+  <g transform="translate(960,915)">
+   <line x1="${-400}" x2="-205" y1="-11" y2="-11" stroke="${OFF}" stroke-opacity=".35" stroke-width="2"/>
+   <line x1="215" x2="410" y1="-11" y2="-11" stroke="${OFF}" stroke-opacity=".35" stroke-width="2"/>
+   <text x="5" text-anchor="middle" font-family="Mono" font-weight="700" font-size="30" fill="${LIME}" letter-spacing="10">CONEXÃO JOVEM</text>
+  </g>
+  <line x1="0" x2="1920" y1="1000" y2="1000" stroke="${OFF}" stroke-opacity=".12"/>
+  ${stars.map(s=>{const k=.5+.5*S(t,2,s[4]);return star(s[0],s[1],s[2]*(.6+.6*k),s[3],.3+.7*k)}).join('')}`;
+  turb.setAttribute('seed',1+Math.floor(t*12)%6);
+}
+window.render=render;render(0);
+</script></body></html>
