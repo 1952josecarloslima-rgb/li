@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:400;src:url(fonts/space-mono-latin-400-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/space-mono-latin-700-normal.woff2)}
+@font-face{font-family:Brush;src:url(fonts/caveat-brush-latin-400-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1920px;height:1080px;overflow:hidden;background:#0A0C24;position:relative}
+.L{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%;filter:blur(90px)}
+.dots{background-image:radial-gradient(rgba(243,240,232,.9) 2.4px,transparent 2.6px);background-size:18px 18px;opacity:.09;-webkit-mask-image:linear-gradient(135deg,#000 0%,transparent 45%,transparent 60%,#000 100%)}
+.obj{position:absolute;filter:drop-shadow(16px 28px 26px rgba(3,4,20,.7));will-change:transform}
+.strip{position:absolute;left:-200px;width:2400px;overflow:hidden;white-space:nowrap;font-family:Anton;letter-spacing:2px}
+.strip span{display:inline-block}
+svg{position:absolute;inset:0;overflow:visible}
+</style></head><body>
+<div class="L" id="bg"></div>
+<div class="L dots"></div>
+<svg id="mid" width="1920" height="1080"></svg>
+<div class="strip" id="s1" style="top:842px;height:96px;background:#FF2D8A;color:#F3F0E8;font-size:64px;line-height:96px;transform:rotate(-4deg)"><span id="s1t"></span></div>
+<div class="strip" id="s2" style="top:944px;height:70px;background:#D7FF3C;color:#0A0C24;font-size:44px;line-height:70px;transform:rotate(2.5deg)"><span id="s2t"></span></div>
+<img class="obj" id="mega" src="obj/mega.png" style="left:30px;top:250px;width:400px">
+<img class="obj" id="phones" src="obj/phones.png" style="left:1505px;top:130px;width:360px">
+<img class="obj" id="laptop" src="obj/laptop.png" style="left:40px;top:640px;width:420px">
+<img class="obj" id="mouse" src="obj/mouse.png" style="left:1640px;top:735px;width:230px">
+<svg id="fx" width="1920" height="1080"></svg>
+<svg width="1920" height="1080" style="mix-blend-mode:overlay;opacity:.55"><filter id="grain"><feTurbulence id="turb" type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="1"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.5 -.5"/></filter><rect width="1920" height="1080" filter="url(#grain)"/></svg>
+<script>
+const T=16, TAU=Math.PI*2, LIME='#D7FF3C',MAG='#FF2D8A',BLUE='#2F45FF',OFF='#F3F0E8';
+const S=(t,k=1,ph=0)=>Math.sin(TAU*(k*t/T+ph));
+// background blobs
+const blobs=[[BLUE,900,420,380,1,0,260,140],[MAG,820,1500,660,1,.35,220,160],[BLUE,600,940,1000,2,.6,300,90],[LIME,380,1450,150,1,.15,200,120],[MAG,500,300,950,1,.8,240,110]];
+bg.innerHTML=blobs.map((b,i)=>`<div class="blob" id="b${i}" style="width:${b[1]}px;height:${b[1]}px;background:${b[0]};opacity:${b[0]==LIME?.28:.85}"></div>`).join('');
+// strips text
+const seg1='CONEXÃO JOVEM  ✦  ', seg2='CNX  ✦  CULTO DE JOVENS  ✦  ';
+s1t.textContent=seg1.repeat(14); s2t.textContent=seg2.repeat(14);
+const logo=`<symbol id="logo" viewBox="100 0 665 710"><mask id="lm"><path fill="#fff" d="M435 5Q456 5 476 19L724 180Q745 195 745 220V678Q745 700 723 700H142Q120 700 120 678V220Q120 195 141 180L394 19Q414 5 435 5Z"/><path fill="#000" d="M388 178Q388 148 418 148H450Q480 148 480 178V720H388ZM250 280H390V368H250ZM480 280H770V418C705 415 655 498 572 492C532 488 500 466 480 445Z"/></mask><rect x="100" width="665" height="710" fill="currentColor" mask="url(#lm)"/><g fill="currentColor"><circle cx="525" cy="400" r="22"/><circle cx="672" cy="345" r="28"/></g><g fill="none" stroke="currentColor" stroke-linecap="round"><path stroke-width="15" d="M487 420C530 446 566 424 612 388"/><path stroke-width="19" d="M548 453C612 462 640 396 734 394"/></g></symbol>`;
+const star=(x,y,s,f,o=1)=>`<path transform="translate(${x},${y}) scale(${s})" fill="${f}" opacity="${o}" d="M0-14Q1.6-1.6 14 0Q1.6 1.6 0 14Q-1.6 1.6-14 0Q-1.6-1.6 0-14Z"/>`;
+const stars=[[520,150,1.6,LIME,0],[1430,560,1.0,OFF,.3],[300,560,.9,OFF,.55],[1180,110,1.1,OFF,.75],[1700,500,1.4,LIME,.45],[700,760,.8,OFF,.15]];
+let w1=0,w2=0;
+function render(t){
+  blobs.forEach((b,i)=>{const e=document.getElementById('b'+i);const x=b[2]+b[6]*S(t,b[4],b[5]),y=b[3]+b[7]*Math.cos(TAU*(b[4]*t/T+b[5]));e.style.transform=`translate(${x-b[1]/2}px,${y-b[1]/2}px)`});
+  if(!w1){w1=s1t.getBoundingClientRect().width/14;w2=s2t.getBoundingClientRect().width/14}
+  s1t.style.transform=`translateX(${-((t/T)*w1*2)%(w1*2)}px)`;
+  s2t.style.transform=`translateX(${-w2*2+((t/T)*w2*2)%(w2*2)}px)`;
+  const bob=(id,ph,amp,rot,r0)=>{document.getElementById(id).style.transform=`translateY(${amp*S(t,1,ph)}px) rotate(${r0+rot*S(t,1,ph+.25)}deg)`};
+  bob('mega',0,16,3,8);document.getElementById('mega').style.transform+=' scaleX(-1)';bob('phones',.3,18,4,10);bob('laptop',.55,14,2.5,5);bob('mouse',.8,16,4,-14);
+  // beat: 2 beats per second-ish -> 32 per loop
+  const beat=Math.pow(Math.max(0,Math.cos(TAU*16*t/T)),8);
+  const oy=58+22*beat+8*S(t,2);
+  // shine sweep twice per loop
+  const sp=((t/T*2)%1), shx=-400+sp*2600;
+  // equalizer
+  let eq='';for(let i=0;i<9;i++){const h=18+70*Math.abs(Math.sin(TAU*((3+i%4)*t/T)+i*1.7))*(.55+.45*beat);eq+=`<rect x="${1570+i*30}" y="${665-h}" width="16" height="${h}" rx="4" fill="${i%3==1?MAG:LIME}"/>`}
+  // megaphone waves (expanding arcs)
+  let wv='';for(let k=0;k<3;k++){const p=((t/T)*8+k/3)%1;const r=40+p*170;wv+=`<path d="M${0} ${-r}A${r} ${r} 0 0 1 ${0} ${r}" fill="none" stroke="${LIME}" stroke-width="${8-4*p}" stroke-linecap="round" opacity="${(1-p)*.9}" transform="rotate(-8)"/>`}
+  mid.innerHTML=`<defs>${logo}<linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#E9E4D8"/></linearGradient>
+  <linearGradient id="sh" gradientUnits="userSpaceOnUse" x1="${shx}" y1="0" x2="${shx+260}" y2="120"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="${LIME}" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+  <use href="#logo" x="70" y="56" width="50" height="54" color="${OFF}"/>
+  <text x="136" y="80" font-family="Mono" font-weight="700" font-size="17" fill="${OFF}" letter-spacing="2.5">JOVENS</text>
+  <text x="136" y="104" font-family="Mono" font-size="17" fill="${OFF}" letter-spacing="2.5">CASA DA PATERNIDADE</text>
+  <g font-family="Anton" font-size="520" text-anchor="middle" letter-spacing="-5">
+   <text x="960" y="650" fill="none" stroke="${MAG}" stroke-width="3" transform="translate(${-6*beat},${-oy})" opacity="${.25+.4*beat}">CNX</text>
+   <text x="960" y="650" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(16,${oy*2})" opacity=".35">CNX</text>
+   <text x="960" y="650" fill="none" stroke="${LIME}" stroke-width="3" transform="translate(8,${oy})" opacity=".75">CNX</text>
+   <text x="960" y="650" fill="url(#cg)" transform="translate(960,420) scale(${1+.012*beat}) translate(-960,-420)">CNX</text>
+   <text x="960" y="650" fill="url(#sh)" style="mix-blend-mode:multiply" transform="translate(960,420) scale(${1+.012*beat}) translate(-960,-420)">CNX</text>
+  </g>
+  <g transform="translate(445,395)">${wv}</g>
+  ${eq}`;
+  fx.innerHTML=stars.map(s=>{const k=.5+.5*S(t,2,s[4]);return star(s[0],s[1],s[2]*(.6+.6*k),s[3],.35+.65*k)}).join('');
+  turb.setAttribute('seed',1+Math.floor(t*12)%6);
+}
+window.render=render;render(0);
+</script></body></html>
