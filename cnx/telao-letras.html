@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(fonts/anton-latin-400-normal.woff2)}
+*{margin:0;padding:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#080A1F;position:relative}
+.L{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%;filter:blur(120px)}
+.beam{position:absolute;left:960px;top:-200px;width:220px;height:1700px;transform-origin:50% 0;filter:blur(40px);mix-blend-mode:screen}
+.shade{background:radial-gradient(ellipse 62% 48% at 50% 50%,rgba(6,7,24,.72) 0%,rgba(6,7,24,.45) 55%,rgba(6,7,24,0) 100%)}
+.vig{background:radial-gradient(ellipse at center,transparent 60%,rgba(4,5,18,.75) 100%)}
+svg{position:absolute;inset:0}
+</style></head><body>
+<div class="L" id="bg"></div>
+<div class="L" id="beams"></div>
+<svg id="waves" width="1920" height="1080"></svg>
+<div class="L shade"></div>
+<svg id="parts" width="1920" height="1080"></svg>
+<div class="L vig"></div>
+<svg id="mark" width="1920" height="1080"></svg>
+<svg width="1920" height="1080" style="mix-blend-mode:overlay;opacity:.45"><filter id="grain"><feTurbulence id="turb" type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="1"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1.5 -.5"/></filter><rect width="1920" height="1080" filter="url(#grain)"/></svg>
+<script>
+const T=16,TAU=Math.PI*2,LIME='#D7FF3C',MAG='#FF2D8A',BLUE='#2F45FF',OFF='#F3F0E8';
+const S=(t,k=1,ph=0)=>Math.sin(TAU*(k*t/T+ph)),C=(t,k=1,ph=0)=>Math.cos(TAU*(k*t/T+ph));
+let seed=7;const R=()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296};
+const blobs=[[BLUE,1000,250,300,1,0,300,200,.85],[MAG,950,1650,780,1,.4,260,200,.8],[BLUE,700,1100,1050,1,.65,380,100,.6],[LIME,450,1550,120,1,.15,240,120,.18],[MAG,600,250,950,1,.85,280,120,.45],[BLUE,550,960,-60,1,.3,400,60,.5]];
+bg.innerHTML=blobs.map((b,i)=>`<div class="blob" id="b${i}" style="width:${b[1]}px;height:${b[1]}px;background:${b[0]};opacity:${b[8]}"></div>`).join('');
+const bm=[[MAG,-30,.0,.38],[BLUE,10,.33,.45],[LIME,35,.66,.16],[OFF,-55,.2,.14]];
+beams.innerHTML=bm.map((b,i)=>`<div class="beam" id="m${i}" style="background:linear-gradient(${b[0]},transparent 85%);opacity:${b[3]}"></div>`).join('');
+const P=[];for(let i=0;i<70;i++)P.push({x:R()*1920,y:R()*1080,r:1.5+R()*4,k:1+Math.floor(R()*2),ph:R(),dx:20+R()*50,c:R()<.25?LIME:(R()<.3?MAG:OFF),o:.35+R()*.6});
+const W=[[LIME,.5,830,60,1,.0,3],[OFF,.18,860,80,1,.3,2],[MAG,.5,890,70,2,.6,2],[BLUE,.65,250,70,1,.5,2],[OFF,.12,220,50,2,.1,1.5]];
+function render(t){
+  blobs.forEach((b,i)=>{document.getElementById('b'+i).style.transform=`translate(${b[2]+b[6]*S(t,b[4],b[5])-b[1]/2}px,${b[3]+b[7]*C(t,b[4],b[5])-b[1]/2}px)`});
+  bm.forEach((b,i)=>{document.getElementById('m'+i).style.transform=`translateX(-110px) rotate(${b[1]+18*S(t,1,b[2])}deg)`});
+  waves.innerHTML=W.map(w=>{let d='';for(let x=-20;x<=1940;x+=20){const y=w[2]+w[3]*Math.sin(x/1920*TAU*w[6]+TAU*(w[4]*t/T+w[5]))+18*Math.sin(x/1920*TAU*5-TAU*(2*t/T)+w[5]*7);d+=(x<0?'M':'L')+x+' '+y.toFixed(1)}return `<path d="${d}" fill="none" stroke="${w[0]}" stroke-opacity="${w[1]}" stroke-width="3"/>`}).join('');
+  parts.innerHTML=P.map(p=>{const y=((p.y-(p.k*1180)*(t/T))%1180+1180)%1180-50;const x=p.x+p.dx*S(t,p.k,p.ph);const tw=.6+.4*S(t,4,p.ph);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${p.r}" fill="${p.c}" opacity="${(p.o*tw).toFixed(2)}"/>`}).join('');
+  turb.setAttribute('seed',1+Math.floor(t*12)%6);
+}
+mark.innerHTML=`<text x="1856" y="1032" text-anchor="end" font-family="Anton" font-size="34" fill="${OFF}" opacity=".28" letter-spacing="1">CNX</text>`;
+window.render=render;render(0);
+</script></body></html>
